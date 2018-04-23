@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 1248e38ef3ebb8d4cb20942c5c1579a6
+timeCreated: 1513170592
+licenseType: Free
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _ProximityGradient: {fileID: 28753282921749494, guid: 505a0fe3688fb244c90aaf7fed18c323,
+      type: 2}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

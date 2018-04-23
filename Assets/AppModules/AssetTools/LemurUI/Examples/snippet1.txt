@@ -1,0 +1,28 @@
+
+Lemur.Button myButtonA;
+Lemur.Button myButtonB;
+Lemur.Button myButtonC;
+
+Lemur.TextBox myTextBox;
+
+var ui = Lemur.Construct()
+  .Panel(
+    Horizontal(
+      Vertical(
+        ScrollView(
+          Button(out myButtonA)
+          .Button(out myButtonB)
+          .Button(out myButtonC)
+        )
+        .Panel(
+          Label("foo")
+        ).Hug(Panel.Bottom)
+      )
+      .ScrollView(
+        TextBox(out myTextBox)
+      )
+    )
+  );
+
+// Go!
+ui.Spawn();

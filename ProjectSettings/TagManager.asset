@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Outside Portals
+  - Portal 1
+  - Portal 1 No Contact
+  - Outside Portals No Contact
+  - Contact Bones
+  - Portal A
+  - Portal A No Contact
+  - Portal B
+  - Portal B No Contact
+  - Portal C
+  - Portal C No Contact
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
