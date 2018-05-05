@@ -61,15 +61,12 @@ namespace Leap.Unity {
                                       bool breadthFirst = false) {
       if (breadthFirst) {
         var cursor = t; var cursorIdx = toFill.Count; var endIdx = cursorIdx;
-        int didIFuckUp = 0;
         do {
-          endIdx += addImmediateChildren(t, toFill);
+          endIdx += addImmediateChildren(cursor, toFill);
           cursorIdx += 1;
-          if (cursorIdx == endIdx) break;
+          if (cursorIdx >= endIdx) break;
           cursor = toFill[cursorIdx];
-          didIFuckUp += 1;
-        } while (didIFuckUp < 1000);
-        if (didIFuckUp == 1000) { Debug.LogError("Ya fucked up son"); }
+        } while (true);
       }
       else {
         addChildrenRecursive(t, toFill);
