@@ -105,6 +105,10 @@ float Leap_Map(float input, float valueMin, float valueMax, float resultMin, flo
   return lerp(resultMin, resultMax, saturate((input - valueMin) / (valueMax - valueMin)));
 }
 
+float Leap_Map4(float input, float4 mapValues) {
+  return Leap_Map(input, mapValues.x, mapValues.y, mapValues.z, mapValues.w);
+}
+
 float Leap_Dist(float3 a, float3 b) {
   float3 ab = b - a;
   return sqrt(ab.x * ab.x + ab.y * ab.y + ab.z * ab.z);

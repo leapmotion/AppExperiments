@@ -3,6 +3,7 @@ using Leap.Unity.Attributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -113,20 +114,32 @@ namespace Leap.Unity.Animation {
       updateSwitch(value);
     }
 
+    public Action OnTweenLeftStart = () => { };
     private void onTweenLeftStart() {
       whenTweenLeavesStart();
+
+      OnTweenLeftStart();
     }
 
+    public Action OnTweenLeftEnd = () => { };
     private void onTweenLeftEnd() {
       whenTweenLeavesEnd();
+
+      OnTweenLeftEnd();
     }
 
+    public Action OnTweenReachedStart = () => { };
     private void onTweenReachedStart() {
       whenTweenReachesStart();
+
+      OnTweenReachedStart();
     }
 
+    public Action OnTweenReachedEnd = () => { };
     private void onTweenReachedEnd() {
       whenTweenReachesEnd();
+
+      OnTweenReachedEnd();
     }
 
     private Tween? _targetModeTween;
