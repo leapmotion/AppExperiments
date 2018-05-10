@@ -21,38 +21,69 @@ namespace Leap.Unity {
     /// THIS ALLOCATES GARBAGE. Use it for editor code only.
     /// </summary>
     public static List<Transform> GetSelfAndAllChildren(this Transform t,
-                                                       bool includeInactiveObjects = false) {
+                                                        bool includeInactiveObjects = false) {
       var allChildren = new List<Transform>();
 
-      Stack<Transform> toVisit = Pool<Stack<Transform>>.Spawn();
+      Queue<Transform> toVisit = Pool<Queue<Transform>>.Spawn();
 
       try {
         // Traverse the hierarchy of this object's transform to find all of its Colliders.
-        toVisit.Push(t.transform);
+        toVisit.Enqueue(t.transform);
         Transform curTransform;
         while (toVisit.Count > 0) {
-          curTransform = toVisit.Pop();
+          curTransform = toVisit.Dequeue();
 
           // Recursively search children and children's children
           foreach (var child in curTransform.GetChildren()) {
-            // Ignore children with Rigidbodies of their own; its own Rigidbody
-            // owns its own colliders and the colliders of its children
             if (includeInactiveObjects || child.gameObject.activeSelf) {
-              toVisit.Push(child);
+              toVisit.Enqueue(child);
             }
           }
-
-          // Since we'll visit every valid child, all we need to do is add the colliders
-          // of every transform we visit.
+          
           allChildren.Add(curTransform);
         }
       }
       finally {
         toVisit.Clear();
-        Pool<Stack<Transform>>.Recycle(toVisit);
+        Pool<Queue<Transform>>.Recycle(toVisit);
       }
 
       return allChildren;
+    }
+
+    /// <summary>
+    /// Scans all the children in order of the argument Transform, appending each transform
+    /// it finds to toFill. Children are added depth-first by default.
+    ///
+    /// Pass breadthFirst: true to fill the list breadth-first instead.
+    /// </summary>
+    public static void GetAllChildren(this Transform t, List<Transform> toFill,
+                                      bool breadthFirst = false) {
+      if (breadthFirst) {
+        var cursor = t; var cursorIdx = toFill.Count; var endIdx = cursorIdx;
+        do {
+          endIdx += addImmediateChildren(cursor, toFill);
+          cursorIdx += 1;
+          if (cursorIdx >= endIdx) break;
+          cursor = toFill[cursorIdx];
+        } while (true);
+      }
+      else {
+        addChildrenRecursive(t, toFill);
+      }
+    }
+    private static void addChildrenRecursive(Transform t, List<Transform> list) {
+      foreach (var child in t.GetChildren()) {
+        list.Add(child);
+        addChildrenRecursive(child, list);
+      }
+    }
+    private static int addImmediateChildren(Transform t, List<Transform> list) {
+      int numChildren = 0;
+      foreach (var child in t.GetChildren()) {
+        list.Add(child); numChildren++;
+      }
+      return numChildren;
     }
 
     #endregion
@@ -180,6 +211,100 @@ namespace Leap.Unity {
         return foo;
       }
       return other;
+    }
+
+    #endregion
+
+    #region Vector3 Utils
+
+    /// <summary>
+    /// Returns a copy of the input Vector3 with a different X component.
+    /// </summary>
+    public static Vector3 WithX(this Vector3 v, float x) {
+      return new Vector3(x, v.y, v.z);
+    }
+
+    /// <summary>
+    /// Returns a copy of the input Vector3 with a different Y component.
+    /// </summary>
+    public static Vector3 WithY(this Vector3 v, float y) {
+      return new Vector3(v.x, y, v.z);
+    }
+
+    /// <summary>
+    /// Returns a copy of the input Vector3 with a different Z component.
+    /// </summary>
+    public static Vector3 WithZ(this Vector3 v, float z) {
+      return new Vector3(v.x, v.y, z);
+    }
+
+    /// <summary>
+    /// Returns the values of this vector clamped component-wise with minimums from minV
+    /// and maximums from maxV.
+    /// </summary>
+    public static Vector3 Clamped(this Vector3 v, Vector3 minV, Vector3 maxV) {
+      return new Vector3(Mathf.Clamp(v.x, minV.x, maxV.x),
+                         Mathf.Clamp(v.y, minV.y, maxV.y),
+                         Mathf.Clamp(v.z, minV.z, maxV.z));
+    }
+
+    /// <summary>
+    /// Infix method to convert a Vector3 to a Vector2.
+    /// </summary>
+    public static Vector2 ToVector2(this Vector3 v) {
+      return v;
+    }
+
+    public static Vector3 RotatedAround(this Vector3 v, 
+                                        Vector3 aroundPoint, float angle, Vector3 axis) {
+      var vFromPoint = v - aroundPoint;
+      vFromPoint = Quaternion.AngleAxis(angle, axis) * vFromPoint;
+      return aroundPoint + vFromPoint;
+    }
+
+    public static Vector3 Abs(this Vector3 v) {
+      return new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
+    }
+
+    public static Vector3 NaNOrInfTo(this Vector3 v, float valueIfNaNOrInf) {
+      return new Vector3(v.x.NaNOrInfTo(valueIfNaNOrInf), v.y.NaNOrInfTo(valueIfNaNOrInf),
+        v.z.NaNOrInfTo(valueIfNaNOrInf));
+    }
+
+    #endregion
+
+    #region Vector2 Utils
+
+    /// <summary>
+    /// Returns the values of this vector clamped component-wise with minimums from minV
+    /// and maximums from maxV.
+    /// </summary>
+    public static Vector2 Clamped(this Vector2 v, Vector2 minV, Vector2 maxV) {
+      return new Vector2(Mathf.Clamp(v.x, minV.x, maxV.x),
+                         Mathf.Clamp(v.y, minV.y, maxV.y));
+    }
+
+    public static Vector2 Abs(this Vector2 v) {
+      return new Vector2(Mathf.Abs(v.x), Mathf.Abs(v.y));
+    }
+
+    #endregion
+
+    #region Float Utils
+
+    public static float Squared(this float f) {
+      return f * f;
+    }
+
+    public static float Abs(this float f) {
+      return Mathf.Abs(f);
+    }
+
+    public static float NaNOrInfTo(this float f, float valueIfNaNOrInf) {
+      if (float.IsNaN(f) || float.IsNegativeInfinity(f) || float.IsPositiveInfinity(f)) {
+        return valueIfNaNOrInf;
+      }
+      return f;
     }
 
     #endregion

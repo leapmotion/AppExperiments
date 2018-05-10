@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c842d1b2b9c484c87dd90f52aef336, type: 3}
+  m_Name: Paper Base Fade Ramp
+  m_EditorClassIdentifier: 
+  _gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 0.1254902}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  _wrapMode: 1
+  _textureResolution: 128
+  _filterMode: 1
+  _texture: {fileID: 28664215203106066}
+--- !u!28 &28664215203106066
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: RampTexture
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 128
+  m_Height: 1
+  m_CompleteImageSize: 512
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_AlphaIsTransparency: 1
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 512
+  _typelessdata: fffffffffffffffdfffffffbfffffff9fffffff7fffffff6fffffff4fffffff2fffffff0ffffffefffffffedffffffebffffffe9ffffffe8ffffffe6ffffffe4ffffffe2ffffffe1ffffffdfffffffddffffffdbffffffdaffffffd8ffffffd6ffffffd4ffffffd3ffffffd1ffffffcfffffffcdffffffccffffffcaffffffc8ffffffc6ffffffc5ffffffc3ffffffc1ffffffbfffffffbeffffffbcffffffbaffffffb8ffffffb7ffffffb5ffffffb3ffffffb1ffffffafffffffaeffffffacffffffaaffffffa8ffffffa7ffffffa5ffffffa3ffffffa1ffffffa0ffffff9effffff9cffffff9affffff99ffffff97ffffff95ffffff93ffffff92ffffff90ffffff8effffff8cffffff8bffffff89ffffff87ffffff85ffffff84ffffff82ffffff80ffffff7effffff7dffffff7bffffff79ffffff77ffffff76ffffff74ffffff72ffffff70ffffff6fffffff6dffffff6bffffff69ffffff67ffffff66ffffff64ffffff62ffffff60ffffff5fffffff5dffffff5bffffff59ffffff58ffffff56ffffff54ffffff52ffffff51ffffff4fffffff4dffffff4bffffff4affffff48ffffff46ffffff44ffffff43ffffff41ffffff3fffffff3dffffff3cffffff3affffff38ffffff36ffffff35ffffff33ffffff31ffffff2fffffff2effffff2cffffff2affffff28ffffff27ffffff25ffffff23ffffff21ffffff1f
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
