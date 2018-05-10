@@ -40,17 +40,8 @@ namespace Leap.Unity.Portals {
     [SerializeField]
     private bool _maskChildren = true;
 
-    [SerializeField]
-    private string refreshHotkey = "";
-
     private void Awake() {
       Refresh();
-    }
-
-    private void Update() {
-      if (!string.IsNullOrEmpty(refreshHotkey) && Input.GetKeyDown(refreshHotkey)) {
-        Refresh();
-      }
     }
 
     public void Refresh() {
