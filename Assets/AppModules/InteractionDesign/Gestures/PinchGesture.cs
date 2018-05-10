@@ -32,7 +32,7 @@ namespace Leap.Unity.Gestures {
     [DevGui.DevCategory(CATEGORY_PINCH_HEURISTIC)]
     [DevGui.DevValue]
     [Range(0f, 0.04f)]
-    public float pinchActivateDistance = 0.005f;
+    public float pinchActivateDistance = 0.0075f;
 
     [Header("Deactivation")]
 
@@ -51,39 +51,27 @@ namespace Leap.Unity.Gestures {
 
     #region Safety Pinch Heuristic Settings
 
-    #region Safety Checks (Middle Finger Checks)
+    private const string CATEGORY_SAFETY_PINCH = "Safety Pinch (Middle & Ring Fingers)";
 
-    private const string CATEGORY_MIDDLE_SAFETY = "Middle Finger Safety Pinch";
+    [Header("Safety Pinch Heuristic")]
 
-    [Header("Heuristics")]
-
-    [DevGui.DevCategory(CATEGORY_MIDDLE_SAFETY)]
+    [DevGui.DevCategory(CATEGORY_SAFETY_PINCH)]
     [DevGui.DevValue]
-    public bool requireMiddleFingerAngle = true;
+    [Tooltip("This is the 'safety pinch' requirement, which only recognizes a pinch if "
+           + "the middle and ring fingers are open.")]
+    public bool requireMiddleAndRingSafetyPinch = true;
 
-    [DevGui.DevCategory(CATEGORY_MIDDLE_SAFETY)]
+    [DevGui.DevCategory(CATEGORY_SAFETY_PINCH)]
     [DevGui.DevValue]
     [Range(0f, 90f)]
-    [DisableIf("requireMiddleFingerAngle", isEqualTo: false)]
+    [DisableIf("requireMiddleAndRingSafetyPinch", isEqualTo: false)]
     public float minPalmMiddleAngle = 65f;
 
-    #endregion
-
-    #region Safety Checks (Ring Finger Checks)
-
-    private const string CATEGORY_RING_SAFETY = "Ring Finger Safety Pinch";
-
-    [DevGui.DevCategory(CATEGORY_RING_SAFETY)]
-    [DevGui.DevValue]
-    public bool requireRingFingerAngle = true;
-
-    [DevGui.DevCategory(CATEGORY_RING_SAFETY)]
+    [DevGui.DevCategory(CATEGORY_SAFETY_PINCH)]
     [DevGui.DevValue]
     [Range(0f, 90f)]
-    [DisableIf("requireRingFingerAngle", isEqualTo: false)]
+    [DisableIf("requireMiddleAndRingSafetyPinch", isEqualTo: false)]
     public float minPalmRingAngle = 65f;
-
-    #endregion
 
     #endregion
 
@@ -98,25 +86,9 @@ namespace Leap.Unity.Gestures {
 
     #endregion
 
-    #region Palm Vs Leap Angle
-
-    private const string CATEGORY_PALM_ANGLE = "Palm Normal Angle";
-
-    [DevGui.DevCategory(CATEGORY_PALM_ANGLE)]
-    [DevGui.DevValue]
-    public bool requirePalmVsLeapAngle = false;
-
-    [DevGui.DevCategory(CATEGORY_PALM_ANGLE)]
-    [DevGui.DevValue]
-    [Range(10f, 181f)]
-    [DisableIf("requirePalmVsLeapAngle", isEqualTo: false)]
-    public float maxPalmVsLeapAngle = 181f;
-
-    #endregion
-
     #region Gesture Eligibility -- Visual Feedback only!
 
-    #region Index Angle (Eligibility Only)
+    #region Eligibility Angles
 
     private const string CATEGORY_INDEX_ANGLE = "Index Angle Eligibility (Visual Only)";
 
@@ -125,30 +97,32 @@ namespace Leap.Unity.Gestures {
     [DevGui.DevCategory(CATEGORY_INDEX_ANGLE)]
     [DevGui.DevValue]
     [Range(45f, 130f)]
+    [Tooltip("Angle from the palm normal to the index finger direction to make the "
+           + "gesture eligible.")]
     public float maxIndexAngleForEligibilityActivation = 98f;
 
     [DevGui.DevCategory(CATEGORY_INDEX_ANGLE)]
     [DevGui.DevValue]
     [Range(45f, 130f)]
+    [Tooltip("Angle from the palm normal to the index finger direction to make the "
+           + "gesture ineligible.")]
     public float maxIndexAngleForEligibilityDeactivation = 110f;
-
-    #endregion
-
-    #region Thumb Angle (Eligibility Only)
 
     private const string CATEGORY_THUMB_ANGLE = "Thumb Angle Eligibility (Visual Only)";
 
     [DevGui.DevCategory(CATEGORY_THUMB_ANGLE)]
     [DevGui.DevValue]
     [Range(45f, 130f)]
+    [Tooltip("Angle from the palm normal to the thumb direction to make the gesture "
+           + "eligible.")]
     public float maxThumbAngleForEligibilityActivation = 85f;
 
     [DevGui.DevCategory(CATEGORY_THUMB_ANGLE)]
     [DevGui.DevValue]
     [Range(45f, 130f)]
+    [Tooltip("Angle from the palm normal to the thumb direction to make the gesture "
+           + "ineligible.")]
     public float maxThumbAngleForEligibilityDeactivation = 100f;
-
-    #endregion
 
     #endregion
 
@@ -167,6 +141,8 @@ namespace Leap.Unity.Gestures {
 
     public bool _drawDebug = false;
     public bool _drawDebugPath = false;
+
+    #endregion
 
     #endregion
 
@@ -322,7 +298,7 @@ namespace Leap.Unity.Gestures {
     #region Private Memory
 
     #region Core Buffers
-    
+
     /// <summary>
     /// One of the heuristics uses the velocity of the hand to adjust the activation
     /// pinch distance.
@@ -518,13 +494,6 @@ namespace Leap.Unity.Gestures {
             
             #endregion
 
-            #region Palm-vs-Leap Angle
-
-            var palmNormalCameraAngle = Vector3.Angle(hand.PalmarAxis(),
-                                                      provider.transform.forward);
-
-            #endregion
-
             #region Index Angle (Eligibility Only)
 
             // Note: obviously pinching already requires the index finger to
@@ -561,18 +530,14 @@ namespace Leap.Unity.Gestures {
                     || (wasEligibleLastCheck
                         && signedMiddlePalmAngle >= minPalmMiddleAngle
                                                     * ringMiddleSafetyHysteresisMult)
-                    || !requireMiddleFingerAngle)
+                    || !requireMiddleAndRingSafetyPinch)
 
                 && ((!wasEligibleLastCheck
                      && signedRingPalmAngle >= minPalmRingAngle)
                     || (wasEligibleLastCheck
                         && signedRingPalmAngle >= minPalmRingAngle
                                                   * ringMiddleSafetyHysteresisMult)
-                    || !requireRingFingerAngle)
-
-                // Palm normal vs Leap provider angle.
-                && (palmNormalCameraAngle <= maxPalmVsLeapAngle
-                    || !requirePalmVsLeapAngle)
+                    || !requireMiddleAndRingSafetyPinch)
 
                 // Index angle (eligibility state only)
                 && ((!wasEligibleLastCheck

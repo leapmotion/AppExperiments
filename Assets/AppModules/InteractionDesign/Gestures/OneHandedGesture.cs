@@ -29,6 +29,15 @@ namespace Leap.Unity.Gestures {
     [EditTimeOnly]
     public Chirality whichHand;
 
+    #if UNITY_EDITOR
+    /// <summary>
+    /// This editor-only value prevents chirality from being changed when the component
+    /// is Reset back to its default values.
+    /// </summary>
+    [NonSerialized]
+    private Chirality? _editorPreviousChirality = null;
+    #endif
+
     #region Public API
 
     /// <summary>
@@ -196,6 +205,16 @@ namespace Leap.Unity.Gestures {
 
     protected virtual void Reset() {
       if (provider == null) provider = Hands.Provider;
+
+      if (_editorPreviousChirality.HasValue) {
+        whichHand = _editorPreviousChirality.Value;
+      }
+    }
+
+    protected virtual void OnValidate() {
+      #if UNITY_EDITOR
+      _editorPreviousChirality = whichHand;
+      #endif
     }
 
     protected virtual void OnDisable() {
