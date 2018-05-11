@@ -206,9 +206,11 @@ namespace Leap.Unity.Gestures {
     protected virtual void Reset() {
       if (provider == null) provider = Hands.Provider;
 
+      #if UNITY_EDITOR
       if (_editorPreviousChirality.HasValue) {
         whichHand = _editorPreviousChirality.Value;
       }
+      #endif
     }
 
     protected virtual void OnValidate() {
