@@ -16,13 +16,13 @@ namespace Leap.Unity.PhysicalInterfaces {
     public override void OnInspectorGUI() {
       base.OnInspectorGUI();
 
-      EditorGUILayout.LabelField("Attached Handles", EditorStyles.boldLabel);
-      foreach (var handleBehaviour in target.attachedHandles
-                                            .Query()
-                                            .Select(h => h as MonoBehaviour)
-                                            .Where(b => b != null)) {
-        EditorGUILayout.LabelField(handleBehaviour.name);
-      }
+      //EditorGUILayout.LabelField("Attached Handles", EditorStyles.boldLabel);
+      //foreach (var handleBehaviour in target.attachedHandles
+      //                                      .Query()
+      //                                      .Select(h => h as MonoBehaviour)
+      //                                      .Where(b => b != null)) {
+      //  EditorGUILayout.LabelField(handleBehaviour.name);
+      //}
     }
 
   }

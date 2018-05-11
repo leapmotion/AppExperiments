@@ -78,9 +78,9 @@ namespace Leap.Unity {
         value = new T();
       }
 
-      //if (value is IPoolable) {
-      //  (value as IPoolable).OnSpawn();
-      //}
+      if (value is IPoolable) {
+        (value as IPoolable).OnSpawn();
+      }
 
       return value;
     }
@@ -91,9 +91,9 @@ namespace Leap.Unity {
         return;
       }
 
-      //if (t is IPoolable) {
-      //  (t as IPoolable).OnRecycle();
-      //}
+      if (t is IPoolable) {
+        (t as IPoolable).OnRecycle();
+      }
 
       _pool.Push(t);
     }

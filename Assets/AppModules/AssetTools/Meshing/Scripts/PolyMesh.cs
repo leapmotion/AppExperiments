@@ -458,7 +458,9 @@ namespace Leap.Unity.Meshing {
     /// if you'd like to have the indices of the positions that were added.
     /// </summary>
     public void AddPositions(ReadonlyList<Vector3> positions) {
-      _positions.AddRange(positions);
+      foreach (var position in positions) {
+        _positions.Add(position);
+      }
     }
 
     /// <summary>
@@ -800,7 +802,9 @@ namespace Leap.Unity.Meshing {
       if (_colors == null) {
         _colors = new List<Color>();
       }
-      _colors.AddRange(colors);
+      foreach (var color in colors) {
+        _colors.Add(color);
+      }
     }
 
     public void AddColor(Color color) {

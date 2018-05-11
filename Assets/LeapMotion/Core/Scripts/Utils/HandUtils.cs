@@ -22,10 +22,14 @@ namespace Leap.Unity {
 
     private static LeapProvider s_provider;
     private static GameObject s_leapRig;
-    
+
     static Hands() {
       InitStatic();
       SceneManager.activeSceneChanged += InitStaticOnNewScene;
+    }
+
+    private static void InitStaticOnNewScene(Scene unused, Scene unused2) {
+      InitStatic();
     }
 
     private static void InitStatic() {
@@ -43,10 +47,6 @@ namespace Leap.Unity {
       s_leapRig = providerCamera.transform.parent.gameObject;
     }
 
-    private static void InitStaticOnNewScene(Scene unused, Scene unused2) {
-      InitStatic();
-    }
-
     /// <summary>
     /// Static convenience accessor for the Leap camera rig. This is the parent
     /// of the Camera that contains a LeapProvider in one of its children,
@@ -60,7 +60,6 @@ namespace Leap.Unity {
         return s_leapRig;
       }
     }
-
 
     /// <summary>
     /// Static convenience accessor for a LeapProvider in the scene. Preference is given

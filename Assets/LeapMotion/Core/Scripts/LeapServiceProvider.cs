@@ -248,9 +248,29 @@ namespace Leap.Unity {
       _untransformedFixedFrame = new Frame();
     }
 
+    private float _timeSinceServiceConnectionChecked = 0f;
+
     protected virtual void Update() {
       if (_workerThreadProfiling) {
         LeapProfiling.Update();
+      }
+
+      if (_leapController.IsServiceConnected) {
+        _timeSinceServiceConnectionChecked = 0f;
+      }
+      else {
+        _timeSinceServiceConnectionChecked += Time.deltaTime;
+
+        if (_timeSinceServiceConnectionChecked > 2f) {
+          _timeSinceServiceConnectionChecked = 0f;
+          
+          destroyController();
+          createController();
+          Debug.LogError("Tried destroying and recreating the controller!!", this);
+          #if UNITY_EDITOR
+          UnityEditor.EditorApplication.isPaused = true;
+          #endif
+        }
       }
 
 #if UNITY_EDITOR
@@ -365,20 +385,20 @@ namespace Leap.Unity {
       }
     }
 
-    #endregion
+#endregion
 
-    #region Public API
+#region Public API
 
     /// <summary>
     /// Returns the Leap Controller instance.
     /// </summary>
     public Controller GetLeapController() {
-      #if UNITY_EDITOR
+#if UNITY_EDITOR
       // Null check to deal with hot reloading.
       if (!_isDestroyed && _leapController == null) {
         createController();
       }
-      #endif
+#endif
       return _leapController;
     }
 
@@ -413,20 +433,20 @@ namespace Leap.Unity {
       leapXRServiceProvider._workerThreadProfiling = _workerThreadProfiling;
     }
 
-    #endregion
+#endregion
 
-    #region Internal Methods
+#region Internal Methods
 
     protected virtual long CalculateInterpolationTime(bool endOfFrame = false) {
-      #if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
       return _leapController.Now() - 16000;
-      #else
+#else
       if (_leapController != null) {
         return _leapController.Now() - (long)_smoothedTrackingLatency.value;
       } else {
         return 0;
       }
-      #endif
+#endif
     }
     
     /// <summary>
@@ -499,7 +519,7 @@ namespace Leap.Unity {
       dest.CopyFrom(source).Transform(transform.GetLeapMatrix());
     }
 
-    #endregion
+#endregion
 
   }
 

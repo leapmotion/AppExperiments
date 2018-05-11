@@ -101,7 +101,8 @@ namespace Leap.Unity.Attributes {
       var serializedObject = property.serializedObject;
       var targetObjectType = serializedObject.targetObject.GetType();
       fieldInfo = targetObjectType.GetField(propertyName,
-        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+        | BindingFlags.FlattenHierarchy);
 
       targets = property.serializedObject.targetObjects;
 

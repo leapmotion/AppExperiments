@@ -357,11 +357,6 @@ namespace Leap.Unity.Interaction {
     /// If this event is fired on a given frame, it will occur after OnGraspEnd and before OnGraspStay.
     /// </remarks>
     public Action OnGraspBegin;
-    /// <summary>
-    /// Called when the object becomes grasped, if it was not already held by any interaction controllers on the
-    /// previous frame. Also passes itself as an event argument.
-    /// </summary>
-    public Action<InteractionBehaviour> OnObjectGraspBegin;
 
     /// <summary>
     /// Called when the object is no longer grasped by any interaction controllers.
@@ -370,11 +365,6 @@ namespace Leap.Unity.Interaction {
     /// If this event is fired on a given frame, it will occur before OnGraspBegin and OnGraspStay.
     /// </remarks>
     public Action OnGraspEnd;
-    /// <summary>
-    /// Called when the object is no longer grasped by any interaction controllers. Also
-    /// passes itself as an event argument.
-    /// </summary>
-    public Action<InteractionBehaviour> OnObjectGraspEnd;
 
     /// <summary>
     /// Called every fixed (physics) frame during which this object is grasped by one or more hands.
@@ -387,11 +377,6 @@ namespace Leap.Unity.Interaction {
     /// OnGraspedMovement.
     /// </remarks>
     public Action OnGraspStay;
-    /// <summary>
-    /// Called every fixed (physics) frame during which this object is grasped by one or
-    /// more hands. Also passes itself as an event argument.
-    /// </summary>
-    public Action<InteractionBehaviour> OnObjectGraspStay;
 
     /// <summary>
     /// Called whenever an interaction controller grasps this object.
@@ -1278,7 +1263,6 @@ namespace Leap.Unity.Interaction {
         rigidbody.angularDrag = 0F;
 
         OnGraspBegin();
-        OnObjectGraspBegin(this);
       }
     }
 
@@ -1316,7 +1300,6 @@ namespace Leap.Unity.Interaction {
         }
 
         OnGraspEnd();
-        OnObjectGraspEnd(this);
 
         if (_justGrasped) _justGrasped = false;
       }
@@ -1339,7 +1322,6 @@ namespace Leap.Unity.Interaction {
       }
 
       OnGraspStay();
-      OnObjectGraspStay(this);
 
       _justGrasped = false;
     }
@@ -1614,9 +1596,6 @@ namespace Leap.Unity.Interaction {
       GraspBegin = 140,
       GraspEnd = 141,
       GraspStay = 142,
-      ObjectGraspBegin = 143,
-      ObjectGraspEnd = 144,
-      ObjectGraspStay = 145,
       PerControllerGraspBegin = 150,
       PerControllerGraspEnd = 152,
 
@@ -1650,9 +1629,6 @@ namespace Leap.Unity.Interaction {
       setupCallback(ref OnGraspBegin,                     EventType.GraspBegin);
       setupCallback(ref OnGraspEnd,                       EventType.GraspEnd);
       setupCallback(ref OnGraspStay,                      EventType.GraspStay);
-      setupCallback(ref OnObjectGraspBegin,               EventType.ObjectGraspBegin);
-      setupCallback(ref OnObjectGraspEnd,                 EventType.ObjectGraspEnd);
-      setupCallback(ref OnObjectGraspStay,                EventType.ObjectGraspStay);
       setupCallback(ref OnPerControllerGraspBegin,        EventType.PerControllerGraspBegin);
       setupCallback(ref OnPerControllerGraspEnd,          EventType.PerControllerGraspEnd);
 
