@@ -37,6 +37,18 @@ namespace Leap.Unity {
     /// </summary>
     protected const string HAND_ARRAY_GLOBAL_NAME = "_LeapHandTransforms";
 
+    /// <summary>
+    /// The maximum number of times the provider will 
+    /// attempt to reconnect to the service before giving up.
+    /// </summary>
+    protected const int MAX_RECONNECTION_ATTEMPTS = 5;
+
+    /// <summary>
+    /// The number of frames to wait between each
+    /// reconnection attempt.
+    /// </summary>
+    protected const int RECONNECTION_INTERVAL = 180;
+
     #endregion
 
     #region Inspector
@@ -248,30 +260,12 @@ namespace Leap.Unity {
       _untransformedFixedFrame = new Frame();
     }
 
-    private float _timeSinceServiceConnectionChecked = 0f;
-
     protected virtual void Update() {
       if (_workerThreadProfiling) {
         LeapProfiling.Update();
       }
 
-      if (_leapController.IsServiceConnected) {
-        _timeSinceServiceConnectionChecked = 0f;
-      }
-      else {
-        _timeSinceServiceConnectionChecked += Time.deltaTime;
-
-        if (_timeSinceServiceConnectionChecked > 2f) {
-          _timeSinceServiceConnectionChecked = 0f;
-          
-          destroyController();
-          createController();
-          Debug.LogError("Tried destroying and recreating the controller!!", this);
-          #if UNITY_EDITOR
-          UnityEditor.EditorApplication.isPaused = true;
-          #endif
-        }
-      }
+      if (!checkConnectionIntegrity()) { return; }
 
 #if UNITY_EDITOR
       if (UnityEditor.EditorApplication.isCompiling) {
@@ -385,20 +379,20 @@ namespace Leap.Unity {
       }
     }
 
-#endregion
+    #endregion
 
-#region Public API
+    #region Public API
 
     /// <summary>
     /// Returns the Leap Controller instance.
     /// </summary>
     public Controller GetLeapController() {
-#if UNITY_EDITOR
+      #if UNITY_EDITOR
       // Null check to deal with hot reloading.
       if (!_isDestroyed && _leapController == null) {
         createController();
       }
-#endif
+      #endif
       return _leapController;
     }
 
@@ -433,20 +427,20 @@ namespace Leap.Unity {
       leapXRServiceProvider._workerThreadProfiling = _workerThreadProfiling;
     }
 
-#endregion
+    #endregion
 
-#region Internal Methods
+    #region Internal Methods
 
     protected virtual long CalculateInterpolationTime(bool endOfFrame = false) {
-#if UNITY_ANDROID && !UNITY_EDITOR
+      #if UNITY_ANDROID && !UNITY_EDITOR
       return _leapController.Now() - 16000;
-#else
+      #else
       if (_leapController != null) {
         return _leapController.Now() - (long)_smoothedTrackingLatency.value;
       } else {
         return 0;
       }
-#endif
+      #endif
     }
     
     /// <summary>
@@ -507,6 +501,37 @@ namespace Leap.Unity {
       }
     }
 
+    private int _framesSinceServiceConnectionChecked = 0;
+    private int _numberOfReconnectionAttempts = 0;
+    /// <summary>
+    /// Checks whether this provider is connected to a service;
+    /// If it is not, attempt to reconnect at regular intervals
+    /// for MAX_RECONNECTION_ATTEMPTS
+    /// </summary>
+    protected bool checkConnectionIntegrity() {
+      if (_leapController.IsServiceConnected) {
+        _framesSinceServiceConnectionChecked = 0;
+        _numberOfReconnectionAttempts = 0;
+        return true;
+      } else if (_numberOfReconnectionAttempts < MAX_RECONNECTION_ATTEMPTS) {
+        _framesSinceServiceConnectionChecked ++;
+
+        if (_framesSinceServiceConnectionChecked > RECONNECTION_INTERVAL) {
+          _framesSinceServiceConnectionChecked = 0;
+          _numberOfReconnectionAttempts++;
+
+          Debug.LogWarning("Leap Service not connected; attempting to reconnect for try " +
+                           _numberOfReconnectionAttempts + "/" + MAX_RECONNECTION_ATTEMPTS +
+                           "...", this);
+          using (new ProfilerSample("Reconnection Attempt")) {
+            destroyController();
+            createController();
+          }
+        }
+      }
+      return false;
+    }
+
     protected void onHandControllerConnect(object sender, LeapEventArgs args) {
       initializeFlags();
 
@@ -519,7 +544,7 @@ namespace Leap.Unity {
       dest.CopyFrom(source).Transform(transform.GetLeapMatrix());
     }
 
-#endregion
+    #endregion
 
   }
 
