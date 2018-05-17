@@ -1,7 +1,7 @@
 ﻿Shader "Hidden/ScreenSpaceDistanceField" {
-	Properties {
-		_MainTex ("Texture", 2D) = "white" {}
-	}
+  Properties {
+    _MainTex ("Texture", 2D) = "white" {}
+  }
 
   CGINCLUDE
   #include "UnityCG.cginc"
@@ -124,17 +124,17 @@
   }
   ENDCG
 
-	SubShader {
-		Cull Off ZWrite Off ZTest Always
+  SubShader {
+    Cull Off ZWrite Off ZTest Always
     Blend One Zero
 
     //Pass 0: Init
-		Pass {
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag_init
-			ENDCG
-		}
+    Pass {
+      CGPROGRAM
+      #pragma vertex vert
+      #pragma fragment frag_init
+      ENDCG
+    }
 
     //Pass 1: Jump
     Pass{
@@ -143,5 +143,5 @@
       #pragma fragment frag_jump
       ENDCG
     }
-	}
+  }
 }
