@@ -70,16 +70,18 @@ namespace Leap.Unity.Portals {
       return (localPoint - closestPoint).sqrMagnitude;
     }
 
+    private void Awake() {
+      _mesh = new Mesh();
+      _mesh.hideFlags = HideFlags.HideAndDontSave;
+      _mesh.name = "Portal Mesh";
+    }
+
     private void OnEnable() {
       if (PortalManager.Instance == null) {
         Debug.LogError("Could not enable Portal " + this + " because no Portal Manager was found in the scene.");
         enabled = false;
       }
       PortalManager.Instance.AddPortal(this);
-
-      _mesh = new Mesh();
-      _mesh.hideFlags = HideFlags.HideAndDontSave;
-      _mesh.name = "Portal Mesh";
 
       if (_stencilMaskMaterial == null) {
         var stencilMaskShader = Shader.Find("Hidden/StencilMask");
@@ -108,6 +110,8 @@ namespace Leap.Unity.Portals {
       if (PortalManager.Instance != null) {
         PortalManager.Instance.RemovePortal(this);
       }
+
+      _isInsidePortal = false;
     }
 
     private void Update() {
@@ -171,8 +175,6 @@ namespace Leap.Unity.Portals {
     }
 
     private void OnDrawGizmos() {
-      if (!this.enabled || !this.gameObject.activeInHierarchy) return;
-
       Gizmos.color = Color.white;
       Gizmos.matrix = transform.localToWorldMatrix;
 
@@ -180,22 +182,6 @@ namespace Leap.Unity.Portals {
       float h = _height / 2;
       float w2 = (_width - 0.05f) / 2;
       float h2 = (_height - 0.05f) / 2;
-
-      Gizmos.DrawLine(new Vector3(-w, -h), new Vector3(+w, -h));
-      Gizmos.DrawLine(new Vector3(+w, -h), new Vector3(+w, +h));
-      Gizmos.DrawLine(new Vector3(+w, +h), new Vector3(-w, +h));
-      Gizmos.DrawLine(new Vector3(-w, +h), new Vector3(-w, -h));
-
-      Gizmos.DrawLine(new Vector3(-w2, -h2), new Vector3(+w2, -h2));
-      Gizmos.DrawLine(new Vector3(+w2, -h2), new Vector3(+w2, +h2));
-      Gizmos.DrawLine(new Vector3(+w2, +h2), new Vector3(-w2, +h2));
-      Gizmos.DrawLine(new Vector3(-w2, +h2), new Vector3(-w2, -h2));
-      
-      Gizmos.color = Color.black;
-      w = (_width - 0.001f) / 2;
-      h = (_height - 0.001f) / 2;
-      w2 = (_width - 0.05f - 0.001f) / 2;
-      h2 = (_height - 0.05f - 0.001f) / 2;
 
       Gizmos.DrawLine(new Vector3(-w, -h), new Vector3(+w, -h));
       Gizmos.DrawLine(new Vector3(+w, -h), new Vector3(+w, +h));

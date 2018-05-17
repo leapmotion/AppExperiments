@@ -227,7 +227,7 @@ namespace Leap.Unity.Portals {
       camera.farClipPlane = _mainCamera.farClipPlane;
       camera.allowHDR = _mainCamera.allowHDR;
       camera.allowMSAA = _mainCamera.allowMSAA;
-      camera.fieldOfView = _mainCamera.fieldOfView;
+      if (!XRSupportUtil.IsXREnabled()) { camera.fieldOfView = _mainCamera.fieldOfView; }
 
       layers = getLayersFromMask(mask);
     }
