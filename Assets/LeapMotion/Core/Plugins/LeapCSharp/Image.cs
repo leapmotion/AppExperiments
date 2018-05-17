@@ -142,8 +142,11 @@ namespace Leap {
     /// Note, this function was formerly named Rectify().
     /// @since 2.1.0
     /// </summary>
-    public Vector PixelToRectilinear(CameraType camera, Vector pixel) {
+    public static Vector PixelToRectilinear(CameraType camera, Vector pixel) {
       return Connection.GetConnection().PixelToRectilinear(camera, pixel);
+    }
+    public static Vector PixelToRectilinear(CameraType camera, Vector pixel, Connection connection) {
+      return connection.PixelToRectilinear(camera, pixel);
     }
 
     /// <summary>
@@ -171,8 +174,11 @@ namespace Leap {
     /// Note, this function was formerly named Warp().
     /// @since 2.1.0
     /// </summary>
-    public Vector RectilinearToPixel(CameraType camera, Vector ray) {
+    public static Vector RectilinearToPixel(CameraType camera, Vector ray) {
       return Connection.GetConnection().RectilinearToPixel(camera, ray);
+    }
+    public static Vector RectilinearToPixel(CameraType camera, Vector ray, Connection connection) {
+      return connection.RectilinearToPixel(camera, ray);
     }
 
     /// <summary>
