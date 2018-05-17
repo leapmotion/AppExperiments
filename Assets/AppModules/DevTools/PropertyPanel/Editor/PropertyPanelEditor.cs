@@ -160,7 +160,13 @@ public class PropertyPanelEditor : CustomEditorBase<PropertyPanel> {
   private void drawObjectMode(SerializedProperty property) {
     EditorGUILayout.BeginHorizontal();
 
-    if (GUILayout.Button("Add All")) {
+    bool noProperties = selectedPropertyList.Count == 0;
+    EditorGUI.BeginDisabledGroup(noProperties);
+    bool addProperty = GUILayout.Button(noProperties ? 
+                                        "No Properties Selected" : 
+                                        "Add Properties");
+    EditorGUI.EndDisabledGroup();
+    if (addProperty) {
       foreach (var key in selectedPropertyList) {
         int index = property.arraySize;
         property.InsertArrayElementAtIndex(index);
