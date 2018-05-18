@@ -1,23 +1,17 @@
 ﻿using System.Collections.Generic;
 
 public struct FlowRoutine {
-
-  private FlowRoutineState _coroutineState;
-  private long _lastYieldTime;
-
   private IEnumerator<Flow> _baseEnumerator;
   private Stack<IEnumerator<Flow>> _enumeratorStack;
 
-  private float _heapValue;
-  private int _heapIndex;
-
   public FlowRoutine(IEnumerator<Flow> enumerator) {
-    _baseEnumerator = enumerator;
-    _coroutineState = FlowRoutineState.Update;
-    _lastYieldTime = 0;
     _enumeratorStack = null;
-    _heapValue = -1;
-    _heapIndex = -1;
+    _baseEnumerator = enumerator;
+
+    State = FlowRoutineState.Update;
+    LastYieldTime = 0;
+    HeapValue = -1;
+    HeapIndex = -1;
   }
 
   public bool MoveNext() {
@@ -52,38 +46,13 @@ public struct FlowRoutine {
     }
   }
 
-  public FlowRoutineState State {
-    get {
-      return _coroutineState;
-    }
-  }
+  public FlowRoutineState State { get; private set; }
 
-  public float HeapValue {
-    get {
-      return _heapValue;
-    }
-    set {
-      _heapValue = value;
-    }
-  }
+  public float HeapValue { get; set; }
 
-  public long LastYieldTime {
-    get {
-      return _lastYieldTime;
-    }
-    set {
-      _lastYieldTime = value;
-    }
-  }
+  public long LastYieldTime { get; set; }
 
-  public int HeapIndex {
-    get {
-      return _heapIndex;
-    }
-    set {
-      _heapIndex = value;
-    }
-  }
+  public int HeapIndex { get; set; }
 
   private IEnumerator<Flow> topEnumerator() {
     if (_enumeratorStack == null) {

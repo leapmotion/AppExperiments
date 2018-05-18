@@ -1,5 +1,4 @@
-﻿//#define DEBUG
-
+﻿
 using UnityEngine;
 using System;
 
@@ -15,10 +14,6 @@ public class FlowHeap {
   }
 
   public void Insert(FlowRoutine element) {
-#if VALIDATE
-    validateHeap("Insert");
-#endif
-
     //if the array isn't big enough, expand it
     if (_array.Length == _count) {
       FlowRoutine[] newArray = new FlowRoutine[_array.Length * 2];
@@ -53,10 +48,6 @@ public class FlowHeap {
   }
 
   private FlowRoutine removeAt(int index) {
-#if VALIDATE
-    validateHeap("Remove At");
-#endif
-
     FlowRoutine ret = _array[index];
     _count--;
 
@@ -97,10 +88,6 @@ public class FlowHeap {
     }
 
     _array[element.HeapIndex] = element;
-
-#if VALIDATE
-    validateHeap("Bubble Up");
-#endif
   }
 
   private void bubbleDown(FlowRoutine element) {
@@ -148,10 +135,6 @@ public class FlowHeap {
 
     element.HeapIndex = elementIndex;
     _array[elementIndex] = element;
-
-#if VALIDATE
-    validateHeap("Bubble Down");
-#endif
   }
 
   private void validateHeap(string operation) {

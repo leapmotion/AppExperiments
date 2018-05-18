@@ -29,9 +29,9 @@ public class FlowExample : MonoBehaviour {
     startTime = Time.realtimeSinceStartup;
     startFrame = Time.frameCount;
     for (int i = 0; i < ARRAY_SIZE; i++) {
+      yield return Flow.IfElapsed(4);
       for (int j = 0; j < ARRAY_SIZE; j++) {
         array[i, j] = i * j;
-        yield return Flow.IfElapsed(4);
       }
     }
     Debug.Log("Ended operation.  Took " + (Time.realtimeSinceStartup - startTime) + " seconds at " + ((Time.frameCount - startFrame) / (Time.realtimeSinceStartup - startTime)) + " FPS");
