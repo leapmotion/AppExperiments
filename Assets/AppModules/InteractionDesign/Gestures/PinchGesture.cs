@@ -59,7 +59,7 @@ namespace Leap.Unity.Gestures {
     [DevGui.DevValue]
     [Tooltip("This is the 'safety pinch' requirement, which only recognizes a pinch if "
            + "the middle and ring fingers are open.")]
-    public bool requireMiddleAndRingSafetyPinch = true;
+    public bool requireMiddleAndRingSafetyPinch = false;
 
     [DevGui.DevCategory(CATEGORY_SAFETY_PINCH)]
     [DevGui.DevValue]
