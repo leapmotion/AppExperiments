@@ -61,6 +61,8 @@ namespace Leap.Unity {
 
     [Tooltip("Follow Hand Point implements IStream<Pose>; It will stream data as long as "
           + "the component is enabled, the hand is tracked, and this option is enabled.")]
+    [QuickButton("Send Stream Now", "sendStreamNow",
+      tooltip: "Open, send pose, and close the stream immediately. Edit-time only.")]
     public bool doPoseStream = true;
 
     [DisableIf("doPoseStream", isEqualTo: false)]
@@ -124,7 +126,8 @@ namespace Leap.Unity {
       if (hand != null) {
         _isHandTracked = true;
 
-        if (enabled && gameObject.activeInHierarchy) {
+        if (enabled && gameObject.activeInHierarchy
+            && attachmentPoint.IsSinglePoint()) {
           Vector3 pointPosition; Quaternion pointRotation;
           AttachmentPointBehaviour.GetLeapHandPointData(hand, attachmentPoint,
                                                         out pointPosition,
@@ -225,6 +228,18 @@ namespace Leap.Unity {
 
     private void moveToAttachmentPointNow() {
       onUpdateFrame(provider.CurrentFrame);
+    }
+
+    private void sendStreamNow() {
+      if (!Application.isPlaying) {
+        if (_isStreamOpen) {
+          OnClose();
+          _isStreamOpen = false;
+        }
+        OnOpen();
+        OnSend(this.transform.ToPose());
+        OnClose();
+      }
     }
 
     #endregion
