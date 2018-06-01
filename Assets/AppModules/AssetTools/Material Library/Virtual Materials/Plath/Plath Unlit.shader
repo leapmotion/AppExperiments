@@ -37,7 +37,7 @@
 			struct v2f
 			{
 				float4 vertex : SV_POSITION;
-        float4 worldVertex : TECOORD0;
+        float4 worldVertex : TEXCOORD0;
 			};
 
       // Public Material Properties

@@ -72,7 +72,7 @@ public class TextureRampAsset : ScriptableObject {
     TextureRampAsset asset = CreateInstance<TextureRampAsset>();
     AssetDatabase.CreateAsset(asset, path);
 
-    Texture2D tex = new Texture2D(1, 1, TextureFormat.ARGB32, false, true);
+    Texture2D tex = new Texture2D(1, 1, TextureFormat.RGBA32, false, false);
     tex.name = "RampTexture";
     tex.alphaIsTransparency = true;
     asset._texture = tex;

@@ -60,7 +60,7 @@ public class GraphicHoverPaletteController : GraphicPaletteController {
     if (intObj.isPrimaryHovered) {
       targetColor = primaryHoveredColor;
     }
-    else if (intObj.isHovered) {
+    else if (intObj.isHovered && useNormalHover) {
       targetColor = Color.Lerp(restingColor, hoveredColor,
                       intObj.closestHoveringControllerDistance
                             .Map(hoverFalloffDistance, 0f, 0f, 1f));
