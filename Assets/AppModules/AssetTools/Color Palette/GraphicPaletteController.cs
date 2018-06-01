@@ -76,8 +76,7 @@ namespace Leap.Unity {
 
       if (Application.isPlaying) {
         _targetColor = updateTargetColor();
-      }
-      else {
+      } else {
         _targetColor = palette[restingColorIdx];
       }
 
@@ -90,8 +89,7 @@ namespace Leap.Unity {
         if (curColor != _targetColor) {
           setColor(Color.Lerp(curColor, _targetColor, colorChangeSpeed * Time.deltaTime));
         }
-      }
-      else {
+      } else {
         setColor(_targetColor);
       }
     }
@@ -105,16 +103,13 @@ namespace Leap.Unity {
         var text = graphic as LeapTextGraphic;
         if (text != null) {
           return text.color;
-        }
-        else {
+        } else {
           return graphic.GetRuntimeTint();
         }
-      }
-      else {
+      } else {
         if (Application.isPlaying) {
           return renderer.material.GetColor(_shaderColorID);
-        }
-        else {
+        } else {
           return renderer.sharedMaterial.GetColor(_shaderColorID);
         }
       }
@@ -128,17 +123,14 @@ namespace Leap.Unity {
       var text = graphic as LeapTextGraphic;
       if (text != null) {
         text.color = color;
-      }
-      else {
+      } else {
         if (graphic != null) {
           graphic.SetRuntimeTint(color);
-        }
-        else {
+        } else {
           if (renderer != null) {
             if (Application.isPlaying) {
               renderer.material.SetColor(_shaderColorID, color);
-            }
-            else {
+            } else {
               renderer.sharedMaterial.SetColor(_shaderColorID, color);
             }
           }
@@ -150,5 +142,5 @@ namespace Leap.Unity {
       restingColorIdx = paletteColorIdx;
     }
   }
-  
+
 }
