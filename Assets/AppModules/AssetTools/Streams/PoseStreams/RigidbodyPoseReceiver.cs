@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Leap.Unity.AR.Testing {
+namespace Leap.Unity.Streams {
 
   public class RigidbodyPoseReceiver : MonoBehaviour,
                                        IStreamReceiver<Pose> {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Drawing {
+namespace Leap.Unity.Streams {
 
   public class PoseStreamSkippingFilter : StreamSkippingFilter<Pose> {
 

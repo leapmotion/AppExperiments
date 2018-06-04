@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Leap.Unity.Drawing {
+namespace Leap.Unity.Apps.Paint6.Drawing {
 
   [System.Serializable]
   public struct StrokePoint {

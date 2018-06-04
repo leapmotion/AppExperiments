@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity {
+namespace Leap.Unity.Streams {
 
   public class PoseStreamBuffer : MonoBehaviour, IStreamReceiver<Pose>,
                                                  IIndexable<Pose> {

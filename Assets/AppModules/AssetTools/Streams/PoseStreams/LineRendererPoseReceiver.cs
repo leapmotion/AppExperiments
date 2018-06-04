@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity {
+namespace Leap.Unity.Streams {
   
   /// <summary>
   /// Fills received poses into a buffer, then fills a LineRenderer object with

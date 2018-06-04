@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Drawing {
+namespace Leap.Unity.Apps.Paint6.Drawing {
 
   public class StrokeObject : MonoBehaviour, IIndexable<StrokePoint> {
 

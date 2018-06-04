@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Pose = Leap.Unity.Pose;
+
 namespace Leap.Unity {
 
   public static class NewUtils {
@@ -146,6 +148,26 @@ namespace Leap.Unity {
     }
 
     #endregion
+
+    #endregion
+
+    #region Rigidbody Utils
+
+    /// <summary>
+    /// Sets body.position and body.rotation using the argument Pose.
+    /// </summary>
+    public static void SetPose(this Rigidbody body, Pose pose) {
+      body.position = pose.position;
+      body.rotation = pose.rotation;
+    }
+
+    /// <summary>
+    /// Calls body.MovePosition() and body.MoveRotation() using the argument Pose.
+    /// </summary>
+    public static void MovePose(this Rigidbody body, Pose pose) {
+      body.MovePosition(pose.position);
+      body.MoveRotation(pose.rotation);
+    }
 
     #endregion
 

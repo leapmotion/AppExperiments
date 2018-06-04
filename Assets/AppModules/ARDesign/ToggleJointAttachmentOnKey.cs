@@ -55,31 +55,4 @@ namespace Leap.Unity.AR.Testing {
 
   }
 
-  public static class JointRigidbodyExtensions {
-    
-    /// <summary>
-    /// Gets the pose defined by body.position and body.rotation.
-    /// </summary>
-    public static Pose GetPose(this Rigidbody body) {
-      return new Pose(body.position, body.rotation);
-    }
-
-    /// <summary>
-    /// Sets body.position and body.rotation using the argument Pose.
-    /// </summary
-    public static void SetPose(this Rigidbody body, Pose pose) {
-      body.position = pose.position;
-      body.rotation = pose.rotation;
-    }
-
-    /// <summary>
-    /// Calls body.MovePosition() and body.MoveRotation() using the argument Pose.
-    /// </summary
-    public static void MovePose(this Rigidbody body, Pose pose) {
-      body.MovePosition(pose.position);
-      body.MoveRotation(pose.rotation);
-    }
-
-  }
-
 }

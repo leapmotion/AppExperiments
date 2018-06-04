@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Leap.Unity.UserContext;
 
-namespace Leap.Unity.Drawing {
+namespace Leap.Unity.Apps.Paint6.Drawing {
 
   public class Paintbrush : MonoBehaviour,
                             IRuntimeGizmoComponent,

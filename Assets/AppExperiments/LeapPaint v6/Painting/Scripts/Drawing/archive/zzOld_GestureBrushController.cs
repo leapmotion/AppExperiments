@@ -1,5 +1,5 @@
 ﻿using Leap.Unity.Attributes;
-using Leap.Unity.Drawing;
+using Leap.Unity.Apps.Paint6.Drawing;
 using Leap.Unity.Gestures;
 using Leap.Unity.Intention;
 using UnityEngine;
