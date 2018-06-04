@@ -39,7 +39,7 @@ namespace Leap.Unity.Gestures {
     [DevGui.DevCategory(CATEGORY_PINCH_HEURISTIC)]
     [DevGui.DevValue]
     [Range(0f, 0.04f)]
-    public float pinchDeactivateDistance = 0.045f;
+    public float pinchDeactivateDistance = 0.025f;
 
 
     [DevGui.DevCategory(CATEGORY_PINCH_HEURISTIC)]
@@ -59,7 +59,7 @@ namespace Leap.Unity.Gestures {
     [DevGui.DevValue]
     [Tooltip("This is the 'safety pinch' requirement, which only recognizes a pinch if "
            + "the middle and ring fingers are open.")]
-    public bool requireMiddleAndRingSafetyPinch = true;
+    public bool requireMiddleAndRingSafetyPinch = false;
 
     [DevGui.DevCategory(CATEGORY_SAFETY_PINCH)]
     [DevGui.DevValue]
