@@ -13578,7 +13578,7 @@ MonoBehaviour:
   whichHand: 1
   drawDebugPinchDistance: 0
   pinchActivateDistance: 0.0075
-  pinchDeactivateDistance: 0.035
+  pinchDeactivateDistance: 0.025
   failedPinchResetDistance: 0.01
   requireMiddleAndRingSafetyPinch: 1
   minPalmMiddleAngle: 65
@@ -42196,12 +42196,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd66228b20306d49ad7f891f6269e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftFingertipsUniformParamId: 502
-  _rightFingertipsUniformParamId: 503
-  _leftPalmTrisUniformParamId: 504
-  _rightPalmTrisUniformParamId: 505
-  _leftFingerSegmentsUniformParamId: 506
-  _rightFingerSegmentsUniformParamId: 507
+  _leftFingertipsUniformParamId: 488
+  _rightFingertipsUniformParamId: 489
+  _leftPalmTrisUniformParamId: 490
+  _rightPalmTrisUniformParamId: 491
+  _leftFingerSegmentsUniformParamId: 492
+  _rightFingerSegmentsUniformParamId: 493
 --- !u!4 &1756187802
 Transform:
   m_ObjectHideFlags: 0
@@ -51571,11 +51571,11 @@ MonoBehaviour:
   _templateLayer:
     layerIndex: 0
   _interactionLayer:
-    layerIndex: 19
+    layerIndex: 8
   _interactionNoContactLayer:
-    layerIndex: 20
+    layerIndex: 9
   _contactBoneLayer:
-    layerIndex: 21
+    layerIndex: 10
   _drawControllerRuntimeGizmos: 0
 --- !u!1001 &1968446964
 Prefab:
