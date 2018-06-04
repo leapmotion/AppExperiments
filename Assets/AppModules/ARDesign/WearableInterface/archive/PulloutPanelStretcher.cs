@@ -1,7 +1,7 @@
 ﻿using Leap.Unity.Attributes;
 using UnityEngine;
 
-namespace Leap.Unity.ARTesting {
+namespace Leap.Unity.AR.Testing {
 
   [ExecuteInEditMode]
   public class PulloutPanelStretcher : MonoBehaviour {

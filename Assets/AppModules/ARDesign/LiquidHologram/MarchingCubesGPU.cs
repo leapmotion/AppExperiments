@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using System.Collections.Generic;
 
-namespace Leap.Unity.ARTesting {
+namespace Leap.Unity.AR.Testing {
 
   public class MarchingCubesGPU : MonoBehaviour {
 
