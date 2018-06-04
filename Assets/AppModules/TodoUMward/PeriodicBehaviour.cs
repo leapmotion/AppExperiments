@@ -31,9 +31,10 @@ namespace Leap.Unity {
     }
 
     /// <summary>
-    /// The PeriodicBehaviour will call this once for every N Updates(), where N is
-    /// the current updatePeriod. (When the updatePeriod changes, the object will receive
-    /// a new phase, randomly determined within the update period range.)
+    /// The PeriodicBehaviour will call this once for every N Updates(), where N
+    /// is the current updatePeriod. (When the updatePeriod changes, the object
+    /// will receive a new phase, randomly determined within the update period
+    /// range.)
     /// </summary>
     public abstract void PeriodicUpdate();
 
@@ -53,8 +54,8 @@ namespace Leap.Unity {
         }
         else {
           // TODO: This leaves a performance optimization up to chance. Instead,
-          // static memory should track which cycles are heaviest and minimize their
-          // use.
+          // static memory should track which phases are heaviest and minimize
+          // their use.
           _phase = Random.Range(0, updatePeriod - 1);
         }
 

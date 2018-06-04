@@ -1,4 +1,5 @@
 ﻿using Leap.Unity;
+using Leap.Unity.Animation;
 using Leap.Unity.Attributes;
 using Leap.Unity.GraphicalRenderer;
 using Leap.Unity.Interaction;
