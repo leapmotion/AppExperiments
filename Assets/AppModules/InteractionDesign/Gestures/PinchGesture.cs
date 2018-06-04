@@ -39,7 +39,7 @@ namespace Leap.Unity.Gestures {
     [DevGui.DevCategory(CATEGORY_PINCH_HEURISTIC)]
     [DevGui.DevValue]
     [Range(0f, 0.04f)]
-    public float pinchDeactivateDistance = 0.035f;
+    public float pinchDeactivateDistance = 0.025f;
 
 
     [DevGui.DevCategory(CATEGORY_PINCH_HEURISTIC)]
@@ -171,7 +171,7 @@ namespace Leap.Unity.Gestures {
       var pinchDistance = PinchSegment2SegmentDisplacement(h, out c0, out c1).magnitude;
 
       pinchDistance -= 0.01f;
-      pinchDistance = pinchDistance.Clamped01();
+      pinchDistance = Mathf.Max(0f, pinchDistance);
 
       if (Input.GetKeyDown(KeyCode.C)) {
         Debug.Log(pinchDistance);
@@ -185,7 +185,7 @@ namespace Leap.Unity.Gestures {
       var pinchDistance = PinchSegment2SegmentDisplacement(h, out c0, out c1).magnitude;
 
       pinchDistance -= 0.01f;
-      pinchDistance = pinchDistance.Clamped01();
+      pinchDistance = Mathf.Max(0f, pinchDistance);
 
       if (Input.GetKeyDown(KeyCode.C)) {
         Debug.Log(pinchDistance);
@@ -648,7 +648,7 @@ namespace Leap.Unity.Gestures {
       OnPinchStrengthEvent.Invoke(_latestPinchStrength);
 
       if (minDeactivateTimer > MIN_DEACTIVATE_TIME) {
-        var pinchDistance = PinchSegment2SegmentDisplacement(hand).magnitude;
+        var pinchDistance = GetCustomPinchDistance(hand);
 
         if (pinchDistance > pinchDeactivateDistance) {
           shouldDeactivate = true;
