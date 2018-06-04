@@ -17,22 +17,22 @@ namespace Leap.Unity.ARTesting {
 
     public Transform facingTarget;
     public float activationAngle = 80f;
-    //public float deactivationAngle = 90f;
+    public float deactivationAngle = 81f;
 
     private void Update() {
       if (facingTarget != null && propertySwitch != null) {
         var shouldActivate = transform.forward.IsFacing(transform.position,
                                                         facingTarget.position,
                                                         activationAngle);
-        //var shouldDeactivate = transform.forward.IsFacing(transform.position,
-        //                                                facingTarget.position,
-        //                                                deactivationAngle);
+        var shouldDeactivate = !transform.forward.IsFacing(transform.position,
+                                                           facingTarget.position,
+                                                           deactivationAngle);
 
         var onOrTurningOn = propertySwitch.GetIsOnOrTurningOn();
         var offOrTurningOff = propertySwitch.GetIsOffOrTurningOff();
         if (shouldActivate && !onOrTurningOn) {
           propertySwitch.On();
-        } else if (!shouldActivate && !offOrTurningOff) {
+        } else if (shouldDeactivate && !offOrTurningOff) {
           propertySwitch.Off();
         }
       }
