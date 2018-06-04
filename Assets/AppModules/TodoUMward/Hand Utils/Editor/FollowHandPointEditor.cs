@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace Leap.Unity {
+namespace Leap.Unity.Attachments {
   
   [CanEditMultipleObjects]
   [CustomEditor(typeof(FollowHandPoint))]

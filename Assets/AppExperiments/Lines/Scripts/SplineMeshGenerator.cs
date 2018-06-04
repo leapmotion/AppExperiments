@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Examples.Lines {
+namespace Leap.Unity.Apps.Lines {
 
   public class SplineMeshGenerator : MonoBehaviour {
 
@@ -58,7 +58,9 @@ namespace Leap.Unity.Examples.Lines {
       s_indices.Clear();
 
       zzOldSplineUtility.MeshGen.GenerateQuadSplineMesh(ref s_verts, ref s_indices,
-        spline, thickness, Camera.main.transform.position, (1 - (1 - _spline.smoothness)*(1 - _spline.smoothness)).Map(0F, 1F, 0.85F, 1F));
+        spline, thickness, Camera.main.transform.position,
+        (1 - (1 - _spline.smoothness)*(1 - _spline.smoothness))
+          .Map(0F, 1F, 0.85F, 1F));
 
       if (_splineMesh == null) {
         _splineMesh = new Mesh();

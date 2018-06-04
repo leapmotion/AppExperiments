@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace Leap.Unity {
   
+  /// <summary>
+  /// Fills received poses into a buffer, then fills a LineRenderer object with
+  /// the received Pose data on Close().
+  /// </summary>
   public class LineRendererPoseReceiver : MonoBehaviour,
                                           IStreamReceiver<Pose> {
     

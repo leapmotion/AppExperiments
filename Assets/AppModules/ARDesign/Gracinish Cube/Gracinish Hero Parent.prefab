@@ -71,14 +71,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4231032471223482}
-  - component: {fileID: 114248404085565652}
   m_Layer: 0
   m_Name: Gracinish Hero Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1407074212845378
 GameObject:
   m_ObjectHideFlags: 1
@@ -141,7 +140,6 @@ GameObject:
   - component: {fileID: 4341884161359788}
   - component: {fileID: 54131747838480522}
   - component: {fileID: 114577115312387708}
-  - component: {fileID: 114304957919858240}
   m_Layer: 0
   m_Name: Gracinish Hero Cube
   m_TagString: Untagged
@@ -482,6 +480,7 @@ MonoBehaviour:
   body: {fileID: 54131747838480522}
   movementMode: 1
   preserveRelativePoseOnOpen: 1
+  ignoreRotations: 0
 --- !u!114 &114174170225665132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -497,19 +496,6 @@ MonoBehaviour:
   _receiver: {fileID: 114079951067734966}
   drawWire: 1
   debugWire: 0
---- !u!114 &114248404085565652
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1381688733221096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc768b97f42c25f43915ce5b74cff61f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startEnabled: 0
-  toggleKey: 51
 --- !u!114 &114298733012269112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -523,18 +509,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggleCollider: {fileID: 65082929233577928}
   toggleKey: 99
---- !u!114 &114304957919858240
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1752740461633352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b34ed094b5ff3d2419ff62bb6e8cd719, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resetKey: 114
 --- !u!114 &114322452003423536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -595,7 +569,6 @@ MonoBehaviour:
   _allowMultiGrasp: 0
   _moveObjectWhenGrasped: 1
   graspedMovementType: 0
-  graspHoldWarpingEnabled__curIgnored: 1
   _overrideInteractionLayer: 0
   _interactionLayer:
     layerIndex: 0

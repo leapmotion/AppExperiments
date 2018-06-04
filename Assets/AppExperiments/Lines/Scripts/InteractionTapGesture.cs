@@ -1,4 +1,5 @@
-﻿using Leap.Unity.Gestures;
+﻿using Leap.Unity;
+using Leap.Unity.Gestures;
 using Leap.Unity.RuntimeGizmos;
 using Leap.Unity.Interaction;
 using System.Collections;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Leap.Unity.Examples.Lines {
+namespace Leap.Unity.Apps.Lines {
   
   /// <summary>
   /// This one-shot gesture activates when it detects the hand has tapped an

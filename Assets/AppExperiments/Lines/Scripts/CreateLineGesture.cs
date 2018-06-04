@@ -1,8 +1,9 @@
-﻿using Leap.Unity.Attributes;
+﻿using Leap.Unity;
+using Leap.Unity.Attributes;
 using Leap.Unity.Gestures;
 using UnityEngine;
 
-namespace Leap.Unity.Examples.Lines {
+namespace Leap.Unity.Apps.Lines {
 
   public class CreateLineGesture : TwoHandedGesture {
 

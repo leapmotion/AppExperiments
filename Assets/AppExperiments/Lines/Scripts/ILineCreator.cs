@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Leap.Unity.Examples.Lines {
+namespace Leap.Unity.Apps.Lines {
 
   public interface ILineCreator {
 
