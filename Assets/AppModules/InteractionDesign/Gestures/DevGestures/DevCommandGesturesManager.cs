@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
-using Leap.Unity.Gestures;
 
-namespace Leap.Unity {
+namespace Leap.Unity.Gestures {
 
   public class DevCommandGesturesManager : MonoBehaviour {
 
