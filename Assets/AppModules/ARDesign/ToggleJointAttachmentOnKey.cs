@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Leap.Unity.ARTesting {
+namespace Leap.Unity.AR.Testing {
 
   public class ToggleJointAttachmentOnKey : MonoBehaviour {
 
