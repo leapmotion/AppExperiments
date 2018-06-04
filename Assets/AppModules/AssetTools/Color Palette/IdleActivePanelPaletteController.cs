@@ -3,62 +3,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleActivePanelPaletteController : MonoBehaviour {
+namespace Leap.Unity {
 
-  public PaletteSwitcherController paletteSwitcherController;
-  public Transform findInteractionObjectsWithin;
+  public class IdleActivePanelPaletteController : MonoBehaviour {
 
-  public int activePaletteIdx = 0;
-  public int idlePaletteIdx = 1;
+    public PaletteSwitcherController paletteSwitcherController;
+    public Transform findInteractionObjectsWithin;
 
-  public float waitTimeBeforeIdle = 3f;
+    public int activePaletteIdx = 0;
+    public int idlePaletteIdx = 1;
 
-  private bool _haveInitializedInteractionObjects = false;
-  private float _timeSinceLastPrimaryHover = 0f;
-  private List<InteractionBehaviour> _intObjs = new List<InteractionBehaviour>();
+    public float waitTimeBeforeIdle = 3f;
 
-  void Reset() {
-    if (paletteSwitcherController == null) {
-      paletteSwitcherController = GetComponent<PaletteSwitcherController>();
-    }
+    private bool _haveInitializedInteractionObjects = false;
+    private float _timeSinceLastPrimaryHover = 0f;
+    private List<InteractionBehaviour> _intObjs = new List<InteractionBehaviour>();
 
-    if (findInteractionObjectsWithin == null) {
-      findInteractionObjectsWithin = this.transform;
-    }
-  }
-
-  void OnEnable() {
-    if (!_haveInitializedInteractionObjects) {
-      findInteractionObjectsWithin.GetComponentsInChildren(true, _intObjs);
-      foreach (var intObj in _intObjs) {
-        intObj.OnPrimaryHoverStay += onPrimaryHoverStay;
+    void Reset() {
+      if (paletteSwitcherController == null) {
+        paletteSwitcherController = GetComponent<PaletteSwitcherController>();
       }
 
-      _haveInitializedInteractionObjects = true;
-    }
-  }
-
-  void OnDisable() {
-    if (_haveInitializedInteractionObjects) {
-      foreach (var intObj in _intObjs) {
-        intObj.OnPrimaryHoverStay -= onPrimaryHoverStay;
+      if (findInteractionObjectsWithin == null) {
+        findInteractionObjectsWithin = this.transform;
       }
     }
-  }
 
-  void Update() {
-    _timeSinceLastPrimaryHover += Time.deltaTime;
+    void OnEnable() {
+      if (!_haveInitializedInteractionObjects) {
+        findInteractionObjectsWithin.GetComponentsInChildren(true, _intObjs);
+        foreach (var intObj in _intObjs) {
+          intObj.OnPrimaryHoverStay += onPrimaryHoverStay;
+        }
 
-    if (_timeSinceLastPrimaryHover > waitTimeBeforeIdle) {
-      paletteSwitcherController.curPaletteIdx = idlePaletteIdx;
+        _haveInitializedInteractionObjects = true;
+      }
     }
-    else {
-      paletteSwitcherController.curPaletteIdx = activePaletteIdx;
-    }
-  }
 
-  private void onPrimaryHoverStay() {
-    _timeSinceLastPrimaryHover = 0f;
+    void OnDisable() {
+      if (_haveInitializedInteractionObjects) {
+        foreach (var intObj in _intObjs) {
+          intObj.OnPrimaryHoverStay -= onPrimaryHoverStay;
+        }
+      }
+    }
+
+    void Update() {
+      _timeSinceLastPrimaryHover += Time.deltaTime;
+
+      if (_timeSinceLastPrimaryHover > waitTimeBeforeIdle) {
+        paletteSwitcherController.curPaletteIdx = idlePaletteIdx;
+      }
+      else {
+        paletteSwitcherController.curPaletteIdx = activePaletteIdx;
+      }
+    }
+
+    private void onPrimaryHoverStay() {
+      _timeSinceLastPrimaryHover = 0f;
+    }
+
   }
 
 }

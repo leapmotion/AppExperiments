@@ -829,7 +829,10 @@ MonoBehaviour:
   _provider: {fileID: 1882949155}
   whichHand: 1
   attachmentPoint: 4
+  _followMode: 0
   _isHandTracked: 1
+  showAdvancedSettings: 0
+  usePalmRotationForWrist: 0
   doPoseStream: 1
   usePoseStreamOffset: 0
   poseStreamOffsetSource: {fileID: 0}
@@ -1011,7 +1014,10 @@ MonoBehaviour:
   _provider: {fileID: 0}
   whichHand: 1
   attachmentPoint: 4
+  _followMode: 0
   _isHandTracked: 1
+  showAdvancedSettings: 0
+  usePalmRotationForWrist: 0
   doPoseStream: 1
   usePoseStreamOffset: 1
   poseStreamOffsetSource: {fileID: 1802368594}
@@ -10463,6 +10469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6effe41317f88fc4c94f4e653addf61e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  streamDuringEditMode: 0
 --- !u!1 &446525152
 GameObject:
   m_ObjectHideFlags: 0
@@ -13027,7 +13034,10 @@ MonoBehaviour:
   _provider: {fileID: 1882949155}
   whichHand: 0
   attachmentPoint: 4
+  _followMode: 0
   _isHandTracked: 1
+  showAdvancedSettings: 0
+  usePalmRotationForWrist: 0
   doPoseStream: 1
   usePoseStreamOffset: 0
   poseStreamOffsetSource: {fileID: 0}
@@ -13578,7 +13588,7 @@ MonoBehaviour:
   whichHand: 1
   drawDebugPinchDistance: 0
   pinchActivateDistance: 0.0075
-  pinchDeactivateDistance: 0.025
+  pinchDeactivateDistance: 0.035
   failedPinchResetDistance: 0.01
   requireMiddleAndRingSafetyPinch: 1
   minPalmMiddleAngle: 65
@@ -18085,7 +18095,10 @@ MonoBehaviour:
   _provider: {fileID: 1882949155}
   whichHand: 0
   attachmentPoint: 4
+  _followMode: 0
   _isHandTracked: 1
+  showAdvancedSettings: 0
+  usePalmRotationForWrist: 0
   doPoseStream: 1
   usePoseStreamOffset: 0
   poseStreamOffsetSource: {fileID: 0}
@@ -22840,7 +22853,10 @@ MonoBehaviour:
   _provider: {fileID: 1882949155}
   whichHand: 1
   attachmentPoint: 4
+  _followMode: 0
   _isHandTracked: 1
+  showAdvancedSettings: 0
+  usePalmRotationForWrist: 0
   doPoseStream: 1
   usePoseStreamOffset: 0
   poseStreamOffsetSource: {fileID: 0}
@@ -28419,7 +28435,10 @@ MonoBehaviour:
   _provider: {fileID: 0}
   whichHand: 0
   attachmentPoint: 2
+  _followMode: 0
   _isHandTracked: 1
+  showAdvancedSettings: 0
+  usePalmRotationForWrist: 0
   doPoseStream: 1
   usePoseStreamOffset: 0
   poseStreamOffsetSource: {fileID: 0}
@@ -37936,8 +37955,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1590745294}
-  m_LocalRotation: {x: 0.12940948, y: -0.48296294, z: -0.86272997, w: -0.07547902}
-  m_LocalPosition: {x: -0.21282744, y: 1.4405918, z: 0.2506181}
+  m_LocalRotation: {x: -0.12599395, y: 0.4448715, z: 0.88297534, w: 0.081052005}
+  m_LocalPosition: {x: -0.20831597, y: 1.3938078, z: 0.3489772}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1564672214}
@@ -41559,7 +41578,10 @@ MonoBehaviour:
   _provider: {fileID: 1882949155}
   whichHand: 0
   attachmentPoint: 2
+  _followMode: 0
   _isHandTracked: 1
+  showAdvancedSettings: 0
+  usePalmRotationForWrist: 0
   doPoseStream: 1
   usePoseStreamOffset: 0
   poseStreamOffsetSource: {fileID: 0}
@@ -41573,7 +41595,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1724368089}
   m_LocalRotation: {x: -0.12599395, y: 0.4448715, z: 0.88297534, w: 0.081052005}
-  m_LocalPosition: {x: -0.21282747, y: 1.4179891, z: 0.3661501}
+  m_LocalPosition: {x: -0.20831597, y: 1.3938078, z: 0.3489772}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42196,12 +42218,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd66228b20306d49ad7f891f6269e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftFingertipsUniformParamId: 488
-  _rightFingertipsUniformParamId: 489
-  _leftPalmTrisUniformParamId: 490
-  _rightPalmTrisUniformParamId: 491
-  _leftFingerSegmentsUniformParamId: 492
-  _rightFingerSegmentsUniformParamId: 493
+  _leftFingertipsUniformParamId: 528
+  _rightFingertipsUniformParamId: 529
+  _leftPalmTrisUniformParamId: 530
+  _rightPalmTrisUniformParamId: 531
+  _leftFingerSegmentsUniformParamId: 532
+  _rightFingerSegmentsUniformParamId: 533
 --- !u!4 &1756187802
 Transform:
   m_ObjectHideFlags: 0
@@ -51426,8 +51448,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1959552851}
-  m_LocalRotation: {x: 0.12940948, y: -0.48296294, z: -0.86272997, w: -0.07547902}
-  m_LocalPosition: {x: -0.21999995, y: 1.4704567, z: 0.2595414}
+  m_LocalRotation: {x: -0.12599395, y: 0.4448715, z: 0.88297534, w: 0.081052005}
+  m_LocalPosition: {x: -0.21999998, y: 1.4469626, z: 0.3776424}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 97234646}

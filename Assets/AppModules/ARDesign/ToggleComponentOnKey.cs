@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.ARTesting {
+namespace Leap.Unity.AR.Testing {
 
   public class ToggleComponentOnKey : MonoBehaviour {
 

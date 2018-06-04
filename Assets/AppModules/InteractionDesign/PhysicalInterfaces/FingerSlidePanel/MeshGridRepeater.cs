@@ -47,6 +47,8 @@ public class MeshGridRepeater : MonoBehaviour, IRuntimeGizmoComponent {
   [Header("Output")]
   public MeshFilter outputToFilter;
 
+  public LeapMeshGraphic outputToGraphic;
+
   [Header("PortalSurface Shader Integration")]
   public Renderer portalSurfaceRenderer;
 
@@ -83,7 +85,7 @@ public class MeshGridRepeater : MonoBehaviour, IRuntimeGizmoComponent {
   public bool drawDebug = false;
 
   private void OnValidate() {
-    if (_resultMesh != null && outputToFilter.sharedMesh == _resultMesh) {
+    if (_resultMesh != null && outputToFilter != null && outputToFilter.sharedMesh == _resultMesh) {
       RefreshPortalMaterialData();
       RefreshOffsetVector();
     }
@@ -167,9 +169,12 @@ public class MeshGridRepeater : MonoBehaviour, IRuntimeGizmoComponent {
       Pool<List<Vector3>>.Recycle(blendShapeDeltaVerts);
     }
 
-    if (outputToFilter != null) {
+    if (outputToGraphic != null) {
+      outputToGraphic.SetMesh(_resultMesh);
+    } 
+    else if (outputToFilter != null) {
       outputToFilter.mesh = _resultMesh;
-    }
+    } 
     else {
       Debug.LogWarning("[MeshGridRepeater] Generation successful, but no output mesh filter was specified.", this);
     }

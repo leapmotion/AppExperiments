@@ -286,6 +286,14 @@ float _normalDisplacementMagnitude = 100.0;
 // Plath (Color by Hand Proximity)
 // -------------------------------
 
+float4 Leap_EvalGradientWithMap(float input, sampler2D gradient, float4 inputMapping) {
+  float eval = Leap_Map(input,   inputMapping.x,
+                                 inputMapping.y,
+                                 inputMapping.z,
+                                 inputMapping.w);
+  return tex2D(gradient, float2(eval, 0));
+}
+
 float4 evalProximityColor(float3 worldPos, sampler2D proximityGradient, float4 proximityMapping) {
   float sqrDist = Leap_SqrDistToHand(worldPos);
   float eval = saturate(Leap_Map(sqrDist, proximityMapping.x * proximityMapping.x,

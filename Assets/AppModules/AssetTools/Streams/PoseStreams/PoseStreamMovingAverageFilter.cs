@@ -74,8 +74,14 @@ namespace Leap.Unity {
     public void Close() {
       var finalPose = buffer.GetLatest();
 
-      for (int i = 0; i < buffer.Count - 1; i++) {
-        Receive(finalPose);
+      if (Application.isPlaying) {
+        for (int i = 0; i < buffer.Count - 1; i++) {
+          Receive(finalPose);
+        }
+      }
+      else {
+        // Just pass-through if we're getting a value at edit-time.
+        OnSend(finalPose);
       }
 
       OnClose();

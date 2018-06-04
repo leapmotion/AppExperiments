@@ -459,9 +459,9 @@ namespace Leap.Unity.Gestures {
 
             // Determine whether the hand meets the FOV heuristic -- result may be
             // ignored depending on public settings.
-            var handFOVAngle = Vector3.Angle(Camera.main.transform.forward,
-            hand.PalmPosition.ToVector3() - Camera.main.transform.position);
-            var handWithinFOV = handFOVAngle < Camera.main.fieldOfView / 2.2f;
+            //var handFOVAngle = Vector3.Angle(Camera.main.transform.forward,
+            //hand.PalmPosition.ToVector3() - Camera.main.transform.position);
+            //var handWithinFOV = handFOVAngle < Camera.main.fieldOfView / 2.2f;
 
             // Heuristic: Higher hand velocity == more stringent pinch requirement.
             // Goal: Reduce accidental pinches when e.g. dropping the hands by requiring
@@ -552,7 +552,7 @@ namespace Leap.Unity.Gestures {
                         && thumbPalmAngle < maxThumbAngleForEligibilityDeactivation))
 
                 // FOV.
-                && (handWithinFOV)
+                //&& (handWithinFOV)
 
                 // Must cross pinch threshold from a non-pinching / non-fist pose.
                 && (!requiresRepinch)

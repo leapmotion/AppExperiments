@@ -17,7 +17,7 @@ namespace Leap.Unity.Animation {
       }
     }
 
-      [System.Serializable]
+    [System.Serializable]
     public struct SwitchState {
 
       [SerializeField, ImplementsInterface(typeof(IPropertySwitch))]
@@ -28,7 +28,7 @@ namespace Leap.Unity.Animation {
 
       public UnityEvent onSwitchedOn;
     }
-    
+
     public StateDictionary states;
 
     [SerializeField, OnEditorChange("curState")]

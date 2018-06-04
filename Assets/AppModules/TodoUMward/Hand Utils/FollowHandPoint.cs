@@ -1,9 +1,10 @@
 ﻿using System;
+using Leap.Unity.Attachments;
 using Leap.Unity.Attributes;
 using Leap.Unity.Query;
 using UnityEngine;
 
-namespace Leap.Unity.Attachments {
+namespace Leap.Unity {
   
   [ExecuteInEditMode]
   public class FollowHandPoint : MonoBehaviour, IStream<Pose> {
@@ -24,6 +25,7 @@ namespace Leap.Unity.Attachments {
     public AttachmentPointFlags attachmentPoint = AttachmentPointFlags.Palm;
 
     public enum FollowMode { Update, FixedUpdate }
+    [SerializeField, OnEditorChange("followMode")]
     private FollowMode _followMode = FollowMode.Update;
     public FollowMode followMode {
       get {
@@ -31,11 +33,15 @@ namespace Leap.Unity.Attachments {
       }
       set {
         if (value != _followMode) {
-          unsubscribeFrameCallback();
+          if (Application.isPlaying) {
+            unsubscribeFrameCallback();
+          }
 
           _followMode = value;
 
-          subscribeFrameCallback();
+          if (Application.isPlaying) {
+            subscribeFrameCallback();
+          }
         }
       }
     }
@@ -45,10 +51,18 @@ namespace Leap.Unity.Attachments {
     private bool _isHandTracked = false;
     public bool isHandTracked { get { return _isHandTracked; } }
 
+    [Header("Advanced")]
+
+    public bool showAdvancedSettings = false;
+
+    public bool usePalmRotationForWrist = false;
+
     [Header("Pose Stream")]
 
     [Tooltip("Follow Hand Point implements IStream<Pose>; It will stream data as long as "
           + "the component is enabled, the hand is tracked, and this option is enabled.")]
+    [QuickButton("Send Stream Now", "sendStreamNow",
+      tooltip: "Open, send pose, and close the stream immediately. Edit-time only.")]
     public bool doPoseStream = true;
 
     [DisableIf("doPoseStream", isEqualTo: false)]
@@ -82,6 +96,11 @@ namespace Leap.Unity.Attachments {
     }
 
     void OnDisable() {
+      if (_isStreamOpen) {
+        OnClose();
+        _isStreamOpen = false;
+      }
+
       unsubscribeFrameCallback();
     }
 
@@ -107,18 +126,28 @@ namespace Leap.Unity.Attachments {
       if (hand != null) {
         _isHandTracked = true;
 
-        if (enabled && gameObject.activeInHierarchy) {
+        if (enabled && gameObject.activeInHierarchy
+            && attachmentPoint.IsSinglePoint()) {
           Vector3 pointPosition; Quaternion pointRotation;
           AttachmentPointBehaviour.GetLeapHandPointData(hand, attachmentPoint,
                                                         out pointPosition,
                                                         out pointRotation);
 
           // Replace wrist rotation data with that from the palm for now.
-          if (attachmentPoint == AttachmentPointFlags.Wrist) {
+          if (attachmentPoint == AttachmentPointFlags.Wrist
+              && usePalmRotationForWrist) {
             Vector3 unusedPos;
             AttachmentPointBehaviour.GetLeapHandPointData(hand, AttachmentPointFlags.Palm,
                                                           out unusedPos,
                                                           out pointRotation);
+          }
+          if (attachmentPoint == AttachmentPointFlags.Wrist) {
+            // TODO: Fix wrist position for edit-time hands.
+            // Artificially shift the wrist position down because for some reason it's
+            // not so great.
+            if (!Application.isPlaying) {
+              pointPosition -= pointRotation * Vector3.forward * 0.03f;
+            }
           }
 
           this.transform.position = pointPosition;
@@ -199,6 +228,18 @@ namespace Leap.Unity.Attachments {
 
     private void moveToAttachmentPointNow() {
       onUpdateFrame(provider.CurrentFrame);
+    }
+
+    private void sendStreamNow() {
+      if (!Application.isPlaying) {
+        if (_isStreamOpen) {
+          OnClose();
+          _isStreamOpen = false;
+        }
+        OnOpen();
+        OnSend(this.transform.ToPose());
+        OnClose();
+      }
     }
 
     #endregion

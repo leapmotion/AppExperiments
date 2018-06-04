@@ -23,9 +23,8 @@ namespace Leap.Unity {
 
       OnOpen();
     }
-
-    private Pose[] _posesBuffer = new Pose[4];
-    private Pose[] _smoothedPosesBuffer = new Pose[512];
+    
+    private Pose[] _smoothedPosesBuffer = new Pose[1024];
 
     public void Receive(Pose data) {
       bool wasNotFull = false;
@@ -45,12 +44,14 @@ namespace Leap.Unity {
 
     private void send(Pose a, Pose b, Pose c, Pose d, bool reverseOutput = false) {
 
-      var length = Vector3.Distance(_posesBuffer[1].position,
-                                    _posesBuffer[2].position);
+      var length = Vector3.Distance(b.position,
+                                    c.position);
       var numSamplesByPosition = getNumSamplesByPosition(length);
 
-      var angle = Quaternion.Angle(_posesBuffer[1].rotation,
-                                   _posesBuffer[2].rotation);
+      var ab = b.position - a.position;
+      var bc = c.position - b.position;
+      var cd = d.position - c.position;
+      var angle = Mathf.Max(Vector3.Angle(ab, bc), Vector3.Angle(bc, cd));
       var numSamplesByRotation = getNumSamplesByRotation(angle);
 
       var numSamples = Mathf.Max(numSamplesByPosition, numSamplesByRotation);
@@ -87,6 +88,7 @@ namespace Leap.Unity {
     private int getNumSamplesByPosition(float length) {
       var numSamples = Mathf.FloorToInt(length * samplesPerMeter);
       numSamples = Mathf.Max(2, numSamples);
+
       return numSamples;
     }
 
@@ -98,13 +100,25 @@ namespace Leap.Unity {
 
     public void Close() {
       if (_poseBuffer.Count < 2) {
-        return;
+        // Only a single pose: no spline to send, Close() only, below.
       }
       if (_poseBuffer.Count == 2) {
+        // Two poses only: Send the two, no spline needed.
         OnSend(_poseBuffer.Get(0));
         OnSend(_poseBuffer.Get(1));
       }
+      else if (_poseBuffer.Count == 3) {
+        // Edge case: Open, Send 3, Close. Need to send data for the two segments, which
+        // we usually handle on the fourth Send.
+        send(_poseBuffer.Get(0), _poseBuffer.Get(0),
+             _poseBuffer.Get(1), _poseBuffer.Get(2));
+        send(_poseBuffer.Get(2), _poseBuffer.Get(2),
+             _poseBuffer.Get(1), _poseBuffer.Get(0),
+             reverseOutput: true);
+      }
       else {
+        // General case: With a full buffer, we need to send data to reach the final pose
+        // in the stream.
         send(_poseBuffer.Get(3), _poseBuffer.Get(3),
              _poseBuffer.Get(2), _poseBuffer.Get(1),
              reverseOutput: true);

@@ -5,7 +5,7 @@ using Leap.Unity.Interaction;
 using Leap.Unity.Query;
 using UnityEngine;
 
-namespace Leap.Unity.ARTesting {
+namespace Leap.Unity.AR.Testing {
 
   using Collision = Leap.Unity.Geometry.Collision;
 
