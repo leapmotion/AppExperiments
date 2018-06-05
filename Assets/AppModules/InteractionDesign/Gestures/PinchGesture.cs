@@ -193,10 +193,10 @@ namespace Leap.Unity.Gestures {
 
       if (drawDebugPinchDistance) {
         DebugPing.Line("RH pinch",  c0, c1, LeapColor.blue);
-        DebugPing.Label("RH pinch",
-                        labelText: pinchDistance.ToString("F3"),
-                        labeledPosition: ((c1 + c0) / 2f),
-                        color: LeapColor.blue);
+        // DebugPing.Label("RH pinch",
+        //                 labelText: pinchDistance.ToString("F3"),
+        //                 labeledPosition: ((c1 + c0) / 2f),
+        //                 color: LeapColor.blue);
       }
 
       return pinchDistance;

@@ -1,5 +1,4 @@
-﻿using Leap.Unity.LemurUI;
-using Leap.Unity.RuntimeGizmos;
+﻿using Leap.Unity.RuntimeGizmos;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,13 +28,14 @@ namespace Leap.Unity {
     private void Update() {
       updatePings();
       updateLines();
-      updateLabels();
+      //updateLabels(); // TODO: Support Label pings without Lemur dependency.
     }
 
     public void OnDrawRuntimeGizmos(RuntimeGizmoDrawer drawer) {
       drawPingGizmos(drawer);
       drawLineGizmos(drawer);
-      drawLabelGizmos(drawer);
+      //drawLabelGizmos(drawer);  // TODO: Support Label pings without Lemur
+                                  // dependency.
     }
 
     #region DebugPing.Ping
@@ -393,117 +393,117 @@ namespace Leap.Unity {
 
     #region DebugPing.Label
 
-    public class PingLabel : PingObject {
-      private Label _backingLabel;
-      public Label label {
-        get {
-          if (_backingLabel == null) {
-            _backingLabel = Lemur.Default<Label>();
-          }
-          return _backingLabel;
-        }
-      }
+    // public class PingLabel : PingObject {
+    //   private Label _backingLabel;
+    //   public Label label {
+    //     get {
+    //       if (_backingLabel == null) {
+    //         _backingLabel = Lemur.Default<Label>();
+    //       }
+    //       return _backingLabel;
+    //     }
+    //   }
 
-      public string text = "";
+    //   public string text = "";
 
-      public Func<Vector3> overrideFacingPositionFunc;
-      public Vector3? overrideFacingPosition; // otherwise Camera.main.transform.position
-      private Vector3 getFacingPosition() {
-        if (overrideFacingPositionFunc != null) {
-          return overrideFacingPositionFunc();
-        }
-        else if (overrideFacingPosition.HasValue) {
-          return overrideFacingPosition.Value;
-        }
-        else {
-          var cam = Camera.main;
-          if (cam != null) {
-            return cam.transform.position;
-          }
-          else {
-            return Vector3.zero;
-          }
-        }
-      }
+    //   public Func<Vector3> overrideFacingPositionFunc;
+    //   public Vector3? overrideFacingPosition; // otherwise Camera.main.transform.position
+    //   private Vector3 getFacingPosition() {
+    //     if (overrideFacingPositionFunc != null) {
+    //       return overrideFacingPositionFunc();
+    //     }
+    //     else if (overrideFacingPosition.HasValue) {
+    //       return overrideFacingPosition.Value;
+    //     }
+    //     else {
+    //       var cam = Camera.main;
+    //       if (cam != null) {
+    //         return cam.transform.position;
+    //       }
+    //       else {
+    //         return Vector3.zero;
+    //       }
+    //     }
+    //   }
 
-      public Func<Vector3> labeledPositionFunc;
-      public Vector3 labeledPosition;
-      private Vector3 getLabeledPosition() {
-        if (labeledPositionFunc != null) {
-          return labeledPositionFunc();
-        }
-        return labeledPosition;
-      }
+    //   public Func<Vector3> labeledPositionFunc;
+    //   public Vector3 labeledPosition;
+    //   private Vector3 getLabeledPosition() {
+    //     if (labeledPositionFunc != null) {
+    //       return labeledPositionFunc();
+    //     }
+    //     return labeledPosition;
+    //   }
 
-      public override void Draw(RuntimeGizmoDrawer drawer) {
-        var facingPosition = getFacingPosition();
-        var labeledPosition = getLabeledPosition();
+    //   public override void Draw(RuntimeGizmoDrawer drawer) {
+    //     var facingPosition = getFacingPosition();
+    //     var labeledPosition = getLabeledPosition();
 
-        // Instead of "drawing", we're going to update the data for the Label,
-        // which handles its own drawing.
-        label.gameObject.transform.position = labeledPosition;
-        label.gameObject.transform.rotation = Utils.FaceTargetWithoutTwist(
-                                                labeledPosition,
-                                                facingPosition,
-                                                flip180: true);
+    //     // Instead of "drawing", we're going to update the data for the Label,
+    //     // which handles its own drawing.
+    //     label.gameObject.transform.position = labeledPosition;
+    //     label.gameObject.transform.rotation = Utils.FaceTargetWithoutTwist(
+    //                                             labeledPosition,
+    //                                             facingPosition,
+    //                                             flip180: true);
 
-        label.textStyle.Overlay(Style.Color(this.color));
+    //     label.textStyle.Overlay(Style.Color(this.color));
 
-        label.text = this.text;
-      }
-    }
+    //     label.text = this.text;
+    //   }
+    // }
 
-    public static Dictionary<string, PingLabel> _labels
-      = new Dictionary<string, PingLabel>();
+    // public static Dictionary<string, PingLabel> _labels
+    //   = new Dictionary<string, PingLabel>();
 
-    public static void Label(string labelName,
-                             string labelText,
-                             Vector3 labeledPosition,
-                             Color color) {
-      ensurePingRunnerExists();
+    // public static void Label(string labelName,
+    //                          string labelText,
+    //                          Vector3 labeledPosition,
+    //                          Color color) {
+    //   ensurePingRunnerExists();
 
-      PingLabel label;
-      if (!_labels.TryGetValue(labelName, out label)) {
-        _labels[labelName] = label = new PingLabel() {
-          labeledPosition = labeledPosition,
-          color = color,
-          text = labelText
-        };
-      }
-      else {
-        label.labeledPosition = labeledPosition;
-        label.color = color;
-        label.text = labelText;
-      }
-    }
+    //   PingLabel label;
+    //   if (!_labels.TryGetValue(labelName, out label)) {
+    //     _labels[labelName] = label = new PingLabel() {
+    //       labeledPosition = labeledPosition,
+    //       color = color,
+    //       text = labelText
+    //     };
+    //   }
+    //   else {
+    //     label.labeledPosition = labeledPosition;
+    //     label.color = color;
+    //     label.text = labelText;
+    //   }
+    // }
 
-    private static void updateLabels() {
-      var identifiersToRemove = Pool<HashSet<string>>.Spawn();
-      try {
-        foreach (var idLabelPair in _labels) {
-          var curLabel = idLabelPair.Value;
+    // private static void updateLabels() {
+    //   var identifiersToRemove = Pool<HashSet<string>>.Spawn();
+    //   try {
+    //     foreach (var idLabelPair in _labels) {
+    //       var curLabel = idLabelPair.Value;
 
-          curLabel.time += Time.deltaTime;
+    //       curLabel.time += Time.deltaTime;
 
-          if (curLabel.time > curLabel.lifespan) {
-            identifiersToRemove.Add(idLabelPair.Key);
-          }
-        }
-        foreach (var idToRemove in identifiersToRemove) {
-          _pingLines.Remove(idToRemove);
-        }
-      }
-      finally {
-        identifiersToRemove.Clear();
-        Pool<HashSet<string>>.Recycle(identifiersToRemove);
-      }
-    }
+    //       if (curLabel.time > curLabel.lifespan) {
+    //         identifiersToRemove.Add(idLabelPair.Key);
+    //       }
+    //     }
+    //     foreach (var idToRemove in identifiersToRemove) {
+    //       _pingLines.Remove(idToRemove);
+    //     }
+    //   }
+    //   finally {
+    //     identifiersToRemove.Clear();
+    //     Pool<HashSet<string>>.Recycle(identifiersToRemove);
+    //   }
+    // }
 
-    private static void drawLabelGizmos(RuntimeGizmoDrawer drawer) {
-      foreach (var idLabelPair in _labels) {
-        idLabelPair.Value.Draw(drawer);
-      }
-    }
+    // private static void drawLabelGizmos(RuntimeGizmoDrawer drawer) {
+    //   foreach (var idLabelPair in _labels) {
+    //     idLabelPair.Value.Draw(drawer);
+    //   }
+    // }
 
     #endregion
 
