@@ -1,10 +1,9 @@
 ﻿using Leap.Unity.Attributes;
 using Leap.Unity.Apps.Paint6.Drawing;
 using Leap.Unity.Gestures;
-using Leap.Unity.Intention;
 using UnityEngine;
 
-namespace Leap.Unity.LeapPaint {
+namespace Leap.Unity.Apps.Paint6.Drawing {
 
   public class zzOld_GestureBrushController : MonoBehaviour {
 
