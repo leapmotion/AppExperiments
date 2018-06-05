@@ -17,6 +17,11 @@ namespace Leap.Unity.Gestures {
   [ExecuteInEditMode]
   public abstract class TwoHandedGesture : Gesture {
 
+    /// <summary>
+    /// What LeapProvider should be used to get hand data?
+    /// </summary>
+    public LeapProvider provider = null;
+
     #region Public API
 
     /// <summary>
@@ -211,7 +216,8 @@ namespace Leap.Unity.Gestures {
 
     protected virtual void OnDisable() {
       if (_isActive) {
-        WhenGestureDeactivated(_lHand, _rHand, DeactivationReason.CancelledGesture);
+        WhenGestureDeactivated(_lHand, _rHand,
+          DeactivationReason.CancelledGesture);
         _isActive = false;
       }
     }
@@ -220,15 +226,15 @@ namespace Leap.Unity.Gestures {
       if (Application.isPlaying) {
         initUnityEvents();
 
-        var provider = Hands.Provider;
+        if (provider == null) {
+          provider = Hands.Provider;
+        }
         if (provider != null) {
           provider.OnUpdateFrame += onUpdateFrame;
         }
       }
       else {
-        if (!Application.isPlaying) {
-          refreshEditorHands();
-        }
+        refreshEditorHands();
       }
     }
 
@@ -239,8 +245,12 @@ namespace Leap.Unity.Gestures {
     }
 
     private void refreshEditorHands() {
-      _lHand = TestHandUtil.MakeTestHand(isLeft: true);
-      _rHand = TestHandUtil.MakeTestHand(isLeft: false);
+      var frame = provider.CurrentFrame;
+
+      if (frame.Hands != null) {
+        _lHand = frame.Hands.Query().FirstOrDefault(h =>  h.IsLeft);
+        _rHand = frame.Hands.Query().FirstOrDefault(h => !h.IsLeft);
+      }
     }
 
     protected virtual void onUpdateFrame(Frame frame) {
