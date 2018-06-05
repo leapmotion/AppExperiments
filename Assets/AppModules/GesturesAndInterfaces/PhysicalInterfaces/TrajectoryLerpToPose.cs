@@ -1,11 +1,11 @@
-﻿using Leap.Unity.Attributes;
-using Leap.Unity.PhysicalInterfaces;
+﻿using Leap.Unity.Animation;
+using Leap.Unity.Attributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Animation {
+namespace Leap.Unity.PhysicalInterfaces {
 
   public class TrajectoryLerpToPose : MonoBehaviour, IMoveToPose {
 

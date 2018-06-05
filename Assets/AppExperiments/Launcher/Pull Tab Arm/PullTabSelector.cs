@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.PhysicalInterfaces {
+namespace Leap.Unity.Apps.Launcher {
 
   using IntObj = InteractionBehaviour;
 

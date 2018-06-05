@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Leap.Unity.Portals {
   using Attributes;
+  using Leap.Unity.MeshUtilities;
 
   public class Portal : MonoBehaviour {
 

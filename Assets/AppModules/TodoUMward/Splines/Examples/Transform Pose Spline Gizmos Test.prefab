@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 4719177040924324}
   - component: {fileID: 114210951442166014}
   m_Layer: 0
-  m_Name: Transform Pose Spline Test
+  m_Name: Transform Pose Spline Gizmos Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

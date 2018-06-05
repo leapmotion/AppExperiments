@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Leap.Unity.Apps.Launcher {
+
 public class LODItem : MonoBehaviour {
   
   [Header("Tween Switch (override propertySwitch)")]
@@ -20,5 +22,7 @@ public class LODItem : MonoBehaviour {
       return _propertySwitch as IPropertySwitch;
     }
   }
+
+}
 
 }

@@ -1,6 +1,8 @@
 ﻿using Leap.Unity.Attributes;
+using Leap.Unity.ColorPalettes;
 using Leap.Unity.Interaction;
 using Leap.Unity.Layout;
+using Leap.Unity.PhysicalInterfaces;
 using Leap.Unity.Portals;
 using Leap.Unity.Query;
 using Leap.Unity.RuntimeGizmos;
@@ -9,7 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.PhysicalInterfaces {
+namespace Leap.Unity.Apps.Launcher {
 
   using IntObj = InteractionBehaviour;
 

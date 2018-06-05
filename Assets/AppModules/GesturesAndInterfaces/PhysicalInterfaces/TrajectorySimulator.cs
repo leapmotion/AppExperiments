@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Animation {
+namespace Leap.Unity.PhysicalInterfaces {
 
   public class TrajectorySimulator : MonoBehaviour,
                                      IRuntimeGizmoComponent,

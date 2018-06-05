@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.PhysicalInterfaces {
+namespace Leap.Unity.ColorPalettes {
 
   public class LeapGraphicColorReceiver : MonoBehaviour, IColorReceiver {
 

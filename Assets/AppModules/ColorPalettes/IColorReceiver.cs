@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Leap.Unity.PhysicalInterfaces {
+namespace Leap.Unity.ColorPalettes {
 
   public interface IColorReceiver {
 
