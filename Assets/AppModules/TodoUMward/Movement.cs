@@ -1,7 +1,14 @@
 ﻿using UnityEngine;
 
-namespace Leap.Unity.PhysicalInterfaces {
+namespace Leap.Unity {
 
+  /// <summary>
+  /// A struct containing Vector3s for velocity and angularVelocity, useful
+  /// to encapsulate the derivative over time of a Pose struct.
+  ///
+  /// angularVelocity is always stored as an Angle-Axis vector, whose angle
+  /// amount is the vector's magnitude in degrees (not radians).
+  /// </summary>
   public struct Movement {
 
     /// <summary>

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Leap.Unity.Animation {
+namespace Leap.Unity.Splines {
 
   public interface ISpline<XType, dXType> {
 

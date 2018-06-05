@@ -1,10 +1,10 @@
 ﻿using Leap.Unity.Attributes;
-using Leap.Unity.Meshing;
+using Leap.Unity.Splines;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Animation {
+namespace Leap.Unity.Meshing {
 
   using IPositionSpline = ISpline<Vector3, Vector3>;
 
@@ -68,7 +68,7 @@ namespace Leap.Unity.Animation {
       if (applyInverseSplineTransform) {
         applyTransform = _spline.transform.worldToLocalMatrix;
       }
-      SplineUtil.FillPolyMesh(spline, _polyMesh,
+      SplineMeshing.FillPolyMesh(spline, _polyMesh,
                               applyTransform: applyTransform,
                               radius: radius,
                               startT: useEntireSpline ? (float?)null : minT,

@@ -11,7 +11,7 @@ using Leap.Unity.PhysicalInterfaces;
 using System;
 using UnityEngine;
 
-namespace Leap.Unity.Animation {
+namespace Leap.Unity.Splines {
 
   /// <summary>
   /// Represents a spline for the rotation of a rigid body from one orientation in space

@@ -6,19 +6,18 @@ using UnityEngine;
 using System;
 using Leap.Unity.PhysicalInterfaces;
 
-namespace Leap.Unity.Animation.Examples {
+namespace Leap.Unity.Splines.Examples {
 
   [ExecuteInEditMode]
   [AddComponentMenu("")]
-  public class TransformPoseSpline : MonoBehaviour, IRuntimeGizmoComponent {
+  public class TransformPoseSplineGizmos : MonoBehaviour, IRuntimeGizmoComponent {
 
     [QuickButton("Spawn Default", "spawnDefaultSource0")]
     public Transform pose0Source;
 
     [QuickButton("Spawn Default", "spawnDefaultSource1")]
     public Transform pose1Source;
-
-    [Header("Debug View")]
+    
     [Range(0f, 1f)]
     public float renderPoseAtT = 0f;
 

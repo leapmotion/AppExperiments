@@ -7,11 +7,11 @@
  * between Leap Motion and you, your company or other organization.           *
  ******************************************************************************/
 
-using Leap.Unity.PhysicalInterfaces;
 using System;
+using Leap.Unity.Animation;
 using UnityEngine;
 
-namespace Leap.Unity.Animation {
+namespace Leap.Unity.Splines {
 
   /// <summary>
   /// Represents a spline for poses -- positions and rotations -- that travel from one

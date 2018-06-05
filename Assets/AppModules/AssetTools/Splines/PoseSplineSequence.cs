@@ -1,9 +1,8 @@
-﻿using Leap.Unity.PhysicalInterfaces;
-using Leap.Unity.RuntimeGizmos;
+﻿using Leap.Unity.RuntimeGizmos;
 using System;
 using UnityEngine;
 
-namespace Leap.Unity.Animation {
+namespace Leap.Unity.Splines {
 
   [Serializable]
   public struct PoseSplineSequence : IIndexable<HermitePoseSpline>,

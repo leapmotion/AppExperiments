@@ -32,21 +32,4 @@ namespace Leap.Unity.PhysicalInterfaces {
 
   }
 
-  public static class PoseExtensions {
-
-    public static Pose Integrated(this Pose thisPose, Movement movement, float deltaTime) {
-      thisPose.position = movement.velocity * deltaTime + thisPose.position;
-
-      if (movement.angularVelocity.sqrMagnitude > 0.00001f) {
-        var angVelMag = movement.angularVelocity.magnitude;
-        thisPose.rotation = Quaternion.AngleAxis(angVelMag * deltaTime,
-                                                 movement.angularVelocity / angVelMag)
-                            * thisPose.rotation;
-      }
-
-      return thisPose;
-    }
-
-  }
-
 }
