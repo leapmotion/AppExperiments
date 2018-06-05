@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Leap.Unity.RuntimeGizmos;
 using UnityEngine;
 
 namespace Leap.Unity.Gestures {
@@ -31,21 +32,23 @@ namespace Leap.Unity.Gestures {
       var isRightHandStraight = rightHandStraightAmount > 0.80f;
 
       if (drawHeldPoseDebug) {
-        RuntimeGizmos.BarGizmo.Render(leftHandStraightAmount,
-                                      Vector3.down * 0.2f + Vector3.left * 0.20f,
-                                      Vector3.up,
-                                      isLeftHandStraight ?
-                                        LeapColor.white
-                                      : LeapColor.amber,
-                                      scale: 0.2f);
-
-        RuntimeGizmos.BarGizmo.Render(rightHandStraightAmount,
-                                      Vector3.down * 0.2f + Vector3.left * 0.10f,
-                                      Vector3.up,
-                                      isRightHandStraight ?
-                                        LeapColor.white
-                                      : LeapColor.brown,
-                                      scale: 0.2f);
+        RuntimeGizmoDrawer drawer = null;
+        if (RuntimeGizmoManager.TryGetGizmoDrawer(out drawer)) {
+          drawer.DrawBar(leftHandStraightAmount,
+                        Vector3.down * 0.2f + Vector3.left * 0.20f,
+                        Vector3.up,
+                        isLeftHandStraight ?
+                          LeapColor.white
+                        : LeapColor.amber,
+                        scale: 0.2f);
+          drawer.DrawBar(rightHandStraightAmount,
+                         Vector3.down * 0.2f + Vector3.left * 0.10f,
+                         Vector3.up,
+                         isRightHandStraight ?
+                           LeapColor.white
+                         : LeapColor.brown,
+                         scale: 0.2f);
+        }
       }
 
       var areThumbsParallel = Vector3.Angle(leftHand.RadialAxis(),

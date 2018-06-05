@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Pose = Leap.Unity.Pose;
+using RuntimeGizmoDrawer = Leap.Unity.RuntimeGizmos.RuntimeGizmoDrawer;
 
 namespace Leap.Unity {
 
@@ -172,7 +173,7 @@ namespace Leap.Unity {
 
     #region RuntimeGizmoDrawer Utils
 
-    public static void DrawPose(this RuntimeGizmos.RuntimeGizmoDrawer drawer,
+    public static void DrawPose(this RuntimeGizmoDrawer drawer,
                                 Pose pose, float radius = 0.10f,
                                 bool drawCube = false) {
       drawer.PushMatrix();
@@ -192,12 +193,12 @@ namespace Leap.Unity {
       drawer.PopMatrix();
     }
 
-    public static void DrawRay(this RuntimeGizmos.RuntimeGizmoDrawer drawer,
+    public static void DrawRay(this RuntimeGizmoDrawer drawer,
                                Vector3 position, Vector3 direction) {
       drawer.DrawLine(position, position + direction);
     }
 
-    public static void DrawDashedLine(this RuntimeGizmos.RuntimeGizmoDrawer drawer, 
+    public static void DrawDashedLine(this RuntimeGizmoDrawer drawer, 
                                       Vector3 a, Vector3 b,
                                       float segmentsPerMeter = 32f,
                                       float normalizedPhaseOffset = 0f) {
@@ -213,6 +214,45 @@ namespace Leap.Unity {
 
         drawer.DrawLine(start, end);
       }
+    }
+    
+    public static void DrawBar(this RuntimeGizmoDrawer drawer, float amount,
+                               Vector3 position, Vector3 direction, Color color,
+                               float scale = 1f) {
+      var thickness = 0.10f;
+
+      drawer.color = color;
+
+      drawer.PushMatrix();
+
+      drawer.matrix = Matrix4x4.TRS(position, Quaternion.LookRotation(direction),
+        Vector3.one * scale);
+
+      var bar = new Vector3(thickness, thickness, amount);
+      drawer.DrawWireCube(amount * 0.5f * Vector3.forward,
+        bar + (Vector3.one * thickness));
+      drawer.DrawCube(amount * 0.5f * Vector3.forward, bar);
+
+      drawer.PopMatrix();
+    }
+
+    public static void DrawBar(this RuntimeGizmoDrawer drawer, float amount,
+                               Vector3 position, Vector3 direction,
+                               float scale = 1f) {
+      DrawBar(drawer, amount, position, direction, Color.white, scale);
+    }
+
+    public static void DrawBar(this RuntimeGizmoDrawer drawer, float amount,
+                               Transform atTransform, Color color,
+                               float scale = 1f) {
+      DrawBar(drawer, amount, atTransform.position, atTransform.forward, color,
+        scale);
+    }
+
+    public static void DrawBar(this RuntimeGizmoDrawer drawer, float amount,
+                              Transform atTransform, float scale = 1f) {
+      DrawBar(drawer, amount, atTransform.position, atTransform.forward,
+        Color.white, scale);
     }
 
     #endregion

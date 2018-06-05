@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Leap.Unity.RuntimeGizmos;
 using UnityEngine;
 
 namespace Leap.Unity.Gestures {
@@ -108,9 +109,12 @@ namespace Leap.Unity.Gestures {
         var relativeHandVelocity = leftMinusRightHandPosBuffer.Delta();
 
         if (drawHeldPoseDebug) {
-          RuntimeGizmos.BarGizmo.Render(relativeHandVelocity.magnitude,
-                                        (leftHandPos + rightHandPos) / 2f,
-                                        Vector3.up, 0.1f);
+          RuntimeGizmoDrawer drawer = null;
+          if (RuntimeGizmoManager.TryGetGizmoDrawer(out drawer)) {
+            drawer.DrawBar(relativeHandVelocity.magnitude,
+                           (leftHandPos + rightHandPos) / 2f,
+                           Vector3.up, 0.1f);
+          }
         }
 
         if (relativeHandVelocity.sqrMagnitude < MAX_RELATIVE_HAND_VELOCITY_SQR) {

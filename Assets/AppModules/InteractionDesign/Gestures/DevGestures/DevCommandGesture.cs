@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Leap.Unity.RuntimeGizmos;
 using UnityEngine;
 
 namespace Leap.Unity.Gestures {
@@ -63,27 +64,34 @@ namespace Leap.Unity.Gestures {
                          < MAX_TOUCHING_DISTANCE_SQR;
       if (drawHeldPoseDebug) {
         var touchingAmount = ((leftThumbTip - rightIndexTip).sqrMagnitude
-                             - MAX_TOUCHING_DISTANCE_SQR).Map(0, -MAX_TOUCHING_DISTANCE_SQR, 0, 1);
-        RuntimeGizmos.BarGizmo.Render(touchingAmount,
-                                      Vector3.down * 0.2f + Vector3.right * 0.20f
-                                        + Vector3.forward * 0.1f,
-                                      Vector3.up,
-                                      tipsTouching ?
-                                        LeapColor.white
-                                      : LeapColor.teal,
-                                      scale: 0.2f);
+                             - MAX_TOUCHING_DISTANCE_SQR).Map(0,
+                                 -MAX_TOUCHING_DISTANCE_SQR, 0, 1);
+        RuntimeGizmoDrawer drawer = null;
+        if (RuntimeGizmoManager.TryGetGizmoDrawer(out drawer)) {
+          drawer.DrawBar(touchingAmount,
+                         Vector3.down * 0.2f + Vector3.right * 0.20f
+                           + Vector3.forward * 0.1f,
+                         Vector3.up,
+                         tipsTouching ?
+                           LeapColor.white
+                         : LeapColor.teal,
+                         scale: 0.2f);
+        }
       }
 
       var tipsAligned = Vector3.Dot(leftThumbDir, rightIndexDir) < -0.70f;
       if (drawHeldPoseDebug) {
-        RuntimeGizmos.BarGizmo.Render(Vector3.Dot(leftThumbDir, rightIndexDir)
-                                        .Map(-1, 1, 1, 0),
-                                      Vector3.down * 0.2f + Vector3.right * 0.20f,
-                                      Vector3.up,
-                                      tipsAligned ?
-                                        LeapColor.white
-                                      : LeapColor.periwinkle,
-                                      scale: 0.2f);
+        RuntimeGizmoDrawer drawer = null;
+        if (RuntimeGizmoManager.TryGetGizmoDrawer(out drawer)) {
+          drawer.DrawBar(Vector3.Dot(leftThumbDir, rightIndexDir)
+                          .Map(-1, 1, 1, 0),
+                         Vector3.down * 0.2f + Vector3.right * 0.20f,
+                         Vector3.up,
+                         tipsAligned ?
+                           LeapColor.white
+                         : LeapColor.periwinkle,
+                         scale: 0.2f);
+        }
       }
 
       var leftIndexPointAmount = leftHand.GetIndexPointAmount();
@@ -93,19 +101,25 @@ namespace Leap.Unity.Gestures {
       var rightIsIndexPointing = rightIndexPointAmount > 0.80f;
       
       if (drawHeldPoseDebug) {
-        RuntimeGizmos.BarGizmo.Render(leftIndexPointAmount,
-                                      Vector3.down * 0.2f, Vector3.up,
-                                      leftIsIndexPointing ?
-                                        LeapColor.white
-                                      : LeapColor.lavender,
-                                      scale: 0.2f);
-        RuntimeGizmos.BarGizmo.Render(rightIndexPointAmount,
-                                      Vector3.down * 0.2f + Vector3.right * 0.10f,
-                                      Vector3.up,
-                                      rightIsIndexPointing ?
-                                        LeapColor.white
-                                      : LeapColor.red,
-                                      scale: 0.2f);
+        RuntimeGizmoDrawer drawer = null;
+        if (RuntimeGizmoManager.TryGetGizmoDrawer(out drawer)) {
+          drawer.DrawBar(leftIndexPointAmount,
+                         Vector3.down * 0.2f, Vector3.up,
+                         leftIsIndexPointing ?
+                           LeapColor.white
+                         : LeapColor.lavender,
+                         scale: 0.2f);
+
+        }
+        if (RuntimeGizmoManager.TryGetGizmoDrawer(out drawer)) {
+          drawer.DrawBar(rightIndexPointAmount,
+                         Vector3.down * 0.2f + Vector3.right * 0.10f,
+                         Vector3.up,
+                         rightIsIndexPointing ?
+                           LeapColor.white
+                         : LeapColor.red,
+                         scale: 0.2f);
+        }
       }
 
       positionOfInterest = Vector3.zero;
@@ -137,11 +151,6 @@ namespace Leap.Unity.Gestures {
   #region Hand Extensions
 
   public static class HandExtensions {
-
-    //public static float GetFistAmount(this Hand hand, int fingerId) {
-    //  return Vector3.Dot(hand.Fingers[fingerId].Direction.ToVector3(),
-    //                     -hand.DistalAxis()).Map(-1, 1, 0, 1);
-    //}
 
     public static float GetIndexPointAmount(this Hand hand) {
       return Vector3.Dot(hand.Fingers[1].Direction.ToVector3(),
