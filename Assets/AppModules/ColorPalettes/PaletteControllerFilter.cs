@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity {
+namespace Leap.Unity.ColorPalettes {
 
   public abstract class PaletteControllerFilter : MonoBehaviour {
 

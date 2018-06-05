@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Leap.Unity.Splines {
+namespace Leap.Unity.Apps.Lines {
 
   public interface zzOldISpline {
 

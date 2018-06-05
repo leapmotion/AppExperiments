@@ -1,7 +1,7 @@
 ﻿using Leap.Unity.GraphicalRenderer;
 using UnityEngine;
 
-namespace Leap.Unity {
+namespace Leap.Unity.ColorPalettes {
 
   [ExecuteInEditMode]
   public class GraphicPaletteController : MonoBehaviour,

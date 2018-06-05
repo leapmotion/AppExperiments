@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Splines {
+namespace Leap.Unity.Apps.Lines {
 
   public class zzOldSplineObject : MonoBehaviour, zzOldISpline {
 
@@ -176,7 +176,7 @@ namespace Leap.Unity.Splines {
       s_timesBuffer[2] = 1F;
       s_timesBuffer[3] = 1.5F;
 
-      return CatmullRom.Interpolate(s_posBuffer, s_timesBuffer, t);
+      return Splines.CatmullRom.Interpolate(s_posBuffer, s_timesBuffer, t);
     }
 
     public SplineInterpolatorEnumerator Traverse(float minStepProduct = 0.95F) {

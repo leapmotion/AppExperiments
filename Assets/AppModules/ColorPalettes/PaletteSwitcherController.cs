@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity {
+namespace Leap.Unity.ColorPalettes {
 
   [ExecuteInEditMode]
   public class PaletteSwitcherController : MonoBehaviour {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Splines {
+namespace Leap.Unity.Apps.Lines {
 
   /// <summary>
   /// Container class with useful utilities for working with splines.
