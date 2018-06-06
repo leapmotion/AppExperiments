@@ -4,7 +4,7 @@ using Leap.Unity.UserContext;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.LeapPaint {
+namespace Leap.Unity.Apps.Paint6 {
 
   public class ColorSwatch : MonoBehaviour {
 

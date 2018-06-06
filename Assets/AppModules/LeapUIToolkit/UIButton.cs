@@ -4,59 +4,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UIButton : MonoBehaviour {
+namespace Leap.Unity.UI {
 
-  [Header("UI Button")]
+  public abstract class UIButton : MonoBehaviour {
 
-  public InteractionButton button;
+    [Header("UI Button")]
 
-  private Action onPressAction;
-  private Action onUnpressAction;
+    public InteractionButton button;
 
-  protected virtual void Reset() {
-    initialize();
-  }
+    private Action onPressAction;
+    private Action onUnpressAction;
 
-  protected virtual void OnValidate() {
-    initialize();
-  }
-
-  protected virtual void Awake() {
-    initialize();
-  }
-
-  /// <summary>
-  /// Called on Reset(), OnValidate(), and Awake(). Use this for common runtime
-  /// and edit-time state initialization, such as event subscription and
-  /// last-chance component searches.
-  /// </summary>
-  protected virtual void initialize() {
-    if (button == null) {
-      button = GetComponent<InteractionButton>();
+    protected virtual void Reset() {
+      initialize();
     }
 
-    onPressAction   = OnPress;
-    onUnpressAction = OnUnpress;
-  }
-
-  protected virtual void OnEnable() {
-    if (button != null) {
-      button.OnPress   -= onPressAction;
-      button.OnUnpress -= onUnpressAction;
-      button.OnPress   += onPressAction;
-      button.OnUnpress += onUnpressAction;
+    protected virtual void OnValidate() {
+      initialize();
     }
-  }
 
-  protected virtual void OnDisable() {
-    if (button != null) {
-      button.OnPress -= onPressAction;
-      button.OnUnpress -= onUnpressAction;
+    protected virtual void Awake() {
+      initialize();
     }
+
+    /// <summary>
+    /// Called on Reset(), OnValidate(), and Awake(). Use this for common runtime
+    /// and edit-time state initialization, such as event subscription and
+    /// last-chance component searches.
+    /// </summary>
+    protected virtual void initialize() {
+      if (button == null) {
+        button = GetComponent<InteractionButton>();
+      }
+
+      onPressAction   = OnPress;
+      onUnpressAction = OnUnpress;
+    }
+
+    protected virtual void OnEnable() {
+      if (button != null) {
+        button.OnPress   -= onPressAction;
+        button.OnUnpress -= onUnpressAction;
+        button.OnPress   += onPressAction;
+        button.OnUnpress += onUnpressAction;
+      }
+    }
+
+    protected virtual void OnDisable() {
+      if (button != null) {
+        button.OnPress -= onPressAction;
+        button.OnUnpress -= onUnpressAction;
+      }
+    }
+
+    public virtual void OnPress() { }
+
+    public virtual void OnUnpress() { }
+
   }
-
-  public virtual void OnPress() { }
-
-  public virtual void OnUnpress() { }
 
 }

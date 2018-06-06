@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.ColorPalettes {
+namespace Leap.Unity.UI {
 
   [CreateAssetMenu(fileName = "NewColorPalette", menuName = "Color Palette", order = 310)]
   public class ColorPalette : ScriptableObject {

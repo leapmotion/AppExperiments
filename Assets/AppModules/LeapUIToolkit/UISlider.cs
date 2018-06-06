@@ -4,52 +4,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UISlider : UIButton {
+namespace Leap.Unity.UI {
 
-  [Header("Slider")]
+  public abstract class UISlider : UIButton {
 
-  public InteractionSlider slider;
+    [Header("Slider")]
 
-  private Action<float> onSliderValue;
+    public InteractionSlider slider;
 
-  protected override void initialize() {
-    base.initialize();
+    private Action<float> onSliderValue;
 
-    if (button != null && button is InteractionSlider) {
-      slider = button as InteractionSlider;
+    protected override void initialize() {
+      base.initialize();
+
+      if (button != null && button is InteractionSlider) {
+        slider = button as InteractionSlider;
+      }
+
+      if (slider != null) {
+        button = slider;
+      }
+
+      onSliderValue = OnSliderValue;
     }
 
-    if (slider != null) {
-      button = slider;
+    protected override void OnEnable() {
+      base.OnEnable();
+
+      if (slider != null) {
+        slider.HorizontalSlideEvent -= onSliderValue;
+        slider.HorizontalSlideEvent += onSliderValue;
+      }
     }
 
-    onSliderValue = OnSliderValue;
-  }
+    protected override void OnDisable() {
+      base.OnDisable();
 
-  protected override void OnEnable() {
-    base.OnEnable();
-
-    if (slider != null) {
-      slider.HorizontalSlideEvent -= onSliderValue;
-      slider.HorizontalSlideEvent += onSliderValue;
+      if (slider != null) {
+        slider.HorizontalSlideEvent -= onSliderValue;
+      }
     }
-  }
 
-  protected override void OnDisable() {
-    base.OnDisable();
-
-    if (slider != null) {
-      slider.HorizontalSlideEvent -= onSliderValue;
+    protected virtual void Start() {
+      slider.defaultHorizontalValue = GetStartingSliderValue();
+      slider.HorizontalSliderValue  = slider.defaultHorizontalValue;
     }
+
+    public virtual void OnSliderValue(float value) { }
+
+    public abstract float GetStartingSliderValue();
+
   }
-
-  protected virtual void Start() {
-    slider.defaultHorizontalValue = GetStartingSliderValue();
-    slider.HorizontalSliderValue  = slider.defaultHorizontalValue;
-  }
-
-  public virtual void OnSliderValue(float value) { }
-
-  public abstract float GetStartingSliderValue();
 
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.LeapPaint {
+namespace Leap.Unity.Apps.Paint6 {
 
   [ExecuteInEditMode]
   public class PaintbrushModelSizeMatcher : MonoBehaviour {

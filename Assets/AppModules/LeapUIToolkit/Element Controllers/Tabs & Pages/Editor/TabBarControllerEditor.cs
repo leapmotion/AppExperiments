@@ -4,22 +4,26 @@ using UnityEngine;
 using UnityEditor;
 using Leap.Unity;
 
-[CustomEditor(typeof(TabBarController))]
-public class TabBarControllerEditor : CustomEditorBase<TabBarController> {
+namespace Leap.Unity.UI {
 
-  protected override void OnEnable() {
-    base.OnEnable();
+  [CustomEditor(typeof(TabBarController))]
+  public class TabBarControllerEditor : CustomEditorBase<TabBarController> {
 
-    specifyCustomDecorator("_localOffsetFromTab", drawSetLocalOffsetButton);
-  }
+    protected override void OnEnable() {
+      base.OnEnable();
 
-  private void drawSetLocalOffsetButton(SerializedProperty property) {
-    if (GUILayout.Button("Set Local Offset to Local Position")) {
-      target.SetLocalOffsetToCurrentPosition();
+      specifyCustomDecorator("_localOffsetFromTab", drawSetLocalOffsetButton);
     }
-    if (GUILayout.Button("Set Local Position to Local Offset")) {
-      target.SetLocalPositionToLocalOffset();
+
+    private void drawSetLocalOffsetButton(SerializedProperty property) {
+      if (GUILayout.Button("Set Local Offset to Local Position")) {
+        target.SetLocalOffsetToCurrentPosition();
+      }
+      if (GUILayout.Button("Set Local Position to Local Offset")) {
+        target.SetLocalPositionToLocalOffset();
+      }
     }
+
   }
 
 }

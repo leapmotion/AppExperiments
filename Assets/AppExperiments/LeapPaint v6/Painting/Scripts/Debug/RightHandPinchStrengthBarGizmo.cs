@@ -1,7 +1,7 @@
 ﻿using Leap.Unity.RuntimeGizmos;
 using UnityEngine;
 
-namespace Leap.Unity.LeapPaint {
+namespace Leap.Unity.Apps.Paint6 {
 
   public class RightHandPinchStrengthBarGizmo : MonoBehaviour,
     IRuntimeGizmoComponent {

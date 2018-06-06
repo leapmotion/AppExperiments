@@ -1,5 +1,5 @@
 ﻿using Leap.Unity.Attributes;
-using Leap.Unity.ColorPalettes;
+using Leap.Unity.UI;
 using Leap.Unity.Interaction;
 using Leap.Unity.Layout;
 using Leap.Unity.PhysicalInterfaces;

@@ -4,26 +4,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UISliderInt : UISlider {
+namespace Leap.Unity.UI {
 
-  protected override void initialize() {
-    base.initialize();
+  public abstract class UISliderInt : UISlider {
 
-    if (slider != null) {
-      slider.minHorizontalValue = GetMinValue();
-      slider.maxHorizontalValue = GetMaxValue();
-      slider.horizontalSteps = (GetMaxValue() - GetMinValue());
+    protected override void initialize() {
+      base.initialize();
+
+      if (slider != null) {
+        slider.minHorizontalValue = GetMinValue();
+        slider.maxHorizontalValue = GetMaxValue();
+        slider.horizontalSteps = (GetMaxValue() - GetMinValue());
+      }
     }
-  }
 
-  public abstract int GetMinValue();
+    public abstract int GetMinValue();
 
-  public abstract int GetMaxValue();
+    public abstract int GetMaxValue();
 
-  public virtual void OnSliderValue(int value) { }
+    public virtual void OnSliderValue(int value) { }
 
-  public sealed override void OnSliderValue(float value) {
-    OnSliderValue(Mathf.RoundToInt(value));
+    public sealed override void OnSliderValue(float value) {
+      OnSliderValue(Mathf.RoundToInt(value));
+    }
+
   }
 
 }

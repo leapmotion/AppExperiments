@@ -7,6 +7,7 @@ using System;
 using Leap.Unity.Interaction;
 
 using Receiver = Leap.Unity.Apps.Launcher.PanelCommandReceiver;
+using Leap.Unity.UI;
 
 namespace Leap.Unity.Apps.Launcher {
 

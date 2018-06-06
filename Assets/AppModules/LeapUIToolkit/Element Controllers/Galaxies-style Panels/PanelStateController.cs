@@ -3,80 +3,84 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanelStateController : MonoBehaviour {
+namespace Leap.Unity.Apps.Galaxies {
 
-  public InteractionBehaviour widget;
-  public PanelTransitionController transitionController;
+  public class PanelStateController : MonoBehaviour {
 
-  [Header("Auto")]
-  public State state = State.Open;
+    public InteractionBehaviour widget;
+    public PanelTransitionController transitionController;
 
-  private float _grabIdleDuration = 0F;
-  private Vector3 _lastGrabPosition;
-  private float _grabIdleThreshold = 0.01F;
-  private float _outlineHintDelay = 0.5F;
+    [Header("Auto")]
+    public State state = State.Open;
 
-  void Start() {
-    widget.OnGraspBegin += onGraspBegin;
-  }
+    private float _grabIdleDuration = 0F;
+    private Vector3 _lastGrabPosition;
+    private float _grabIdleThreshold = 0.01F;
+    private float _outlineHintDelay = 0.5F;
 
-  void Update() {
-    if (widget.isGrasped && state == State.Open) {
-      transitionToClosed();
+    void Start() {
+      widget.OnGraspBegin += onGraspBegin;
     }
 
-    if (widget.isGrasped) {
-      Vector3 grabPosition = widget.rigidbody.position;
-
-      _grabIdleDuration += Time.deltaTime;
-
-      float displacement = (grabPosition - _lastGrabPosition).magnitude;
-      if (displacement > _grabIdleThreshold) {
-        _grabIdleDuration = 0F;
-      }
-
-      if (_grabIdleDuration > _outlineHintDelay && state == State.Closed) {
-        transitionToOutline();
-      }
-      else if (_grabIdleDuration < _outlineHintDelay && state == State.Outline) {
+    void Update() {
+      if (widget.isGrasped && state == State.Open) {
         transitionToClosed();
       }
 
-      _lastGrabPosition = grabPosition;
+      if (widget.isGrasped) {
+        Vector3 grabPosition = widget.rigidbody.position;
+
+        _grabIdleDuration += Time.deltaTime;
+
+        float displacement = (grabPosition - _lastGrabPosition).magnitude;
+        if (displacement > _grabIdleThreshold) {
+          _grabIdleDuration = 0F;
+        }
+
+        if (_grabIdleDuration > _outlineHintDelay && state == State.Closed) {
+          transitionToOutline();
+        }
+        else if (_grabIdleDuration < _outlineHintDelay && state == State.Outline) {
+          transitionToClosed();
+        }
+
+        _lastGrabPosition = grabPosition;
+      }
+
+      if (!widget.isGrasped) {
+        transitionToOpen();
+      }
     }
 
-    if (!widget.isGrasped) {
-      transitionToOpen();
+    private void onGraspBegin() {
+      _grabIdleDuration = 0F;
+      _lastGrabPosition = widget.rigidbody.position;
     }
-  }
 
-  private void onGraspBegin() {
-    _grabIdleDuration = 0F;
-    _lastGrabPosition = widget.rigidbody.position;
-  }
-
-  private void transitionToClosed() {
-    if (transitionController.UpdateTransitionToClosed()) {
-      state = State.Closed;
+    private void transitionToClosed() {
+      if (transitionController.UpdateTransitionToClosed()) {
+        state = State.Closed;
+      }
     }
-  }
 
-  private void transitionToOutline() {
-    if (transitionController.UpdateTransitionToOutline()) {
-      state = State.Outline;
+    private void transitionToOutline() {
+      if (transitionController.UpdateTransitionToOutline()) {
+        state = State.Outline;
+      }
     }
-  }
 
-  private void transitionToOpen() {
-    if (transitionController.UpdateTransitionToOpen()) {
-      state = State.Open;
+    private void transitionToOpen() {
+      if (transitionController.UpdateTransitionToOpen()) {
+        state = State.Open;
+      }
     }
-  }
 
-  public enum State {
-    Open,
-    Outline,
-    Closed
+    public enum State {
+      Open,
+      Outline,
+      Closed
+    }
+
   }
 
 }
