@@ -5,13 +5,13 @@ using Leap.Unity.Layout;
 using Leap.Unity.PhysicalInterfaces;
 using UnityEngine;
 
-namespace Leap.Unity.WIPUI {
+namespace Leap.Unity.Apps.Launcher {
 
   public enum HeldOrientabilityType { LockedFacing, Free }
 
   public enum HeldVisiblityType { Hide, StayOpen }
 
-  public class zzOldWidget : MonoBehaviour {
+  public class Widget : MonoBehaviour {
 
     #region Inspector
 

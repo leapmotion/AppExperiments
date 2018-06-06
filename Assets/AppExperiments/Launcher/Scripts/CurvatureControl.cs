@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Launcher {
+namespace Leap.Unity.Apps.Launcher {
 
   public class CurvatureControl : MonoBehaviour {
 

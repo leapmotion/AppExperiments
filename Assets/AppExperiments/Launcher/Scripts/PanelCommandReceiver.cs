@@ -3,13 +3,12 @@ using Leap.Unity.Attributes;
 using Leap.Unity.PhysicalInterfaces;
 using Leap.Unity.Query;
 using Leap.Unity.Space;
-using Leap.Unity.WIPUI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Launcher {
+namespace Leap.Unity.Apps.Launcher {
 
   public enum CurvatureType { Flat, Cylindrical, Spherical }
 
