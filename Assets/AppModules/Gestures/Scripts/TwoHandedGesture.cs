@@ -245,11 +245,17 @@ namespace Leap.Unity.Gestures {
     }
 
     private void refreshEditorHands() {
-      var frame = provider.CurrentFrame;
+      if (provider != null) {
+        var frame = provider.CurrentFrame;
 
-      if (frame.Hands != null) {
-        _lHand = frame.Hands.Query().FirstOrDefault(h =>  h.IsLeft);
-        _rHand = frame.Hands.Query().FirstOrDefault(h => !h.IsLeft);
+        if (frame.Hands != null) {
+          _lHand = frame.Hands.Query().FirstOrDefault(h =>  h.IsLeft);
+          _rHand = frame.Hands.Query().FirstOrDefault(h => !h.IsLeft);
+        }
+      }
+      else {
+        _lHand = null;
+        _rHand = null;
       }
     }
 
