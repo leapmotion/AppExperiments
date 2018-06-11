@@ -10,6 +10,10 @@ using UnityEngine;
 
 namespace Leap.Unity.Apps.Launcher {
 
+  public enum HeldOrientabilityType { LockedFacing, Free }
+
+  public enum HeldVisiblityType { Hide, StayOpen }
+
   public enum CurvatureType { Flat, Cylindrical, Spherical }
 
   public enum HandleType { Orb, Titlebar }
