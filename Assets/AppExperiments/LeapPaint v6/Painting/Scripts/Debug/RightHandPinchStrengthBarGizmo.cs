@@ -1,18 +1,20 @@
 ﻿using Leap.Unity.RuntimeGizmos;
 using UnityEngine;
 
-namespace Leap.Unity.LeapPaint {
+namespace Leap.Unity.Apps.Paint6 {
 
-  public class RightHandPinchStrengthBarGizmo : MonoBehaviour {
+  public class RightHandPinchStrengthBarGizmo : MonoBehaviour,
+    IRuntimeGizmoComponent {
 
     public Color color;
 
-    float _pinchStrength = 0f;
+    private float _pinchStrength = 0f;
+    private Color _useColor;
 
     void Update() {
       var hand = Hands.Right;
 
-      var useColor = color;
+      _useColor = color;
 
       if (hand != null) {
         _pinchStrength = Gestures.PinchGesture.Static_GetCustomPinchStrength(hand);
@@ -22,11 +24,13 @@ namespace Leap.Unity.LeapPaint {
         var handWithinFOV = handFOVAngle < Camera.main.fieldOfView / 2.2f;
 
         if (!handWithinFOV) {
-          useColor = Color.black;
+          _useColor = Color.black;
         }
       }
-
-      BarGizmo.Render(_pinchStrength, this.transform, useColor, 0.25f);
+    }
+    
+    public void OnDrawRuntimeGizmos(RuntimeGizmoDrawer drawer) {
+      drawer.DrawBar(_pinchStrength, this.transform, _useColor, 0.25f);
     }
 
   }

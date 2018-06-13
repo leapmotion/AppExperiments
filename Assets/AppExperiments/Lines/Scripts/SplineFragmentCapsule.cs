@@ -1,7 +1,8 @@
-﻿using Leap.Unity.Splines;
+﻿using Leap.Unity;
+using Leap.Unity.Splines;
 using UnityEngine;
 
-namespace Leap.Unity.Examples.Lines {
+namespace Leap.Unity.Apps.Lines {
 
   /// <summary>
   /// Provides a CapsuleCollider for a SplineFragment. The capsule must

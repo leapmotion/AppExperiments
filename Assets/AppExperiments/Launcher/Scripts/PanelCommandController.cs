@@ -6,10 +6,10 @@ using UnityEngine;
 using System;
 using Leap.Unity.Interaction;
 
-using Receiver = Leap.Unity.Launcher.PanelCommandReceiver;
-using Leap.Unity.WIPUI;
+using Receiver = Leap.Unity.Apps.Launcher.PanelCommandReceiver;
+using Leap.Unity.UI;
 
-namespace Leap.Unity.Launcher {
+namespace Leap.Unity.Apps.Launcher {
 
   public class PanelCommandController : PeriodicBehaviour, IRuntimeGizmoComponent {
 

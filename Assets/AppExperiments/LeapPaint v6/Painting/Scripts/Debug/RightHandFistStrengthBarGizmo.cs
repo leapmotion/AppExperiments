@@ -4,9 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.LeapPaint {
+namespace Leap.Unity.Apps.Paint6 {
 
-  public class RightHandFistStrengthBarGizmo : MonoBehaviour {
+  public class RightHandFistStrengthBarGizmo : MonoBehaviour,
+    IRuntimeGizmoComponent {
 
     public Color color;
 
@@ -18,8 +19,10 @@ namespace Leap.Unity.LeapPaint {
       if (hand != null) {
         _fistStrength = hand.GetFistStrength();
       }
+    }
 
-      BarGizmo.Render(_fistStrength, this.transform, color, 0.25f);
+    public void OnDrawRuntimeGizmos(RuntimeGizmoDrawer drawer) {
+      drawer.DrawBar(_fistStrength, this.transform, color, 0.25f);
     }
 
   }

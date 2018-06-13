@@ -1,4 +1,5 @@
 ﻿using InteractionEngineUtility;
+using Leap.Unity;
 using Leap.Unity.Gestures;
 using Leap.Unity.RuntimeGizmos;
 using Leap.Unity.Splines;
@@ -7,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Examples.Lines {
+namespace Leap.Unity.Apps.Lines {
 
   public class PullSplineGesture : OneHandedGesture, IRuntimeGizmoComponent {
 

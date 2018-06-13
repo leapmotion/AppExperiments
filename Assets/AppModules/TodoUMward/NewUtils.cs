@@ -6,10 +6,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Pose = Leap.Unity.Pose;
+using RuntimeGizmoDrawer = Leap.Unity.RuntimeGizmos.RuntimeGizmoDrawer;
+
 namespace Leap.Unity {
 
   public static class NewUtils {
-
 
     #region Transform Utils
 
@@ -149,9 +151,29 @@ namespace Leap.Unity {
 
     #endregion
 
+    #region Rigidbody Utils
+
+    /// <summary>
+    /// Sets body.position and body.rotation using the argument Pose.
+    /// </summary>
+    public static void SetPose(this Rigidbody body, Pose pose) {
+      body.position = pose.position;
+      body.rotation = pose.rotation;
+    }
+
+    /// <summary>
+    /// Calls body.MovePosition() and body.MoveRotation() using the argument Pose.
+    /// </summary>
+    public static void MovePose(this Rigidbody body, Pose pose) {
+      body.MovePosition(pose.position);
+      body.MoveRotation(pose.rotation);
+    }
+
+    #endregion
+
     #region RuntimeGizmoDrawer Utils
 
-    public static void DrawPose(this RuntimeGizmos.RuntimeGizmoDrawer drawer,
+    public static void DrawPose(this RuntimeGizmoDrawer drawer,
                                 Pose pose, float radius = 0.10f,
                                 bool drawCube = false) {
       drawer.PushMatrix();
@@ -171,12 +193,12 @@ namespace Leap.Unity {
       drawer.PopMatrix();
     }
 
-    public static void DrawRay(this RuntimeGizmos.RuntimeGizmoDrawer drawer,
+    public static void DrawRay(this RuntimeGizmoDrawer drawer,
                                Vector3 position, Vector3 direction) {
       drawer.DrawLine(position, position + direction);
     }
 
-    public static void DrawDashedLine(this RuntimeGizmos.RuntimeGizmoDrawer drawer, 
+    public static void DrawDashedLine(this RuntimeGizmoDrawer drawer, 
                                       Vector3 a, Vector3 b,
                                       float segmentsPerMeter = 32f,
                                       float normalizedPhaseOffset = 0f) {
@@ -193,6 +215,45 @@ namespace Leap.Unity {
         drawer.DrawLine(start, end);
       }
     }
+    
+    public static void DrawBar(this RuntimeGizmoDrawer drawer, float amount,
+                               Vector3 position, Vector3 direction, Color color,
+                               float scale = 1f) {
+      var thickness = 0.10f;
+
+      drawer.color = color;
+
+      drawer.PushMatrix();
+
+      drawer.matrix = Matrix4x4.TRS(position, Quaternion.LookRotation(direction),
+        Vector3.one * scale);
+
+      var bar = new Vector3(thickness, thickness, amount);
+      drawer.DrawWireCube(amount * 0.5f * Vector3.forward,
+        bar + (Vector3.one * thickness));
+      drawer.DrawCube(amount * 0.5f * Vector3.forward, bar);
+
+      drawer.PopMatrix();
+    }
+
+    public static void DrawBar(this RuntimeGizmoDrawer drawer, float amount,
+                               Vector3 position, Vector3 direction,
+                               float scale = 1f) {
+      DrawBar(drawer, amount, position, direction, Color.white, scale);
+    }
+
+    public static void DrawBar(this RuntimeGizmoDrawer drawer, float amount,
+                               Transform atTransform, Color color,
+                               float scale = 1f) {
+      DrawBar(drawer, amount, atTransform.position, atTransform.forward, color,
+        scale);
+    }
+
+    public static void DrawBar(this RuntimeGizmoDrawer drawer, float amount,
+                              Transform atTransform, float scale = 1f) {
+      DrawBar(drawer, amount, atTransform.position, atTransform.forward,
+        Color.white, scale);
+    }
 
     #endregion
 
@@ -204,6 +265,24 @@ namespace Leap.Unity {
 
     #endregion
 
+    #region Gradient Utils
+
+    public static Texture2D ToTexture(this Gradient gradient, int resolution = 256, TextureFormat format = TextureFormat.ARGB32) {
+      Texture2D tex = new Texture2D(resolution, 1, format, mipmap: false, linear: true);
+      tex.filterMode = FilterMode.Bilinear;
+      tex.wrapMode = TextureWrapMode.Clamp;
+      tex.hideFlags = HideFlags.HideAndDontSave;
+
+      for (int i = 0; i < resolution; i++) {
+        float t = i / (resolution - 1.0f);
+        tex.SetPixel(i, 0, gradient.Evaluate(t));
+      }
+      tex.Apply(updateMipmaps: false, makeNoLongerReadable: true);
+      return tex;
+    }
+
+    #endregion
+
     #region Nullable Utils
 
     public static T? ValueOr<T>(this T? foo, T? other) where T : struct {
@@ -211,6 +290,23 @@ namespace Leap.Unity {
         return foo;
       }
       return other;
+    }
+
+    #endregion
+
+    #region Pose Utils
+
+    public static Pose Integrated(this Pose thisPose, Movement movement, float deltaTime) {
+      thisPose.position = movement.velocity * deltaTime + thisPose.position;
+
+      if (movement.angularVelocity.sqrMagnitude > 0.00001f) {
+        var angVelMag = movement.angularVelocity.magnitude;
+        thisPose.rotation = Quaternion.AngleAxis(angVelMag * deltaTime,
+                                                 movement.angularVelocity / angVelMag)
+                            * thisPose.rotation;
+      }
+
+      return thisPose;
     }
 
     #endregion

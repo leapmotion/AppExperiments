@@ -42,7 +42,7 @@ public class StemRenderer : MonoBehaviour {
       _timesCache[1] = 0F;
       _timesCache[2] = 1F;
       _timesCache[3] = 1.2F;
-      CatmullRom.InterpolatePoints(_stemPointsCache, _timesCache, _linePoints);
+      PetalMenuSplines.InterpolatePoints(_stemPointsCache, _timesCache, _linePoints);
       _line.SetPositions(_linePoints);
 
       //s_timeCache[0] = -0.035F / Vector3.Distance(s_valueCache[1], s_valueCache[2]);

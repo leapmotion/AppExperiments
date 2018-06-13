@@ -1,12 +1,16 @@
 ﻿using Leap.Unity.RuntimeGizmos;
 using UnityEngine;
 
-public class DebugDrawColliders : MonoBehaviour, IRuntimeGizmoComponent {
+namespace Leap.Unity.Apps.Lines {
 
-  public Color color = Color.green;
+  public class DebugDrawColliders : MonoBehaviour, IRuntimeGizmoComponent {
 
-  public void OnDrawRuntimeGizmos(RuntimeGizmoDrawer drawer) {
-    drawer.color = color;
-    drawer.DrawColliders(this.gameObject, true, true);
+    public Color color = Color.green;
+
+    public void OnDrawRuntimeGizmos(RuntimeGizmoDrawer drawer) {
+      drawer.color = color;
+      drawer.DrawColliders(this.gameObject, true, true);
+    }
   }
+
 }

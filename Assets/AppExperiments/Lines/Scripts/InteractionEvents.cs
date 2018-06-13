@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Leap.Unity.Examples.Lines {
+namespace Leap.Unity.Apps.Lines {
 
   public class InteractionEvent : UnityEvent<InteractionHand, InteractionBehaviour> { }
 

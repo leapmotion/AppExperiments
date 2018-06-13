@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.Examples.Lines {
+namespace Leap.Unity.Apps.Lines {
 
   public class InteractionDoubleTapGesture : OneHandedGesture, IRuntimeGizmoComponent {
 

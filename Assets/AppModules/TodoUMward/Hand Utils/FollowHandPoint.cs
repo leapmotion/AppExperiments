@@ -1,10 +1,9 @@
 ﻿using System;
-using Leap.Unity.Attachments;
 using Leap.Unity.Attributes;
 using Leap.Unity.Query;
 using UnityEngine;
 
-namespace Leap.Unity {
+namespace Leap.Unity.Attachments {
   
   [ExecuteInEditMode]
   public class FollowHandPoint : MonoBehaviour, IStream<Pose> {

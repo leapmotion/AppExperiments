@@ -1,9 +1,10 @@
-﻿using Leap.Unity.UserContext;
+﻿using Leap.Unity.UI;
+using Leap.Unity.UserContext;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.LeapPaint {
+namespace Leap.Unity.Apps.Paint6 {
 
   public class Button_UconChannel : UIButton {
 

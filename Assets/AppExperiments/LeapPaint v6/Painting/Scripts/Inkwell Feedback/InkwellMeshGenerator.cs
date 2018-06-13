@@ -1,5 +1,5 @@
 ﻿using Leap.Unity.Attributes;
-using Leap.Unity.Drawing;
+using Leap.Unity.Apps.Paint6.Drawing;
 using Leap.Unity.Infix;
 using Leap.Unity.Meshing;
 using Leap.Unity.Query;
@@ -9,7 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Leap.Unity.LeapPaint {
+namespace Leap.Unity.Apps.Paint6 {
 
   public class InkwellMeshGenerator : MonoBehaviour, IRuntimeGizmoComponent {
 

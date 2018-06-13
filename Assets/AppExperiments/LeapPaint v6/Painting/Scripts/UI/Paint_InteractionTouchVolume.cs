@@ -4,8 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
-namespace Leap.Unity.LeapPaint {
+namespace Leap.Unity.Apps.Paint6 {
 
   public class Paint_InteractionTouchVolume : InteractionBehaviour {
 
@@ -21,7 +22,9 @@ namespace Leap.Unity.LeapPaint {
     private bool _isTouched = false;
     public bool isTouched { get { return _isTouched; } }
 
-    public UnityEvent OnTapEvent;
+    [FormerlySerializedAs("OnTapEvent")]
+    public UnityEvent OnTouchBeginEvent;
+    public UnityEvent OnTouchEndEvent;
 
     void FixedUpdate() {
       bool currentlyTouched = false;
@@ -32,11 +35,13 @@ namespace Leap.Unity.LeapPaint {
       if (currentlyTouched && !_isTouched) {
         _isTouched = true;
 
-        OnTapEvent.Invoke();
+        OnTouchBeginEvent.Invoke();
       }
 
       if (!currentlyTouched && _isTouched) {
         _isTouched = false;
+
+        OnTouchEndEvent.Invoke();
       }
     }
 
