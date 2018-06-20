@@ -24,7 +24,9 @@ public class TextSceneController : MonoBehaviour {
       backgroundPanelAnchor.SetActive(showBackgroundPanel);
     }
 
-    mainCamera.backgroundColor = getGrayscale(settings.skyColor);
+    if (mainCamera != null) {
+      mainCamera.backgroundColor = getGrayscale(settings.skyColor);
+    }
 
     backgroundPanel.localPosition = new Vector3(0, 0, settings.panelDistance);
   }
