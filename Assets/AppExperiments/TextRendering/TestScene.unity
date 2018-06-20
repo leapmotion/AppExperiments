@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 317203304}
   - component: {fileID: 317203308}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: BackgroundCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,7 +710,7 @@ RectTransform:
   - {fileID: 487357818}
   - {fileID: 1409635538}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 563489514}
   - component: {fileID: 563489515}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: HandCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -845,11 +845,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 563489513}
   m_LocalRotation: {x: -0.12599395, y: 0.4448715, z: 0.88297534, w: 0.081052005}
-  m_LocalPosition: {x: -0.21999998, y: -0.15303737, z: 0.3776424}
+  m_LocalPosition: {x: -0.21999998, y: -0.15303737, z: 0.44364238}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1857586430}
-  m_Father: {fileID: 916044157}
+  m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &563489515
@@ -960,7 +960,6 @@ Transform:
   m_Children:
   - {fileID: 950725528}
   - {fileID: 1827392238}
-  - {fileID: 563489514}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1838,7 +1837,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2052108380
 MonoBehaviour:
