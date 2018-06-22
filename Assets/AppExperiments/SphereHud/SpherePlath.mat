@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Plath Standard Example 1
+  m_Name: SpherePlath
   m_Shader: {fileID: 4800000, guid: 1248e38ef3ebb8d4cb20942c5c1579a6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -55,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ProximityGradient:
-        m_Texture: {fileID: 28753282921749494, guid: 505a0fe3688fb244c90aaf7fed18c323,
+        m_Texture: {fileID: 28753282921749494, guid: c03d4be4cd437784586c723b44029682,
           type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
