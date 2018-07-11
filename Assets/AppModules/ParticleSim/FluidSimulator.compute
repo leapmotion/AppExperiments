@@ -11,4 +11,4 @@ struct ParticleSystem {
 //
 // Adds particles to the simulation.
 
-#pragma kernel AddParticles
+//#pragma kernel AddParticles

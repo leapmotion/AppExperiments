@@ -94,7 +94,8 @@ public class PlanarReflections : MonoBehaviour {
     Camera.onPreCull += onPreCullCallback;
     Camera.onPreRender += onPreRenderCallback;
 
-    Texture2D noiseTex = new Texture2D(_noiseResolution, _noiseResolution, TextureFormat.ARGB32, mipmap: false, linear: true);
+    Texture2D noiseTex = new Texture2D(_noiseResolution,
+      _noiseResolution, TextureFormat.ARGB32, mipChain: false, linear: true);
 
     Color32[] pixels = noiseTex.GetPixels32();
     for (int i = 0; i < pixels.Length; i++) {

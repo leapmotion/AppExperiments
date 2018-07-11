@@ -268,7 +268,13 @@ namespace Leap.Unity {
     #region Gradient Utils
 
     public static Texture2D ToTexture(this Gradient gradient, int resolution = 256, TextureFormat format = TextureFormat.ARGB32) {
-      Texture2D tex = new Texture2D(resolution, 1, format, mipmap: false, linear: true);
+      #if UNITY_2018_2_OR_NEWER
+      Texture2D tex = new Texture2D(resolution, 1, format, mipChain: false,
+        linear: true);
+      #else
+      Texture2D tex = new Texture2D(resolution, 1, format, mipmap: false,
+        linear: true);
+      #endif
       tex.filterMode = FilterMode.Bilinear;
       tex.wrapMode = TextureWrapMode.Clamp;
       tex.hideFlags = HideFlags.HideAndDontSave;
