@@ -5,12 +5,12 @@
 // =======
 
 #pragma kernel Integrate
-#pragma kernel ResolveCollisions
 #pragma kernel Accumulate_X
 #pragma kernel Accumulate_Y
 #pragma kernel Accumulate_Z
 #pragma kernel Copy
 #pragma kernel Sort
+#pragma kernel ResolveCollisions
 
 
 // =========
