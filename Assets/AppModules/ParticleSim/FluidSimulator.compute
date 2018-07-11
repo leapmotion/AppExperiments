@@ -1,0 +1,14 @@
+
+
+struct ParticleSystem {
+  float4[] positions;
+  float4[] prevPositions;
+}
+
+// ============
+// AddParticles
+// ============
+//
+// Adds particles to the simulation.
+
+#pragma kernel AddParticles
