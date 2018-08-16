@@ -22,7 +22,9 @@
   }
 
   float4 frag(fragment_input input, float face : VFACE) : COLOR {
-    float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(input.screenPos)));
+    float sceneZ = LinearEyeDepth(
+      SAMPLE_DEPTH_TEXTURE_PROJ(
+        _CameraDepthTexture, UNITY_PROJ_COORD(input.screenPos)));
     float distanceToCamera = min(sceneZ, input.screenPos.w);
     return face < 0 ? distanceToCamera : -distanceToCamera;
   }

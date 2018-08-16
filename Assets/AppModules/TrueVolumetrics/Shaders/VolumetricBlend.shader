@@ -1,13 +1,13 @@
-﻿Shader "Hidden/NewImageEffectShader" {
+﻿Shader "LeapMotion/TrueVolumetrics/VolumetricBlend" {
   Properties {
     [HideInInspector]
-    _MainTex ("Texture", 2D)    = "white" {}
+    _MainTex ("Volume Info", 2D)    = "white" {}
     _Color   ("Color",   Color) = (0,0,0,0)
     _Scale   ("Scale",   Float) = 1
     _Density ("Density", Range(0, 1)) = 1
 
     [KeywordEnum(Exponential, Linear)] _Blend ("Blend Mode", Float) = 0
-    [Enum(Additive,1,AlphaBlended,10)]  _BlendType ("Blend Type", Float) = 1
+    [Enum(Additive,1,AlphaBlended,10)] _BlendType ("Blend Type", Float) = 1
   }
   SubShader
   {

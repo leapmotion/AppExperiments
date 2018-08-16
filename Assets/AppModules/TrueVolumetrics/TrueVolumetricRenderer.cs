@@ -6,7 +6,6 @@ using UnityEngine.Rendering;
 [ExecuteInEditMode]
 [RequireComponent(typeof(Camera))]
 public class TrueVolumetricRenderer : MonoBehaviour {
-  private const string TEX_PROPERTY = "_OcclusionHandsTexture";
 
   [SerializeField]
   private Renderer[] _toDraw;
@@ -17,37 +16,56 @@ public class TrueVolumetricRenderer : MonoBehaviour {
   private CommandBuffer _buffer;
 
   private void OnEnable() {
-    if (_toDraw == null || _toDraw.Length == 0 || _toDraw.Any(t => t == null) || _blendMaterial == null) {
+    if (_toDraw == null || _toDraw.Length == 0 || _toDraw.Any(t => t == null) ||
+        _blendMaterial == null) {
       enabled = false;
       return;
     }
 
     _buffer = new CommandBuffer();
+    _buffer.name = "TrueVolumetrics Render";
 
-    int propertyId = Shader.PropertyToID(TEX_PROPERTY);
+    int volumeInfoBufferId =
+      Shader.PropertyToID("_OcclusionHandsTex");
 
     var camera = GetComponent<Camera>();
     int width = camera.pixelWidth;
     int height = camera.pixelHeight;
 
-    RenderTextureDescriptor descriptor = new RenderTextureDescriptor(width, height, RenderTextureFormat.RFloat, 0);
+    RenderTextureDescriptor descriptor = new RenderTextureDescriptor(width,
+      height, RenderTextureFormat.RFloat, 0);
     descriptor.msaaSamples = 1;
     descriptor.bindMS = false;
     descriptor.sRGB = false;
     descriptor.useMipMap = false;
+    
+    _buffer.GetTemporaryRT(volumeInfoBufferId, descriptor);
 
-    RenderTargetIdentifier identifier = new RenderTargetIdentifier(propertyId);
-    RenderTargetIdentifier regular = new RenderTargetIdentifier(BuiltinRenderTextureType.CameraTarget);
+    RenderTargetIdentifier volumeInfoRenderTargetId =
+      new RenderTargetIdentifier(volumeInfoBufferId);
 
-    _buffer.GetTemporaryRT(propertyId, descriptor);
-    _buffer.SetRenderTarget(identifier);
-    _buffer.ClearRenderTarget(clearDepth: false, clearColor: true, backgroundColor: new Color(0, 0, 0, 0));
-
+    // Clear any volume info in the buffer, and render from each renderer in
+    // the renderers list to the current render target: A volume info buffer.
+    //
+    // Note that there's no guarantee that each renderer is actually writing
+    // _volume_ information into this buffer! Currently, this is brittle, and
+    // will only function correctly if every each renderer's attached material
+    // is using a shader that outputs volume information instead of e.g.
+    // color information.
+    _buffer.SetRenderTarget(volumeInfoRenderTargetId);
+    _buffer.ClearRenderTarget(clearDepth: false, clearColor: true,
+      backgroundColor: new Color(0, 0, 0, 0));
     foreach (var renderer in _toDraw) {
       _buffer.DrawRenderer(renderer, renderer.sharedMaterial);
     }
-
-    _buffer.Blit(identifier, regular, _blendMaterial);
+    
+    // Now that we have a screen-sized buffer containing volume info for our
+    // scene, blit from that buffer onto the screen using a shader that defines
+    // how to blend from a pixel of volume data to a pixel on the screen.
+    RenderTargetIdentifier currentlyRenderingTargetId =
+      new RenderTargetIdentifier(BuiltinRenderTextureType.CameraTarget);
+    _buffer.Blit(volumeInfoRenderTargetId, currentlyRenderingTargetId,
+      _blendMaterial);
 
     camera.AddCommandBuffer(CameraEvent.AfterForwardAlpha, _buffer);
   }

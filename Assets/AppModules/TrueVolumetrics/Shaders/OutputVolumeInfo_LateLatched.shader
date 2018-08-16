@@ -3,6 +3,8 @@
 		_InflationAmount("Inflation Amount", Float) = 0.005
     [Enum(Left,1,Right,0)]
     _IsLeft ("Handedness", Float) = 0.0
+    [Enum(Yes,1,No,0)]
+    _IsTracked ("Is Tracked", Float) = 0.0
   }
 
   CGINCLUDE
@@ -22,6 +24,7 @@
 
 	float _InflationAmount;
   float _IsLeft;
+  float _IsTracked;
 
   fragment_input vert(vert_in v) {
     fragment_input o;
@@ -32,7 +35,10 @@
   }
 
   float4 frag(fragment_input input, float face : VFACE) : COLOR {
-    float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(input.screenPos)));
+    float sceneZ = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(input.screenPos)));
+    
+    if (_IsTracked <= 0) input.screenPos.w = sceneZ;
+    
     float distanceToCamera = min(sceneZ, input.screenPos.w);
     return face < 0 ? distanceToCamera : -distanceToCamera;
   }
