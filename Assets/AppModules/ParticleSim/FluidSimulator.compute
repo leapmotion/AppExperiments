@@ -1,14 +1,16 @@
 
 
-struct ParticleSystem {
-  float4[] positions;
-  float4[] prevPositions;
-}
 
-// ============
-// AddParticles
-// ============
-//
-// Adds particles to the simulation.
+//! define MAX_ENTITIES 65536;
 
-//#pragma kernel AddParticles
+//! region component_data
+// e.g. float3 positions[MAX_ENTITIES];
+//! end component_data
+
+//int 
+// #pragma kernel SpawnEntities
+// [numthreads(1,1,1)]
+// void SpawnEntities(uin3 dispatchThreadId : SV_DispatchThreadID);
+
+//! region system_kernels
+//! end system_kernels
