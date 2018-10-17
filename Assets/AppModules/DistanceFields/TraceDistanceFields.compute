@@ -1,0 +1,239 @@
+﻿
+#pragma kernel CSMain
+
+RWTexture2D<float4> Result;
+float4x4 _CameraToWorld;
+float4x4 _CameraInverseProjection;
+
+struct Ray {
+  float3 origin;
+  float3 direction;
+  float3 inverseDirection;
+  int3 invDirSign;
+};
+
+// References:
+// https://www.gamasutra.com/blogs/DavidKuri/20180504/317575/GPU_Ray_Tracing_in_Unity__Part_1.php
+// http://www.scratchapixel.com/code.php?id=10&origin=/lessons/3d-basic-rendering/ray-tracing-rendering-simple-shapes&src=1
+
+
+Ray CreateRay(float3 origin, float3 direction) {
+  Ray ray;
+  ray.origin = origin;
+  ray.direction = direction;
+  ray.inverseDirection = 1 / direction;
+  ray.invDirSign[0] = (ray.inverseDirection.x < 0);
+  ray.invDirSign[1] = (ray.inverseDirection.y < 0);
+  ray.invDirSign[2] = (ray.inverseDirection.z < 0); 
+  return ray;
+}
+
+Ray CreateCameraRay(float2 uv) {
+  // Transform the camera origin to world space
+  float3 origin = mul(_CameraToWorld, float4(0.0f, 0.0f, 0.0f, 1.0f)).xyz;
+  
+  // Invert the perspective projection of the view-space position
+  float3 direction = mul(_CameraInverseProjection, float4(uv, 0.0f, 1.0f)).xyz;
+
+  // Transform the direction from camera to world space and normalize
+  direction = mul(_CameraToWorld, float4(direction, 0.0f)).xyz;
+  direction = normalize(direction);
+  return CreateRay(origin, direction);
+}
+
+struct RayHit {
+  float3 position;
+  float distance;
+  float3 normal;
+};
+
+RayHit CreateRayHit() {
+  RayHit hit;
+  hit.position = float3(0.0f, 0.0f, 0.0f);
+  hit.distance = 1.#INF;
+  hit.normal = float3(0.0f, 0.0f, 0.0f);
+  return hit;
+}
+
+void IntersectGroundPlane(Ray ray, inout RayHit bestHit) {
+  // Calculate distance along the ray where the ground plane is intersected
+  float t = -ray.origin.y / ray.direction.y;
+  if (t > 0 && t < bestHit.distance) {
+    bestHit.distance = t;
+    bestHit.position = ray.origin + t * ray.direction;
+    bestHit.normal = float3(0, 0, 0);
+  }
+}
+
+void IntersectSphere(Ray ray, inout RayHit bestHit, float4 sphere) {
+  // Calculate distance along the ray where the sphere is intersected
+  float3 d = ray.origin - sphere.xyz;
+  float p1 = -dot(ray.direction, d);
+  float p2sqr = p1 * p1 - dot(d, d) + sphere.w * sphere.w;
+  if (p2sqr < 0) {
+    return;
+  }
+  float p2 = sqrt(p2sqr);
+  float t = p1 - p2 > 0 ? p1 - p2 : p1 + p2;
+  if (t > 0 && t < bestHit.distance) {
+    bestHit.distance = t;
+    bestHit.position = ray.origin + t * ray.direction;
+    bestHit.normal = normalize(bestHit.position - sphere.xyz);
+  }
+}
+
+#define RIGHT float3(1, 0, 0)
+#define UP float3(0, 1, 0)
+#define FORWARD float3(0, 0, 1)
+
+void IntersectAABB(Ray ray, inout RayHit bestHit, float3 bMin, float3 bMax) {
+  float tmin, tmax, tymin, tymax, tzmin, tzmax;
+  float3 bounds[2] = { bMin, bMax };
+
+  tmin = (bounds[ray.invDirSign[0]].x - ray.origin.x) * ray.inverseDirection.x;
+  tmax = (bounds[1 - ray.invDirSign[0]].x - ray.origin.x) * ray.inverseDirection.x;
+  tymin = (bounds[ray.invDirSign[1]].y - ray.origin.y) * ray.inverseDirection.y;
+  tymax = (bounds[1 - ray.invDirSign[1]].y - ray.origin.y) * ray.inverseDirection.y;
+
+  float3 normal = float3(1, 1, 1);
+
+  if ((tmin > tymax) || (tymin > tmax)) {
+    //bestHit.normal = float3(1, 0, 0);
+    return;
+  }
+  if (tymin > tmin) {
+    tmin = tymin;
+
+    normal = RIGHT;
+    //bestHit.normal = float3(1, 0, 1);
+    //minNormal = -UP;
+  }
+  if (tymax < tmax) {
+    tmax = tymax;
+    //bestHit.normal = float3(1, 1, 0);
+    normal = UP;
+  }
+  
+  tzmin = (bounds[ray.invDirSign[2]].z - ray.origin.z) * ray.inverseDirection.z;
+  tzmax = (bounds[1 - ray.invDirSign[2]].z - ray.origin.z) * ray.inverseDirection.z;
+  
+  if ((tmin > tzmax) || (tzmin > tmax)) {
+    //bestHit.normal = float3(0, 0, 0);
+    return;
+  }
+
+  if (tzmin > tmin) {
+    tmin = tzmin;
+    normal = FORWARD;
+    //bestHit.normal = float3(0, 1, 1);
+    //minNormal = FORWARD;
+  }
+  if (tzmax < tmax) {
+    normal = float3(1, 0, 1);
+    //bestHit.normal = float3(0, 1, 1);
+    tmax = tzmax;
+  }
+
+  float t = tmin;
+
+  if (t < 0) {
+    //bestHit.normal = float3(0, 1, 0);
+    t = tmax;
+  }
+  if (t < 0) {
+    //bestHit.normal = float3(0, 0, 1);
+    return;
+  }
+  
+  bestHit.position = ray.origin + ray.direction * t;
+  bestHit.distance = t;
+  bestHit.normal = normal;
+}
+
+// class AABBox
+// {
+// public:
+// AABBox(const Vec3f &b0, const Vec3f &b1) { bounds[0] = b0, bounds[1] = b1; }
+// bool intersect(const Ray &r, float &t) const
+// {
+// float tmin, tmax, tymin, tymax, tzmin, tzmax;
+
+// tmin = (bounds[r.sign[0]].x - r.orig.x) * r.invdir.x;
+// tmax = (bounds[1-r.sign[0]].x - r.orig.x) * r.invdir.x;
+// tymin = (bounds[r.sign[1]].y - r.orig.y) * r.invdir.y;
+// tymax = (bounds[1-r.sign[1]].y - r.orig.y) * r.invdir.y;
+
+// if ((tmin > tymax) || (tymin > tmax))
+// return false;
+
+// if (tymin > tmin)
+// tmin = tymin;
+// if (tymax < tmax)
+// tmax = tymax;
+
+// tzmin = (bounds[r.sign[2]].z - r.orig.z) * r.invdir.z;
+// tzmax = (bounds[1-r.sign[2]].z - r.orig.z) * r.invdir.z;
+
+// if ((tmin > tzmax) || (tzmin > tmax))
+// return false;
+
+// if (tzmin > tmin)
+// tmin = tzmin;
+// if (tzmax < tmax)
+// tmax = tzmax;
+
+// t = tmin;
+
+// if (t < 0) {
+// t = tmax;
+// if (t < 0) return false;
+// }
+
+// return true;
+// }
+// Vec3f bounds[2];
+// };
+
+RayHit Trace(Ray ray) {
+  RayHit bestHit = CreateRayHit();
+
+  IntersectGroundPlane(ray, bestHit);
+  
+  IntersectSphere(ray, bestHit, float4(0, 3.0f, 0, 1.0f));
+
+  float3 one = float3(1, 1, 1);
+  IntersectAABB(ray, bestHit, -one * 0.5f, one * 0.5f);
+
+  return bestHit;
+}
+
+float3 Shade(inout Ray ray, RayHit hit) {
+  if (hit.distance < 1.#INF) {
+    // Return the normal
+    return hit.normal * 0.5f + 0.5f;
+  }
+  else {
+    return float4(ray.direction * 0.5f + 0.5f, 1.0f).xyz;
+  }
+}
+
+[numthreads(8,8,1)]
+void CSMain(uint3 id : SV_DispatchThreadID) {
+  // Get the dimensions of the RenderTexture
+  uint width, height;
+  Result.GetDimensions(width, height);
+
+  // Transform pixel to [-1,1] range
+  float2 uv = float2((id.xy + float2(0.5f, 0.5f)) / float2(width, height) * 2.0f - 1.0f);
+
+  // Get a ray for the UVs
+  Ray ray = CreateCameraRay(uv);
+
+  // Trace and shade
+  RayHit hit = Trace(ray);
+  float3 result = Shade(ray, hit);
+  Result[id.xy] = float4(result, 1);
+
+  // Write some colors
+  //Result[id.xy] = float4(ray.direction * 0.5f + 0.5f, 1.0f);
+}
