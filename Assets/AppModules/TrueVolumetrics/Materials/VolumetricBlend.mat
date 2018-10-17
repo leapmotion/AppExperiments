@@ -4,11 +4,11 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: VolumetricBlend
   m_Shader: {fileID: 4800000, guid: c4bd8b28075c48f4a8c4972a09d1d5b6, type: 3}
-  m_ShaderKeywords: _BLEND_LINEAR
+  m_ShaderKeywords: _BLEND_EXPONENTIAL
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -55,11 +55,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Blend: 1
+    - _Blend: 0
     - _BlendType: 10
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Density: 0.692
+    - _Density: 0.708
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1

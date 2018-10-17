@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Leap.Unity.Geometry {
 
+  [System.Serializable]
   /// <summary>
   /// A transformless Plane defined by a position and normal vector.
   /// </summary>
@@ -16,6 +17,10 @@ namespace Leap.Unity.Geometry {
     public LocalPlane(Vector3 position, Vector3 normal) {
       this.position = position;
       this.normal = normal;
+    }
+
+    public Plane With(Transform t) {
+      return new Plane(position, normal, t);
     }
 
   }

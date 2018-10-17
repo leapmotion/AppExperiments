@@ -10,7 +10,7 @@ namespace Leap.Unity.UI {
 
     public Transform findPaletteControllersWithin;
 
-    public ColorPalette[] palettes;
+    public ColorPalette_Old[] palettes;
 
     [SerializeField, OnEditorChange("curPaletteIdx")]
     private int _curPaletteIdx = 0;
@@ -23,7 +23,7 @@ namespace Leap.Unity.UI {
       }
     }
 
-    public ColorPalette curPalette {
+    public ColorPalette_Old curPalette {
       get { return palettes[curPaletteIdx]; }
     }
 

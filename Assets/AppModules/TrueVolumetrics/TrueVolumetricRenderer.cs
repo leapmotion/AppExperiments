@@ -56,6 +56,9 @@ public class TrueVolumetricRenderer : MonoBehaviour {
     _buffer.ClearRenderTarget(clearDepth: false, clearColor: true,
       backgroundColor: new Color(0, 0, 0, 0));
     foreach (var renderer in _toDraw) {
+      if (renderer == null || renderer.sharedMaterial == null) {
+        continue;
+      }
       _buffer.DrawRenderer(renderer, renderer.sharedMaterial);
     }
     

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Leap.Unity.UI {
 
   [CreateAssetMenu(fileName = "NewColorPalette", menuName = "Color Palette", order = 310)]
-  public class ColorPalette : ScriptableObject {
+  public class ColorPalette_Old : ScriptableObject {
 
     [SerializeField]
     public Color[] colors;

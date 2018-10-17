@@ -137,7 +137,7 @@
     }
 
     //Pass 1: Jump
-    Pass{
+    Pass {
       CGPROGRAM
       #pragma vertex vert_jump
       #pragma fragment frag_jump

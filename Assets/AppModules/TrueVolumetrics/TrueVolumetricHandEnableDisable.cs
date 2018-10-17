@@ -25,18 +25,29 @@ namespace Leap.Unity.AppExperiments.TrueVolumetrics {
         _material = trueVolumetricHandRenderer.sharedMaterial;
         _trackedFloatPropId = Shader.PropertyToID(trackedFloatName);
       }
+
+      // Assume the hand is not tracking on start.
+      HideVolumetricHand();
     }
 
     protected override void HandReset() {
       // Hand begun tracking.
-      trueVolumetricHandRenderer.enabled = true;
-      _material.SetFloat(_trackedFloatPropId, 1);
+      ShowVolumetricHand();
     }
 
     protected override void HandFinish() {
       // Hand stopped tracking.
+      HideVolumetricHand();
+    }
+
+    protected virtual void HideVolumetricHand() {
       trueVolumetricHandRenderer.enabled = false;
       _material.SetFloat(_trackedFloatPropId, 0);
+    }
+
+    protected virtual void ShowVolumetricHand() {
+      trueVolumetricHandRenderer.enabled = true;
+      _material.SetFloat(_trackedFloatPropId, 1);
     }
 
   }

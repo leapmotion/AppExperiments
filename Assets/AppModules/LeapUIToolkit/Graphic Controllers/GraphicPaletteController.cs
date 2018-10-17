@@ -17,10 +17,10 @@ namespace Leap.Unity.UI {
 
     [Header("Palette")]
 
-    public ColorPalette palette;
+    public ColorPalette_Old palette;
     public float colorChangeSpeed = 20F;
 
-    public static ColorPalette s_lastPalette;
+    public static ColorPalette_Old s_lastPalette;
 
     private bool _paletteWasNull = true;
     private Color _targetColor;

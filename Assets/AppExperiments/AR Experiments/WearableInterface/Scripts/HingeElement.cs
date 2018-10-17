@@ -10,6 +10,7 @@ namespace Leap.Unity {
 
   //using UnityRect = UnityEngine.Rect;
   using Rect = Geometry.Rect;
+  using Plane = Leap.Unity.Geometry.Plane;
 
   public class HingeElement : MonoBehaviour, IRuntimeGizmoComponent {
 
@@ -468,7 +469,7 @@ namespace Leap.Unity {
       float planeCircleRadius = 0.005f;
       for (int i = 0; i < 4; i++) {
         drawer.DrawWireArc(hingePosition, currentPlane.normal,
-                           currentPlane.normal.Perpendicular(),
+                           currentPlane.normal.Vec().Perpendicular(),
                            planeCircleRadius + i * -0.001f,
                            1.0f);
       }
