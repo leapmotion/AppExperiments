@@ -1,8 +1,12 @@
 # AppExperiments
 
-Experimental application work, mostly migrated from the LeapPaint repo for cleanliness.
+Experimental application-specific modules, utilities, and interaction prototypes.
 
 Also be sure to check out our [Unity Modules][unitymodules], which is the backbone of this application and Leap Motion support for Unity!
+
+## Experimental Notice
+
+The contents of this repository are one-time experiments, and are provided as-is; without support from Leap Motion.  Use at your own risk.
 
 ## License
 
