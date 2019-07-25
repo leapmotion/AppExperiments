@@ -1,0 +1,21 @@
+#pragma kernel GeneratePointsKernel
+
+struct PointStruct
+{			
+	float4 position;
+	float4 color;
+};	
+
+RWStructuredBuffer<PointStruct>	_Point; 
+
+#include "Includes/bitops.cginc"
+#include "Includes/hashes.cginc"
+
+[numthreads(4, 4, 4)]
+void GeneratePointsKernel(uint3 thread : SV_DispatchThreadID)
+{
+	uint id						= encode3(thread);
+	float3 position				= thread/32.;
+	_Point[id].position			= float4(position, 1.);
+	_Point[id].color			= float4(1., 1., 1., 1.);
+}

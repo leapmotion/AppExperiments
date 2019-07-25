@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ceb4fdb0457f7a48aa24d01a002da9a, type: 3}
+  m_Name: Shape
+  m_EditorClassIdentifier: 
+  shape: 0
+  color: {r: 0.0731132, g: 0.12496465, b: 0.2924528, a: 0.105882354}
+  fill: 1
+  grid: 0
+  point_count: 65536
+  point_size: 102.6
+  curvature: 542.08
+  density: 1
+  hand_interaction: 1
+  control_point:
+  - {x: -0.3926974, y: 0.18681656, z: -0.16019702, w: 0}
+  - {x: -0.69519246, y: -0.44266966, z: 0.55551654, w: 0}
+  - {x: -0.997689, y: -1.0721571, z: 1.2712312, w: 0}
+  - {x: -1.3001835, y: -1.701644, z: 1.9869465, w: 0}
+  - {x: -1.6026795, y: -2.33113, z: 2.7026594, w: 0}
+  - {x: -1.9051741, y: -2.9606147, z: 3.4183702, w: 0}
+  - {x: -2.2076683, y: -3.5900996, z: 4.1340885, w: 0}
+  - {x: -2.510168, y: -4.2195883, z: 4.8498, w: 0}
