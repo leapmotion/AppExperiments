@@ -303,12 +303,12 @@ namespace Leap.Unity {
 
   }
 
-  public static class Vector4Extensions {
+  // public static class Vector4Extensions {//
 
-    public static Vector4 WithW(this Vector3 v, float w) {
-      return new Vector4(v.x, v.y, v.z, w);
-    }
+  //   public static Vector4 WithW(this Vector3 v, float w) {
+  //     return new Vector4(v.x, v.y, v.z, w);
+  //   }
 
-  }
+  // }
 
 }

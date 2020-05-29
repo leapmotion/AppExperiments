@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Leap.Unity.Animation;
 using Leap.Unity.Infix;
-using Leap.Unity.Splines;
 using UnityEngine;
 
 namespace Leap.Unity.Meshing {

@@ -224,12 +224,17 @@ public class PropertyPanelEditor : CustomEditorBase<PropertyPanel> {
         continue;
       }
 
-      switch (PrefabUtility.GetPrefabType(editObjects[i])) {
-        case PrefabType.ModelPrefab:
-        case PrefabType.Prefab:
-          editObjects.RemoveAt(i);
-          continue;
+      // Don't want to edit prefab objects.
+      if (Utils.IsObjectPartOfPrefabAsset(editObjects[i])) {
+        editObjects.RemoveAt(i);
       }
+      // Old pre-prefab-change version:
+      // switch (PrefabUtility.GetPrefabType(editObjects[i])) {
+      //   case PrefabType.ModelPrefab:
+      //   case PrefabType.Prefab:
+      //     editObjects.RemoveAt(i);
+      //     continue;
+      // }
 
       if (GUILayout.Button("x")) {
         editObjects.RemoveAt(i);

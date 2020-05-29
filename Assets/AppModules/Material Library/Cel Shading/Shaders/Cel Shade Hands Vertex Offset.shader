@@ -15,7 +15,7 @@
 		    #pragma target 2.0
 
         #include "UnityCG.cginc"
-        #include "Assets/LeapMotion/Core/Resources/LeapCG.cginc"
+        #include "Assets/Plugins/LeapMotion/Core/Resources/LeapCG.cginc"
         #include "CelShading.cginc"
 
         struct vertInput {

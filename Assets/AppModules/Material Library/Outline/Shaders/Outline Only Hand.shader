@@ -8,7 +8,7 @@
 
   CGINCLUDE
   #include "UnityCG.cginc"
-  #include "Assets/LeapMotion/Core/Resources/LeapCG.cginc"
+  #include "Assets/Plugins/LeapMotion/Core/Resources/LeapCG.cginc"
   #pragma fragmentoption ARB_precision_hint_fastest
   #pragma target 2.0
 

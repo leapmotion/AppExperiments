@@ -15,7 +15,7 @@ public class LODItem : MonoBehaviour {
   [Header("Or, non-Tween switch")]
 
   [SerializeField, ImplementsInterface(typeof(IPropertySwitch))]
-  private MonoBehaviour _propertySwitch;
+  private MonoBehaviour _propertySwitch = default;
   public IPropertySwitch propertySwitch {
     get {
       if (tweenSwitch != null) return tweenSwitch;

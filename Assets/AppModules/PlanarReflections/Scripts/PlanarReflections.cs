@@ -4,13 +4,13 @@
 public class PlanarReflections : MonoBehaviour {
 
   [SerializeField]
-  private Camera _targetCamera;
+  private Camera _targetCamera = default;
 
   [SerializeField]
-  private Camera _reflectionCamera;
+  private Camera _reflectionCamera = default;
 
   [SerializeField]
-  private Transform _reflectionAxis;
+  private Transform _reflectionAxis = default;
 
   [SerializeField]
   private int _resolution = 256;
@@ -33,7 +33,7 @@ public class PlanarReflections : MonoBehaviour {
 
   [Header("Blur")]
   [SerializeField]
-  private Shader _blurShader;
+  private Shader _blurShader = default;
 
   [SerializeField]
   private int _itterations = 0;

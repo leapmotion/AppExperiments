@@ -11,7 +11,7 @@ namespace Leap.Unity.PhysicalInterfaces {
     }
 
     [SerializeField]
-    private IHandledObjectConstraint[] _constraints;
+    private IHandledObjectConstraint[] _constraints = default;
     public IHandledObjectConstraint[] constraints {
       get { return _constraints; }
     }

@@ -12,7 +12,7 @@
 
   CGINCLUDE
   #include "UnityCG.cginc"
-  #include "Assets/LeapMotion/Core/Resources/LeapCG.cginc"
+  #include "Assets/Plugins/LeapMotion/Core/Resources/LeapCG.cginc"
   #include "Assets/AppModules/TodoUMward/Shader Hand Data/Resources/HandData.cginc"
 
   //#pragma fragmentoption ARB_precision_hint_fastest

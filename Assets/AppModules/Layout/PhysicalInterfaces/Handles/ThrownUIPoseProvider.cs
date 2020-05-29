@@ -9,7 +9,7 @@ namespace Leap.Unity.PhysicalInterfaces {
   public class ThrownUIPoseProvider : MonoBehaviour, IPoseProvider {
 
     [SerializeField, ImplementsInterface(typeof(IKinematicStateProvider))]
-    private MonoBehaviour _handleKinematicStateProvider;
+    private MonoBehaviour _handleKinematicStateProvider = default;
     public IKinematicStateProvider handleKinematicStateProvider {
       get {
         return _handleKinematicStateProvider as IKinematicStateProvider;
@@ -17,7 +17,7 @@ namespace Leap.Unity.PhysicalInterfaces {
     }
 
     [SerializeField, ImplementsInterface(typeof(IAttachmentProvider))]
-    private MonoBehaviour _handleAttachmentPoseProvider;
+    private MonoBehaviour _handleAttachmentPoseProvider = default;
     public IAttachmentProvider handleAttachmentPoseProvider {
       get {
         return _handleAttachmentPoseProvider as IAttachmentProvider;

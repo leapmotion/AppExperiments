@@ -21,12 +21,12 @@ namespace Leap.Unity.Gestures {
 
     [SerializeField]
     [ImplementsInterface(typeof(IPoseGesture))]
-    private MonoBehaviour _poseSourceA;
+    private MonoBehaviour _poseSourceA = default;
     public IPoseGesture poseSourceA { get {  return _poseSourceA as IPoseGesture; } }
 
     [SerializeField]
     [ImplementsInterface(typeof(IPoseGesture))]
-    private MonoBehaviour _poseSourceB;
+    private MonoBehaviour _poseSourceB = default;
     public IPoseGesture poseSourceB { get { return _poseSourceB as IPoseGesture; } }
 
     [Header("Scale")]

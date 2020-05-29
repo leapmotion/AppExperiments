@@ -9,7 +9,7 @@ public class TextureRampAsset : ScriptableObject {
 
   [Tooltip("This gradient will be converted to a 1D texture for use in a shader.")]
   [SerializeField]
-  private Gradient _gradient;
+  private Gradient _gradient = default;
 
   [SerializeField]
   private TextureWrapMode _wrapMode = TextureWrapMode.Clamp;
@@ -25,7 +25,7 @@ public class TextureRampAsset : ScriptableObject {
 
   [HideInInspector]
   [SerializeField]
-  private Texture2D _texture;
+  private Texture2D _texture = default;
 
   public void UpdateTextureAsset() {
     _texture.Resize(_textureResolution, 1);

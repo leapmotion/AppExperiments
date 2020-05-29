@@ -11,7 +11,7 @@ namespace Leap.Unity.MeshGen {
   public class MeshGeneratorAsset : ScriptableObject {
 
     [SerializeField]
-    private MeshGenerator _meshGenerator;
+    private MeshGenerator _meshGenerator = default;
 
     /// <summary>
     /// The name given to the Mesh object this generator handles. This name is reassigned

@@ -53,41 +53,6 @@ namespace Leap.Unity {
       return allChildren;
     }
 
-    /// <summary>
-    /// Scans all the children in order of the argument Transform, appending each transform
-    /// it finds to toFill. Children are added depth-first by default.
-    ///
-    /// Pass breadthFirst: true to fill the list breadth-first instead.
-    /// </summary>
-    public static void GetAllChildren(this Transform t, List<Transform> toFill,
-                                      bool breadthFirst = false) {
-      if (breadthFirst) {
-        var cursor = t; var cursorIdx = toFill.Count; var endIdx = cursorIdx;
-        do {
-          endIdx += addImmediateChildren(cursor, toFill);
-          cursorIdx += 1;
-          if (cursorIdx >= endIdx) break;
-          cursor = toFill[cursorIdx];
-        } while (true);
-      }
-      else {
-        addChildrenRecursive(t, toFill);
-      }
-    }
-    private static void addChildrenRecursive(Transform t, List<Transform> list) {
-      foreach (var child in t.GetChildren()) {
-        list.Add(child);
-        addChildrenRecursive(child, list);
-      }
-    }
-    private static int addImmediateChildren(Transform t, List<Transform> list) {
-      int numChildren = 0;
-      foreach (var child in t.GetChildren()) {
-        list.Add(child); numChildren++;
-      }
-      return numChildren;
-    }
-
     #endregion
 
     #region Geometry Utils
@@ -294,22 +259,22 @@ namespace Leap.Unity {
 
     #endregion
 
-    #region Pose Utils
+    // // #region Pose Utils
 
-    public static Pose Integrated(this Pose thisPose, Movement movement, float deltaTime) {
-      thisPose.position = movement.velocity * deltaTime + thisPose.position;
+    // // public static Pose Integrated(this Pose thisPose, Movement movement, float deltaTime) {
+    // //   thisPose.position = movement.velocity * deltaTime + thisPose.position;
 
-      if (movement.angularVelocity.sqrMagnitude > 0.00001f) {
-        var angVelMag = movement.angularVelocity.magnitude;
-        thisPose.rotation = Quaternion.AngleAxis(angVelMag * deltaTime,
-                                                 movement.angularVelocity / angVelMag)
-                            * thisPose.rotation;
-      }
+    // //   if (movement.angularVelocity.sqrMagnitude > 0.00001f) {
+    // //     var angVelMag = movement.angularVelocity.magnitude;
+    // //     thisPose.rotation = Quaternion.AngleAxis(angVelMag * deltaTime,
+    // //                                              movement.angularVelocity / angVelMag)
+    // //                         * thisPose.rotation;
+    // //   }
 
-      return thisPose;
-    }
+    // //   return thisPose;
+    // // }
 
-    #endregion
+    // // #endregion
 
     #region Vector3 Utils
 

@@ -153,7 +153,7 @@ namespace Leap.Unity.UserContext {
     public abstract Type channelType { get; }
 
     [SerializeField]
-    private ContextDescriptionType _contextType;
+    private ContextDescriptionType _contextType = default;
     /// <summary>
     /// Whether the channel context is specified by a Unity object or a User Context
     /// Type enum value.

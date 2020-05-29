@@ -8,10 +8,10 @@ using UnityEngine.Rendering;
 public class TrueVolumetricRenderer : MonoBehaviour {
 
   [SerializeField]
-  private Renderer[] _toDraw;
+  private Renderer[] _toDraw = default;
 
   [SerializeField]
-  private Material _blendMaterial;
+  private Material _blendMaterial = default;
 
   private CommandBuffer _buffer;
 

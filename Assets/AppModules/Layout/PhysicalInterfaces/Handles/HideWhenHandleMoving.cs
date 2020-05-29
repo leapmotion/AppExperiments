@@ -10,7 +10,7 @@ namespace Leap.Unity.PhysicalInterfaces {
   public class HideWhenHandleMoving : MonoBehaviour {
 
     [SerializeField, ImplementsInterface(typeof(IHandle))]
-    private MonoBehaviour _handle;
+    private MonoBehaviour _handle = default;
     public IHandle handle {
       get {
         return _handle as IHandle;
@@ -18,7 +18,7 @@ namespace Leap.Unity.PhysicalInterfaces {
     }
 
     [SerializeField, ImplementsInterface(typeof(IPropertySwitch))]
-    private MonoBehaviour _objectVisibleSwitch;
+    private MonoBehaviour _objectVisibleSwitch = default;
     public IPropertySwitch objectVisibleSwitch {
       get {
         return _objectVisibleSwitch as IPropertySwitch;

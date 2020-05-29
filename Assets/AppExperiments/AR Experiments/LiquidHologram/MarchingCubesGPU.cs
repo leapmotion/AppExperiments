@@ -151,7 +151,7 @@ namespace Leap.Unity.AR.Testing {
       m_drawBuffer.SetBuffer("_Buffer", _meshBuffer);
       m_drawBuffer.SetPass(0);
 
-      Graphics.DrawProcedural(MeshTopology.Triangles, VERT_BUFFER_SIZE);
+      Graphics.DrawProceduralNow(MeshTopology.Triangles, VERT_BUFFER_SIZE);
     }
 
     void OnDestroy() {
@@ -167,8 +167,10 @@ namespace Leap.Unity.AR.Testing {
     }
 
     struct Vert {
+      #pragma warning disable 0649 // silence unused var warning
       public Vector4 position;
       public Vector3 normal;
+      #pragma warning restore 0659
     };
 
     /// <summary>

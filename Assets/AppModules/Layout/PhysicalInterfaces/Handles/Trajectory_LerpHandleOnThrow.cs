@@ -17,7 +17,7 @@ namespace Leap.Unity.PhysicalInterfaces {
     public TrajectoryLerpToPose trajectoryLerpToPose;
 
     [SerializeField, ImplementsInterface(typeof(IPoseProvider))]
-    private MonoBehaviour _targetPoseProvider;
+    private MonoBehaviour _targetPoseProvider = default;
     public IPoseProvider targetPoseProvider {
       get {
         return _targetPoseProvider as IPoseProvider;

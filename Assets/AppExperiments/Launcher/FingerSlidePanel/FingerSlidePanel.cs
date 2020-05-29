@@ -301,7 +301,7 @@ namespace Leap.Unity.Apps.Launcher {
     // Color Receiver Sequence
     [SerializeField]
     [ImplementsInterface(typeof(IGameObjectSequenceProvider))]
-    private MonoBehaviour _colorReceivers;
+    private MonoBehaviour _colorReceivers = default;
     public IGameObjectSequenceProvider colorReceivers {
       get { return _colorReceivers as IGameObjectSequenceProvider; }
     }
@@ -315,7 +315,7 @@ namespace Leap.Unity.Apps.Launcher {
     // Position Provider Sequence
     [SerializeField]
     [ImplementsInterface(typeof(IGameObjectSequenceProvider))]
-    private MonoBehaviour _positionProviders;
+    private MonoBehaviour _positionProviders = default;
     public IGameObjectSequenceProvider positionProviders {
       get { return _positionProviders as IGameObjectSequenceProvider; }
     }

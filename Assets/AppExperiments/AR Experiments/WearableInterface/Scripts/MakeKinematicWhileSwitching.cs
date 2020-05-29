@@ -11,7 +11,7 @@ namespace Leap.Unity.AR.Testing {
 
     [SerializeField]
     [ImplementsInterface(typeof(IPropertySwitch))]
-    private MonoBehaviour _tweenSwitch;
+    private MonoBehaviour _tweenSwitch = default;
     public TweenSwitch tweenSwitch {
       get { return _tweenSwitch as TweenSwitch; }
     }

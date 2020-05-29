@@ -48,7 +48,7 @@ public class ProceduralShape : MonoBehaviour
         if (_material.shader != null)
         {
             _material.SetPass(0);
-            Graphics.DrawProcedural(MeshTopology.Points, Mathf.Clamp(configuration.point_count, 1, (int)Mathf.Pow(2, 24)));
+            Graphics.DrawProceduralNow(MeshTopology.Points, Mathf.Clamp(configuration.point_count, 1, (int)Mathf.Pow(2, 24)));
         }
     }
 

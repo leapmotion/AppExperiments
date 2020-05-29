@@ -68,7 +68,7 @@ namespace Leap.Unity.PhysicalInterfaces {
 
     [DisableIf("accelerateTowardsPose", isEqualTo: false)]
     [SerializeField, ImplementsInterface(typeof(IPoseProvider))]
-    private MonoBehaviour _targetPoseProvider;
+    private MonoBehaviour _targetPoseProvider = default;
     public IPoseProvider targetPoseProvider {
       get { return _targetPoseProvider as IPoseProvider; }
     }
