@@ -13,7 +13,7 @@ namespace Leap.Unity.Apps.Paint6.Drawing {
 
     [SerializeField]
     [ImplementsInterface(typeof(IPolyMesher<StrokeObject>))]
-    private MonoBehaviour _polyMesher;
+    private MonoBehaviour _polyMesher = default;
     public IPolyMesher<StrokeObject> polyMesher {
       get { return _polyMesher as IPolyMesher<StrokeObject>;  }
     }

@@ -18,7 +18,7 @@ namespace Leap.Unity.Apps.Launcher {
     [Header("Marbles (each must implement ???Marble)")]
     [SerializeField]
     [ImplementsInterface(typeof(IGameObjectSequenceProvider))]
-    private MonoBehaviour _marbleSequenceProvider;
+    private MonoBehaviour _marbleSequenceProvider = default;
     public IGameObjectSequenceProvider marbles {
       get {
         return _marbleSequenceProvider as IGameObjectSequenceProvider;
@@ -38,7 +38,7 @@ namespace Leap.Unity.Apps.Launcher {
 
     [Header("Move Next Trigger")]
     [SerializeField, ImplementsInterface(typeof(ITrigger))]
-    private MonoBehaviour _moveNextTrigger;
+    private MonoBehaviour _moveNextTrigger = default;
     public ITrigger moveNextTrigger {
       get {
         return _moveNextTrigger as ITrigger;

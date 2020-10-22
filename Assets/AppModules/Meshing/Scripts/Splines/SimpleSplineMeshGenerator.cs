@@ -1,5 +1,5 @@
-﻿using Leap.Unity.Attributes;
-using Leap.Unity.Splines;
+﻿using Leap.Unity.Animation;
+using Leap.Unity.Attributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +12,7 @@ namespace Leap.Unity.Meshing {
   public class SimpleSplineMeshGenerator : MonoBehaviour {
 
     [SerializeField, ImplementsInterface(typeof(IPositionSpline))]
-    private MonoBehaviour _spline;
+    private MonoBehaviour _spline = default;
     public IPositionSpline spline {
       get { return _spline as IPositionSpline; }
     }

@@ -21,7 +21,7 @@ namespace Leap.Unity {
     [Header("Hinge Joint")]
 
     [SerializeField]
-    private Transform _hingeTransform;
+    private Transform _hingeTransform = default;
     public Transform hingeTransform {
       get {
         if (_hingeTransform == null) return this.transform;

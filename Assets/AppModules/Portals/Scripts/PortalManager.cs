@@ -26,13 +26,13 @@ namespace Leap.Unity.Portals {
     }
 
     [SerializeField]
-    private Camera _mainCamera;
+    private Camera _mainCamera = default;
     public Camera mainCamera {
       get { return _mainCamera; }
     }
 
     [SerializeField]
-    private LayerMask _outsideMask;
+    private LayerMask _outsideMask = default;
 
     [SerializeField]
     private bool _clearMainMask = true;

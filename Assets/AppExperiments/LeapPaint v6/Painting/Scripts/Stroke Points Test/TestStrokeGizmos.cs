@@ -19,7 +19,7 @@ namespace Leap.Unity {
 
     [ImplementsInterface(typeof(IIndexable<Pose>))]
     [SerializeField]
-    private MonoBehaviour _strokePoses;
+    private MonoBehaviour _strokePoses = default;
     public IIndexable<Pose> strokePoses {
       get { return _strokePoses as IIndexable<Pose>; }
     }

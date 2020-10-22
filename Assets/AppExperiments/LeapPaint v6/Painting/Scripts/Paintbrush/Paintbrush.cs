@@ -21,7 +21,7 @@ namespace Leap.Unity.Apps.Paint6.Drawing {
 
     [Header("Activation Gesture")]
     [SerializeField]
-    private MonoBehaviour _activationGesture;
+    private MonoBehaviour _activationGesture = default;
     public IGesture activationGesture {
       get { return _activationGesture as IGesture; }
     }
@@ -29,7 +29,7 @@ namespace Leap.Unity.Apps.Paint6.Drawing {
     [Header("Eligibility Switch")]
     [SerializeField]
     [ImplementsInterface(typeof(IPropertySwitch))]
-    private MonoBehaviour _eligibilitySwitch;
+    private MonoBehaviour _eligibilitySwitch = default;
     public IPropertySwitch eligibilitySwitch {
       get { return _eligibilitySwitch as IPropertySwitch; }
     }

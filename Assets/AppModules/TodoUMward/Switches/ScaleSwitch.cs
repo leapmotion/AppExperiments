@@ -48,7 +48,7 @@ namespace Leap.Unity.Animation {
     [Tooltip("The switch attached here will receive Off() when this Scale Switch is at an "
            + "effectively 'zero' scale (even if Enforce Nonzero Scale is checked), and "
            + "On() when the Scale Switch is at an effectively nonzero scale.")]
-    private MonoBehaviour _nonzeroSwitch;
+    private MonoBehaviour _nonzeroSwitch = default;
     public IPropertySwitch nonzeroSwitch {
       get {
         return _nonzeroSwitch as IPropertySwitch;

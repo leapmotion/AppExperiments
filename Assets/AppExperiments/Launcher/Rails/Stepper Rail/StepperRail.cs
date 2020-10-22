@@ -145,11 +145,11 @@ namespace Leap.Unity.Apps.Launcher {
       Vector3? closestPos = null;
       int numDivisions = 256;
       var tStep = (maxT - minT) / numDivisions;
-      var spline = maybePoseSplines.Value.AsPositionSpline();
+      var spline = maybePoseSplines.Value;
       for (int i = 0; i <= numDivisions; i++) {
         var t = minT + tStep * i;
 
-        var testPos = spline.ValueAt(t);
+        var testPos = spline.ValueAt(t).position;
 
         var testSqrDist = (position - testPos).sqrMagnitude;
         if (testSqrDist < closestSqrDist) {

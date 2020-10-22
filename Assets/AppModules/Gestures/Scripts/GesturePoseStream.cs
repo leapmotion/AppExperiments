@@ -15,14 +15,14 @@ namespace Leap.Unity.Gestures {
     public GestureStreamMode streamMode = GestureStreamMode.ActiveOnly;
 
     [SerializeField, ImplementsInterface(typeof(IPoseGesture))]
-    private MonoBehaviour _poseGesture;
+    private MonoBehaviour _poseGesture = default;
     public IPoseGesture poseGesture {
       get { return _poseGesture as IPoseGesture; }
     }
 
-    public event Action OnOpen;
-    public event Action<Pose> OnSend;
-    public event Action OnClose;
+    public event Action OnOpen = () => { };
+    public event Action<Pose> OnSend = (pose) => { };
+    public event Action OnClose = () => { };
 
     private bool _streamOpen = false;
 

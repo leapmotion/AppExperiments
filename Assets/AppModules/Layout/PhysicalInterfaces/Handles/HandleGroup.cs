@@ -14,7 +14,7 @@ namespace Leap.Unity.PhysicalInterfaces {
 
     [Header("Handles (Must Implement IHandle!)")]
     [SerializeField]
-    private GameObject[] _handles;
+    private GameObject[] _handles = default;
     public IIndexable<IHandle> handles {
       // TODO: Create something like an "ElementsImplementInterface" attribute
       get { return new GameObjectArrayComponentWrapper<IHandle>(_handles); }

@@ -17,34 +17,34 @@ namespace Leap.Unity.Particles {
 
     [Header("Hands")]
     [SerializeField]
-    private LeapProvider _provider;
+    private LeapProvider _provider = default;
 
     [SerializeField]
     private float _handCapsuleRadius = 0.025f;
 
     [Header("Custom Capsule")]
     [SerializeField]
-    private Transform _capsuleA;
+    private Transform _capsuleA = default;
 
     [SerializeField]
-    private Transform _capsuleB;
+    private Transform _capsuleB = default;
 
     [SerializeField]
-    private float _capsuleRadius;
+    private float _capsuleRadius = default;
 
     [Header("Custom Plane")]
     [SerializeField]
-    private Transform _plane;
+    private Transform _plane = default;
 
     [Header("Settings")]
     [SerializeField]
-    private Mesh _mesh;
+    private Mesh _mesh = default;
 
     [SerializeField]
-    private ComputeShader _shader;
+    private ComputeShader _shader = default;
 
     [SerializeField]
-    private Shader _display;
+    private Shader _display = default;
 
     [StructLayout(LayoutKind.Sequential)]
     private struct Particle {

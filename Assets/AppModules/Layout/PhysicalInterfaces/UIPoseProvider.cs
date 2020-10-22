@@ -23,7 +23,7 @@ namespace Leap.Unity.PhysicalInterfaces {
     }
 
     [SerializeField, ImplementsInterface(typeof(IWorldPositionProvider))]
-    private MonoBehaviour _uiLookPositionProvider;
+    private MonoBehaviour _uiLookPositionProvider = default;
     public  IWorldPositionProvider uiLookPositionProvider {
       get {
         return _uiLookPositionProvider as IWorldPositionProvider;

@@ -10,7 +10,7 @@ Shader "Volumetric Light/Uniform Density" {
 
   CGINCLUDE
   #include "UnityCG.cginc"
-  #include "Assets/LeapMotion/Core/Resources/LeapCG.cginc"
+  #include "Assets/Plugins/LeapMotion/Core/Resources/LeapCG.cginc"
   uniform sampler2D _CameraDepthTexture;
 
   struct vert_in {

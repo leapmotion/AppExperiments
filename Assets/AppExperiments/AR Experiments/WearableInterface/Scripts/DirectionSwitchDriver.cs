@@ -10,7 +10,7 @@ namespace Leap.Unity.AR.Testing {
 
     [SerializeField]
     [ImplementsInterface(typeof(IPropertySwitch))]
-    private MonoBehaviour _propertySwitch;
+    private MonoBehaviour _propertySwitch = default;
     public IPropertySwitch propertySwitch {
       get { return _propertySwitch as IPropertySwitch; }
     }

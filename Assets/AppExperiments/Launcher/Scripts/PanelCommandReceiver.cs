@@ -162,7 +162,7 @@ namespace Leap.Unity.Apps.Launcher {
     [Header("Held Visiblity")]
 
     [SerializeField, ImplementsInterface(typeof(IPropertySwitch))]
-    private MonoBehaviour _hideWhenHeldSwitch;
+    private MonoBehaviour _hideWhenHeldSwitch = default;
     public IPropertySwitch hideWhenHeldSwitch {
       get {
         return _hideWhenHeldSwitch as IPropertySwitch;
@@ -217,7 +217,7 @@ namespace Leap.Unity.Apps.Launcher {
     [Header("Handle Switching")]
 
     [SerializeField, ImplementsInterface(typeof(IPropertySwitch))]
-    private MonoBehaviour _orbSwitch;
+    private MonoBehaviour _orbSwitch = default;
     public IPropertySwitch orbSwitch {
       get {
         return _orbSwitch as IPropertySwitch;
@@ -225,7 +225,7 @@ namespace Leap.Unity.Apps.Launcher {
     }
 
     [SerializeField, ImplementsInterface(typeof(IPropertySwitch))]
-    private MonoBehaviour _titlebarSwitch;
+    private MonoBehaviour _titlebarSwitch = default;
     public IPropertySwitch titlebarSwitch {
       get {
         return _titlebarSwitch as IPropertySwitch;

@@ -20,7 +20,7 @@
 			float4 color 					: COLOR;
         };
 
-		#include "Assets/Plugins/AppModules/TodoUMward/Shader Hand Data/Resources/HandData.cginc"
+		#include "Assets/AppModules/TodoUMward/Shader Hand Data/Resources/HandData.cginc"
 
 //		RWStructuredBuffer<float4>   		_Position; 
 	//	RWStructuredBuffer<float4>   		_Color; 
