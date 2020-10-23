@@ -1,0 +1,200 @@
+fileFormatVersion: 2
+guid: 2b58d06e777f9d64381bc20940d5e8ba
+timeCreated: 1515527479
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: PowerEgg
+    100004: TimeEgg
+    100006: PowerEgg_Arc
+    100008: PowerEgg_Quadrants
+    100010: PowerEgg_Arc_Bubble
+    100012: PowerEgg_HardExtrude
+    100014: BallToCubeToEdges
+    100016: BallToCubeToEdges_Backup
+    100018: Cube
+    100020: PowerEgg_HardExtrude_Flat
+    100022: PowerCube_FlatToCubeToEdges
+    100024: PowerCube_FlatToCubeToEdges_BackUp
+    100026: PowerCube_Frame
+    100028: PowerCube_Frame_Bool
+    100030: PowerEgg_Frame
+    100032: PowerEgg_Frame_bOOL
+    100034: PalmFacing_Plane
+    100036: PowerCube_FlatToCubeToEdges_Exaggerated
+    100038: PowerCube_FlatToCubeToEdges_Pointer
+    100040: PowerCube_FlatToCubeToEdges_Accordion_002
+    100042: PowerCube_FlatToCubeToEdges_Accordion
+    100044: Cylinder
+    100046: PowerCube_FlatToCubeToEdges_AccordionHollow
+    100048: PowerCube_Intro
+    400000: //RootNode
+    400002: PowerEgg
+    400004: TimeEgg
+    400006: PowerEgg_Arc
+    400008: PowerEgg_Quadrants
+    400010: PowerEgg_Arc_Bubble
+    400012: PowerEgg_HardExtrude
+    400014: BallToCubeToEdges
+    400016: BallToCubeToEdges_Backup
+    400018: Cube
+    400020: PowerEgg_HardExtrude_Flat
+    400022: PowerCube_FlatToCubeToEdges
+    400024: PowerCube_FlatToCubeToEdges_BackUp
+    400026: PowerCube_Frame
+    400028: PowerCube_Frame_Bool
+    400030: PowerEgg_Frame
+    400032: PowerEgg_Frame_bOOL
+    400034: PalmFacing_Plane
+    400036: PowerCube_FlatToCubeToEdges_Exaggerated
+    400038: PowerCube_FlatToCubeToEdges_Pointer
+    400040: PowerCube_FlatToCubeToEdges_Accordion_002
+    400042: PowerCube_FlatToCubeToEdges_Accordion
+    400044: Cylinder
+    400046: PowerCube_FlatToCubeToEdges_AccordionHollow
+    400048: PowerCube_Intro
+    2100000: unnamed
+    2100002: Base
+    2100004: Interior
+    2300000: //RootNode
+    2300002: TimeEgg
+    2300004: Cube
+    2300006: PowerCube_Frame
+    2300008: PowerEgg_Frame_bOOL
+    2300010: PalmFacing_Plane
+    2300012: Cylinder
+    2300014: PowerCube_FlatToCubeToEdges_AccordionHollow
+    2300016: PowerCube_Intro
+    3300000: //RootNode
+    3300002: TimeEgg
+    3300004: Cube
+    3300006: PowerCube_Frame
+    3300008: PowerEgg_Frame_bOOL
+    3300010: PalmFacing_Plane
+    3300012: Cylinder
+    3300014: PowerCube_FlatToCubeToEdges_AccordionHollow
+    3300016: PowerCube_Intro
+    4300000: TimeEgg
+    4300002: PowerEgg
+    4300004: PowerEgg_Quadrants
+    4300006: PowerEgg_Arc
+    4300008: PowerEgg_Arc_Bubble
+    4300010: PowerEgg_HardExtrude
+    4300012: BallToCubeToEdges_Backup
+    4300014: Cube
+    4300016: BallToCubeToEdges
+    4300018: PowerEgg_HardExtrude_Flat
+    4300020: PowerCube_FlatToCubeToEdges
+    4300022: PowerCube_FlatToCubeToEdges_BackUp
+    4300024: PowerCube_Frame_Bool
+    4300026: PowerCube_Frame
+    4300028: PowerEgg_Frame
+    4300030: PowerEgg_Frame_bOOL
+    4300032: PalmFacing_Plane
+    4300034: PowerCube_FlatToCubeToEdges_Exaggerated
+    4300036: PowerCube_FlatToCubeToEdges_Pointer
+    4300038: PowerCube_FlatToCubeToEdges_Accordion_002
+    4300040: PowerCube_FlatToCubeToEdges_Accordion
+    4300042: Cylinder
+    4300044: PowerCube_FlatToCubeToEdges_AccordionHollow
+    4300046: PowerCube_Intro
+    7400000: Default Take
+    9500000: //RootNode
+    13700000: PowerEgg
+    13700002: PowerEgg_Arc
+    13700004: PowerEgg_Quadrants
+    13700006: PowerEgg_Arc_Bubble
+    13700008: PowerEgg_HardExtrude
+    13700010: BallToCubeToEdges
+    13700012: BallToCubeToEdges_Backup
+    13700014: PowerEgg_HardExtrude_Flat
+    13700016: PowerCube_FlatToCubeToEdges
+    13700018: PowerCube_FlatToCubeToEdges_BackUp
+    13700020: PowerCube_Frame_Bool
+    13700022: PowerEgg_Frame
+    13700024: PowerCube_FlatToCubeToEdges_Exaggerated
+    13700026: PowerCube_FlatToCubeToEdges_Pointer
+    13700028: PowerCube_FlatToCubeToEdges_Accordion_002
+    13700030: PowerCube_FlatToCubeToEdges_Accordion
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
