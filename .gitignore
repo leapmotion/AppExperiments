@@ -11,6 +11,7 @@
 *.apk
 *.vs
 
+*.zip
 *.exe
 *_Data/
 
